@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="de">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>GBVX</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+
+
+ 
+<style>  /* style für DIESE Seite */
+    
+  .content-wrapper {     /* Globaler Content-Container */
+    width: 100%;
+    max-width: 1200px;   /* Desktop: Lesbare Breite */
+    margin: 0 auto;
+    padding: 0 1rem;     /* Abstand links/rechts auf Mobil */
+    box-sizing: border-box;
+  }
+
+
+  :root {                         /* Allgemeine Layout-Einstellungen */
+    --content-width: 1200px;      /* gemeinsame Maximalbreite */
+  }
+
+
+  .justified-text {           /* für Blocksatz */
+    text-align: justify;
+    hyphens: auto;
+  }
+
+
+  table { border-collapse: collapse; margin-top: 100px; table-layout: fixed; }
+  td, th { border: 1px solid #ccc; padding: 5px; text-align: center; }
+  input { width: 140px; max-width: 100%; }
+  button { cursor: pointer; }
+  .axis-controls { margin-top: 10px; }
+    
+  #dataTable input { background-color: #FFFFCC; }
+  #xlabel, #ylabel { background-color: #ffcc99; border: 1px solid #ccc; }
+
+
+  .fit-line {               /* für die orange gestrichelte Fit-Linie */
+    display: inline-block;
+    width: 30px;
+    height: 0;
+    border-top: 2px dashed orange;
+    vertical-align: middle;
+  }
+
+
+  #dataTable th:nth-child(6),
+  #dataTable td:nth-child(6) {
+    width: 35px;
+    padding: 5px 2px;
+  }
+
+
+  @media (max-width: 768px) {   /* Responsive Grafik für mobile Geräte */
+    #plot {
+      height: 400px !important;
+    }
+      
+    .colorbar {                /* Colorbar verkleinern im Portrait-Modus */
+      width: 20px !important;
+    }
+  }
+
+</style>
+
+
+
+
+
+
+<body>
+
+
+<script>
+  const availableLangs = ['en', 'de'];
+</script>
+
+<div class="language-selector">
+  <button data-lang="de" class="lang-btn">🇩🇪</button>
+
+  <select id="language">
+    <option value="de" selected>Deutsch</option>
+  </select>
+</div>
+
+
+
+
+
+<header class="site-header">
+  <nav class="nav-bar lang lang-de" style="display:none;">
+    <a href="index.html"            class="nav-button">Start</a>
+    <a href="Watt_Lumen.html"       class="nav-button">Watt und Lumen</a>
+  </nav>
+</header>
+
+
+<!--<script src="script_calc.js" defer></script>  -->  <!-- defer ist wichtig. Ohne defer muss das script am Ende der html stehen -->
+<script src="script_lang_gh.js" defer></script>
+<script src="script_other.js" defer></script>
+<!-- <script src="matomo.js" defer></script>  -->
+
+
+
+
+
+<main class="content-wrapper">
+<!-- <main class="main-content">-->
+
+<!-- ================= SLIDER ================= -->
+
+<!-- <div class="image-box">
+<div class="carousel">
+    <div class="carousel-track">
+      <div class="slide"><img src="THM-slider.jpg"></div>
+      <div class="slide"><img src="G-rBrpq-slider.jpg"></div>
+      <div class="slide"><img src="LTV-vc-Q14-slider.jpg"></div>
+    </div>
+
+    <button class="btn prev">❮</button>
+    <button class="btn next">❯</button>
+</div>
+</div> -->
+
+
+
+
+
+<div class="container-p1">
+  <p class="justified-text" 
+        id="p2_Watt_Lumen">
+  </p>
+</div>
+
+
+
+
+<div class="spacer-80"></div>
+
+<h2>Lichtstrom und elektrische Leistung</h2>
+
+<div id="plot" style="width:100%;height:600px;margin:0 auto;aspect-ratio:16/10;"></div>
+
+
+<!-- Achsentexte unter der Grafik -->
+
+<div class="axis-controls">
+  <div class="axis-field">
+    <label for="xlabel">Beschriftung x-Achse:</label>
+    <input id="xlabel" value="Leistung in W">
+  </div>
+
+  <div class="axis-field">
+    <label for="ylabel">Beschriftung y-Achse:</label>
+    <input id="ylabel" value="Lichtstrom in lm">
+  </div>
+
+&nbsp;&nbsp;&nbsp;
+
+  <div class="axis-field checkbox-field">
+    <label for="fitToggle">
+      <input type="checkbox" id="fitToggle">
+      Linearen Fit anzeigen
+    </label>
+  
+ <!-- Kleine gestrichelte Linie vor Gleichung -->
+  <span id="fitLine" class="fit-line" style="display:none;"></span>
+   <!-- <span id="fitLine" class="fit-line"></span> -->
+  <span id="fitEquation" style="margin-left:10px; font-weight:bold;"></span> <!-- #fitEquation ist der Platzhalter, in den die Gleichung geschrieben wird -->
+
+  </div>
+</div>
+
+
+
+<div class="spacer-80"></div>
+<h3 style="margin-bottom: -2.5em;">Beispiel</h3>
+
+<div style="overflow-x: auto;">
+<table id="dataTable">
+  <tr>
+    <th>Name</th>
+    <th id="xHeader">Leistung (W)</th>
+    <th id="yHeader">Lichstrom (lm)</th>
+    <th>Farbtemperatur in K</th>
+    <th>Kommentar</th>
+    <th>Fit</th>
+    <th></th>
+  </tr>
+  
+  <tr>
+    <td><input value="Raum 1"></td>
+    <td><input value="5"></td>
+    <td><input value="350"></td>
+    <td><input value="2700"></td>
+    <td><input value="Model 2014"></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>   <!-- f7-->
+  </tr>
+  <tr>
+    <td><input value="Raum 2"></td>
+    <td><input value="8"></td>
+    <td><input value="806"></td>
+    <td><input value="2700"></td>
+    <td><input value=""></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+  <tr>
+    <td><input value="Raum 3"></td>
+    <td><input value="22,4"></td>
+    <td><input value="3700"></td>
+    <td><input value="4000"></td>
+    <td><input value="Tube (=Ersatz für Leuchtstoffröhre)"></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+  <tr>
+    <td><input value="Außenbereich"></td>
+    <td><input value="50"></td>
+    <td><input value="5250"></td>
+    <td><input value="3000"></td>
+    <td><input value="Strahler"></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+  <tr>
+    <td><input value="Glühlampe"></td>
+    <td><input value="60"></td>
+    <td><input value="800"></td>
+    <td><input value="2700"></td>
+    <td><input value=""></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+</table>
+</div>
+
+<button onclick="addRow()">+ Zeile</button>                   <!-- f6-->
+
+<button onclick="sortByX()">Nach Leistung sortieren</button>  <!-- f8-->
+
+<button onclick="clearTableInputs()">                         <!-- f9-->
+  🧹 Alle Einträge löschen
+</button>
+
+
+
+
+
+<!-- ================= Überleitung zum Buch ======================= -->
+
+<div class="spacer-80"></div>
+<div class="spacer-80"></div>
+
+<div class="group pageGBVX">
+<h3 style="margin-bottom: 0em;">The Hidden Math Between Market and Sales Development</h3>
+</div>
+
+<div class="spacer-20"></div>
+
+Wie bei der Bewertung von Leuchtmitteln reicht es oft nicht, einzelne Zahlen isoliert zu betrachten. 
+Erst durch den Zusammenhang mehrerer Größen entsteht ein aussagekräftiges Bild.<br>
+
+Genau dieses Denken in Zusammenhängen steht im Mittelpunkt des folgenden Buches, das die mathematischen 
+Beziehungen zwischen Markt- und Umsatzentwicklung eines Unternehmens beschreibt.<br><br>
+
+
+<div class="spacer-20"></div>
+<p>
+  <a href="https://www.vccore.de">The Hidden Math Between Market and Sales Development</a>
+</p>
+
+
+<div class="spacer-20"></div>
+
+<div class="container-p1">
+
+  <div class="image-box">             <!-- macht das Bild zum Bezugspunkt -->
+   <img src="i-THM.png" 
+         alt="Bild" 
+         onclick="openOverlay(this.src)">
+       <p id="ISBN"></p>
+    
+    <div id="overlay" 
+         onclick="closeOverlay()">
+         <img id="overlay-img" src=""> 
+    </div> 
+   
+  </div> 
+
+</div>
+
+
+<div class="spacer-80"></div>  <!-- Abstand zum Footer -->
+
+
+
+
+
+
+<!-- =========================== Script ================================ -->
+
+<script>
+
+// f1
+function getRows() {
+  return Array.from(document.querySelectorAll("#dataTable tr")).slice(1);
+}
+
+
+// f2
+function getData() {
+  const x = [], y = [], meta = [], temp = [];
+  getRows().forEach(row => {
+    const inputs = row.querySelectorAll("input");
+    const name = inputs[0].value;
+    const xi = parseFloat(inputs[1].value);
+    const yi = parseFloat(inputs[2].value);
+    const tInput = parseFloat(inputs[3].value);
+    const t = !isNaN(tInput) ? tInput : 3500; // Standard-Farbtemperatur (grau) wenn nicht vorhanden
+    const comment = inputs[4].value;
+    const fitCheckbox = inputs[5];
+    const isChecked = fitCheckbox.type === 'checkbox' ? fitCheckbox.checked : true;
+
+    // Nur Leistung und Lichtstrom erforderlich - Punkt wird angezeigt, auch wenn Farbtemperatur fehlt
+    if (!isNaN(xi) && !isNaN(yi)) {
+      x.push(xi);
+      y.push(yi);
+      temp.push(t);
+      meta.push([name, t, comment, isChecked]);
+    }
+  });
+  return { x, y, temp, meta };
+}
+
+
+
+// f3 - linearer Fit durch Ursprung y = a*x (nur für ausgewählte Zeilen)
+function linearFitThroughOrigin(x, y, meta) {
+  // Filtere nur ausgewählte Datenpunkte
+  const selectedIndices = meta
+    .map((m, i) => m[3] ? i : -1) // m[3] ist der Checkbox-Status
+    .filter(i => i >= 0);
+  
+  if (selectedIndices.length < 1) return null;
+
+  let sxy = 0, sxx = 0;
+  for (let i of selectedIndices) {
+    sxy += x[i] * y[i];
+    sxx += x[i] * x[i];
+  }
+
+  const a = sxy / sxx;
+  const b = 0;  // immer durch Ursprung
+  return {a, b, selectedIndices};
+}
+
+
+
+// f4
+function updateHeaders() {
+  xHeader.textContent = xlabel.value || "x";
+  yHeader.textContent = ylabel.value || "y";
+}
+
+
+
+
+// f5 - draw
+function draw() {
+  updateHeaders();
+  const { x, y, temp, meta } = getData();
+
+  // 🔑 Labels IMMER hier erzeugen
+  const labels = meta.map(m => m[0]);
+
+  const fit = linearFitThroughOrigin(x, y, meta);
+
+  const fitEqSpan = document.getElementById("fitEquation");
+  const fitLineSpan = document.getElementById("fitLine");   // für orange gestrichelte Linie 
+
+  fitEqSpan.textContent = "";  // Gleichung initial leeren
+  fitLineSpan.style.display = "none";                       // für orange gestrichelte Linie
+
+
+  const traces = [{
+    x, y,
+    mode: "markers+text",
+    text: labels,
+    textposition: "top center",
+    
+    marker: { 
+      size: 14,
+      line: {
+        width: 1.5,
+        color: "black"
+      },
+        color: temp,          // ✅ jetzt gültig
+        // colorscale: "Turbo",
+        colorscale: [
+          [0.0, "rgb(255,180,80)"],   // warm (orange)
+          [0.5, "rgb(255,255,200)"],  // neutral
+          [1.0, "rgb(180,220,255)"]   // kalt (blau)
+        ],
+              // cmin: 2000,          // untere Grenze (optional)
+              // cmax: 6500,          // obere Grenze (optional)
+        colorbar: {
+          title: "Farbtemperatur (K)"
+        },
+    },  // end "marker"
+    
+    customdata: meta,                   // hier werden die Metadaten (Name, Farbtemperatur, Kommentar) an customdata übergeben
+    hovertemplate:
+      `<b>%{customdata[0]}</b><br>` +   // Name
+      `%{x}&nbsp;W<br>` +               // Leistung
+      `%{y}&nbsp;lm<br>` +              // Lichstrom
+      `%{customdata[1]}&nbsp;K<br>` +   // Farbtemperatur
+      `%{customdata[2]}<br>`     +      // Kommentar  
+      `<extra></extra>`                 // ⬅ verhindert Zusatzkommentar
+}]  // end traces
+
+
+// ✅ Linearer Fit nur wenn Checkbox aktiv
+  const fitToggle = document.getElementById("fitToggle");
+
+  if (fitToggle.checked && fit) {
+      const selectedIndices = fit.selectedIndices;
+      
+      if (selectedIndices.length > 0) {
+        const xmin = Math.min(...selectedIndices.map(i => x[i]));
+        const xmax = Math.max(...selectedIndices.map(i => x[i]));
+
+        traces.push({
+          x: [xmin, xmax],
+          y: [fit.a*xmin + fit.b, fit.a*xmax + fit.b],
+           mode: "lines",
+           line: { dash: "dash", width: 2, color: "orange" }
+        });
+
+        // Gleichung daneben anzeigen und orange Linie sichtbar machen
+        fitEqSpan.textContent = `y = ${fit.a.toFixed(2)} x`;
+        fitLineSpan.style.display = "inline-block";
+      } else {
+        fitEqSpan.textContent = "";
+        fitLineSpan.style.display = "none";
+      }
+} else {
+      // Gleichung und orange Linie entfernen, falls Checkbox aus
+      fitEqSpan.textContent = ""; 
+      fitLineSpan.style.display = "none";
+  }
+
+  
+  
+  const isMobile = window.innerWidth <= 768;
+  
+  Plotly.react("plot", traces, {
+    showlegend: false,
+    margin: { t: 80, r: isMobile ? 30 : 60 },
+    hovermode: "closest",
+    xaxis: { showspikes: false },
+    yaxis: { showspikes: false },
+
+    xaxis: {
+      title: { text: xlabel.value, font: { size: isMobile ? 14 : 18 } },
+      tickfont: { size: isMobile ? 10 : 12 },
+      range: [0, Math.max(Math.max(...x) * 1.05, 10)],
+      showline: true,
+      linewidth: 3,
+      linecolor: "black",
+      mirror: true,
+
+      dtick: 10,
+      showgrid: true,
+      gridcolor: '#000000',
+
+      minor: {
+        dtick: 5,
+        showgrid: true,
+        gridcolor: '#ccc'
+     }
+     
+    },   
+
+    yaxis: {
+      title: { text: ylabel.value, font: { size: isMobile ? 14 : 18 } },
+      tickfont: { size: isMobile ? 10 : 12 },
+      range: [0, null],   // ← Start bei 0
+      range: [0, Math.max(Math.max(...y) * 1.10, 1000)],
+      showline: true,
+      linewidth: 3,
+      linecolor: "black",
+      mirror: true,
+
+      dtick: 1000,
+      showgrid: true,
+      gridcolor: '#000000',
+
+      minor: {
+        dtick: 500,
+        showgrid: true,
+        gridcolor: '#ccc'
+      },
+      
+      zeroline: false   // ← DAS entfernt die dünne schwarze Linie bei y=0, dies sonst knapp über der x-Achse und parallel zu dieser verlaufen würde
+    }
+    
+  });
+  
+  // Plotly-Größe an Container anpassen
+  setTimeout(() => {
+    Plotly.Plots.resize("plot");
+  }, 0);
+
+  traces.push({                           // linearFitThroughOrigin 
+  x: [0, Math.max(...x)],
+  y: [0, fit.a * Math.max(...x)],
+  mode: "lines",
+  line: { dash: "dash", width: 2, color: "orange" }
+});
+
+} // f5 - draw
+
+
+
+// f6 - f9: Input der Tabelle 
+// f6
+function addRow() {
+  const row = dataTable.insertRow();
+  row.innerHTML = `
+    <td><input oninput="draw()"></td>
+    <td><input oninput="draw()"></td>
+    <td><input></td>
+    <td><input></td>
+    <td><input></td>
+    <td><input type="checkbox" class="fitCheckbox" checked></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  `;
+}
+
+
+// f7
+function deleteRow(btn) {
+  btn.closest("tr").remove();
+  draw();
+}
+
+
+// f8
+function sortByX() {
+  const rows = getRows();
+  rows.sort((a,b) =>
+    parseFloat(a.cells[1].querySelector("input").value) -
+    parseFloat(b.cells[1].querySelector("input").value)
+  );
+  rows.forEach(r => dataTable.appendChild(r));
+  draw();
+}
+
+
+// f9
+function clearTableInputs() {
+  document
+    .querySelectorAll("#dataTable tr:not(:first-child) input")
+    .forEach(input => input.value = "");
+}
+
+
+
+// Live-Update
+document.addEventListener("input", e => {
+  if (e.target.tagName === "INPUT") draw();
+});
+fitToggle.addEventListener("change", () => {
+  // Alle Fit-Checkboxen auf den gleichen Status setzen wie fitToggle
+  const allFitCheckboxes = document.querySelectorAll(".fitCheckbox");
+  allFitCheckboxes.forEach(checkbox => {
+    checkbox.checked = fitToggle.checked;
+  });
+  draw();
+});
+
+// Checkboxen für Fit-Auswahl auf change überwachen
+document.addEventListener("change", e => {
+  if (e.target.classList.contains("fitCheckbox")) {
+    // Zähle wie viele fitCheckboxes aktiviert sind
+    const checkedCount = document.querySelectorAll(".fitCheckbox:checked").length;
+    
+    // Wenn mindestens 2 aktiviert sind, aktiviere fitToggle automatisch
+    if (checkedCount >= 2) {
+      fitToggle.checked = true;
+    } else {
+      fitToggle.checked = false;
+    }
+    
+    draw();
+  }
+});
+
+// Grafik neu zeichnen beim Drehen des Geräts oder Fenstergrößenänderung
+window.addEventListener("resize", () => {
+  draw();
+});
+
+// Spezifisch für Geräte-Rotation (orientationchange Event)
+window.addEventListener("orientationchange", () => {
+  // Warte kurz, bis das Betriebssystem die neue Ausrichtung vollständig registriert hat
+  setTimeout(() => {
+    draw();
+    Plotly.Plots.resize("plot");
+  }, 100);
+});
+
+draw();
+</script>
+
+</main>  
+
+
+
+
+
+<!--------------------------------- Footer ----------------------------------->
+
+
+<footer id="footer">
+  <div class="footer-de">
+    <p>
+      <a href="ft_Impressum.html" target="_blank">Impressum</a> &nbsp;|&nbsp;
+      <a href="ft_Haftungsausschluss.html" target="_blank">Haftungsausschluss</a> &nbsp;|&nbsp;
+      <a href="ft_Datenschutz.html" target="_blank">Datenschutz</a>
+    <!-- <a href="ft_About.html" target="_blank">Autor</a>  -->
+    </p>
+    <hr>
+     &copy; 2025 Dr. Gerhard Bickel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp Alle Rechte vorbehalten
+  </div>
+</footer>
+
+
+</body>
+
+</html>
