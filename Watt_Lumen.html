@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="de">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Watt&Lumen</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style_github.css">
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+</head>
+
+
+
+
+<body>
+
+<script> const availableLangs = ['en', 'de']; </script>
+
+<!-- <script src="script_calc.js" defer></script> -->  <!-- defer ist wichtig. Ohne defer muss das script am Ende der html stehen -->
+<script src="script_github.js" defer></script>
+<script src="script_lang_gh.js" defer></script>
+<script src="script_other.js" defer></script>
+
+
+<div class="language-selector">
+  <button data-lang="de" class="lang-btn">🇩🇪</button>
+
+  <select id="language">
+    <option value="de" selected>Deutsch</option>
+  </select>
+</div>
+
+
+
+<header class="site-header">
+   <nav class="nav-bar lang lang-de" style="display:none;">
+     <a href="index.html"            class="nav-button">Start</a>
+     <a href="Watt_Lumen.html"       class="nav-button">Watt und Lumen</a>
+     <a href="THM.html"              class="nav-button">The Hidden Math Between Market and Sales Development</a>
+  </nav>
+</header>
+
+
+
+
+
+<main class="content-wrapper"> <!-- <main class="main-content">-->
+
+
+<div class="container-p1">
+  <p class="justified-text" 
+        id="p2_Watt_Lumen">
+  </p>
+</div>
+
+
+
+
+<div class="spacer-80"></div>
+
+<h2>Leuchtenleistung und Lichtstrom</h2>
+
+<div id="plot" style="width:100%;height:600px;margin:0 auto;aspect-ratio:16/10;"></div>
+
+
+<!-- Achsentexte unter der Grafik -->
+
+<div id="axisControls" class="axis-controls hidden">  <!-- ohne hidden kann jeder Besucher die Texte an den Achsen ändern -->
+
+  <div class="axis-controls">
+    <div class="axis-field">
+      <label for="xlabel">Beschriftung x-Achse:</label>
+      <input id="xlabel" value="Leistung in W">
+    </div>
+
+    <div class="axis-field">
+      <label for="ylabel">Beschriftung y-Achse:</label>
+      <input id="ylabel" value="Lichtstrom in lm">
+    </div>
+  </div>
+</div>  <!-- hier endet hidden -->
+
+
+  <div class="axis-field checkbox-field">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <label for="fitToggle">
+      <input type="checkbox" id="fitToggle">
+      Linearen Fit anzeigen
+    </label>
+  
+ <!-- Kleine gestrichelte Linie vor Gleichung -->
+  <span id="fitLine" class="fit-line" style="display:none;"></span>
+   <!-- <span id="fitLine" class="fit-line"></span> -->
+  <span id="fitEquation" style="margin-left:10px; font-weight:bold;"></span> <!-- #fitEquation ist der Platzhalter, in den die Gleichung geschrieben wird -->
+
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button id="exportPNG" onclick="exportPlot('png')">⬇ PNG</button>
+  <button id="exportSVG" onclick="exportPlot('svg')">⬇ SVG</button>
+
+  </div>
+
+
+
+
+
+
+
+<div class="spacer-80"></div>
+<h3 style="margin-bottom: -2.5em;">Beispiel</h3>
+
+<table id="dataTable">
+  <tr>
+    <th>Name</th>
+    <th id="xHeader">Leistung (W)</th>
+    <th id="yHeader">Lichtstrom (lm)</th>
+    <th>Farbtemperatur in K</th>
+    <th>Kommentar</th>
+    <th>Fit</th>
+    <th></th>
+  </tr>
+  
+  <tr>
+    <td><input value="Raum 1"></td>
+    <td><input value="5"></td>
+    <td><input value="350"></td>
+    <td><input value="2700"></td>
+    <td><input value="Model 2014"></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>   <!-- f7-->
+  </tr>
+  <tr>
+    <td><input value="Raum 2"></td>
+    <td><input value="8"></td>
+    <td><input value="806"></td>
+    <td><input value="2700"></td>
+    <td><input value=""></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+  <tr>
+    <td><input value="Raum 3"></td>
+    <td><input value="22,4"></td>
+    <td><input value="3700"></td>
+    <td><input value="4000"></td>
+    <td><input value="Tube LED (Ersatz für Leuchtstoffröhre)"></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+  <tr>
+    <td><input value="Außenbereich"></td>
+    <td><input value="50"></td>
+    <td><input value="5250"></td>
+    <td><input value="3000"></td>
+    <td><input value="Strahler"></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+  <tr>
+    <td><input value="Glühlampe"></td>
+    <td><input value="60"></td>
+    <td><input value="800"></td>
+    <td><input value="2700"></td>
+    <td><input value=""></td>
+    <td><input type="checkbox" class="fitCheckbox"></td>
+    <td><button onclick="deleteRow(this)">✖</button></td>
+  </tr>
+</table>
+</div>
+
+<button onclick="addRow()">+ Zeile</button>                   <!-- f6-->
+
+<button onclick="sortByX()">Nach Leistung sortieren</button>  <!-- f8-->
+
+<button onclick="clearTableInputs()">                         <!-- f9-->
+  🧹 Alle Einträge löschen
+</button>
+
+
+
+
+<div class="spacer-80"></div>
+
+<div class="group page1">
+  <p class="justified-text" 
+        id="p2_lux">
+  </p>
+</div>
+
+
+
+</main>  
+
+
+
+
+
+<div class="spacer-80"></div>
+<!--------------------------------- Footer ----------------------------------->
+
+
+<footer id="footer">
+  <div class="footer-de">
+    <p>
+      <a href="ft_Impressum.html" target="_blank">Impressum</a> &nbsp;|&nbsp;
+      <a href="ft_Haftungsausschluss.html" target="_blank">Haftungsausschluss</a> &nbsp;|&nbsp;
+      <a href="ft_Datenschutz.html" target="_blank">Datenschutz</a>
+    <!-- <a href="ft_About.html" target="_blank">Autor</a>  -->
+    </p>
+    <hr>
+     &copy; 2025 Dr. Gerhard Bickel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp Alle Rechte vorbehalten
+  </div>
+</footer>
+
+
+</body>
+
+</html>
