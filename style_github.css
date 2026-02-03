@@ -1,0 +1,308 @@
+    /* Vereinheitliche Schriftgröße der Navigationsleiste über alle Seiten */
+.nav-bar, .nav-bar a, .nav-bar .nav-button {
+  font-size: 24px; /* Basisgröße - bei Bedarf anpassen */
+  line-height: 1.2;
+  pointer-events: auto;
+}
+
+
+.content-wrapper {     /* Globaler Content-Container */
+    width: 100%;
+    max-width: 1200px;   /* Desktop: Lesbare Breite */
+    margin: 0 auto;
+    padding: 0 0.5rem;   /* Kleinerer Abstand links/rechts auf Mobil */
+    box-sizing: border-box;
+  }
+
+
+  :root {                         /* Allgemeine Layout-Einstellungen */
+    --content-width: 1200px;      /* gemeinsame Maximalbreite */
+  }
+
+
+  .justified-text {           /* für Blocksatz */
+    text-align: justify;
+    hyphens: auto;
+  }
+
+
+
+
+
+  table { border-collapse: collapse; margin-top: 100px; table-layout: fixed; }
+  td, th { border: 1px solid #ccc; padding: 5px; text-align: center; }
+  input { width: 140px; max-width: 100%; }
+  button { cursor: pointer; }
+  .axis-controls { margin-top: 10px; }
+    
+  #dataTable input { background-color: #FFFFCC; }
+  #xlabel, #ylabel { background-color: #ffcc99; border: 1px solid #ccc; }
+
+
+  .fit-line {               /* für die orange gestrichelte Fit-Linie */
+    display: inline-block;
+    width: 30px;
+    height: 0;
+    border-top: 2px dashed orange;
+    vertical-align: middle;
+  }
+
+
+  #dataTable th:nth-child(6),
+  #dataTable td:nth-child(6) {
+    width: 35px;
+    padding: 5px 2px;
+  }
+
+
+  #dataTable th.wrap {
+  max-width: 90px;          /* an Tick-Label-Breite anpassen */
+  white-space: normal;      /* erlaubt Umbruch */
+  word-break: break-word;   /* Notfall: bricht lange Wörter */
+  hyphens: auto;            /* Silbentrennung (DE!) */
+}
+
+
+
+.container-p1 {
+  width: 100%;
+  padding: 10px;
+  /* outline: 3px dotted rgb(24, 17, 235); */
+}
+
+
+/* Grafikbereich */
+.image-box {
+  display: grid;
+  flex-direction: column;
+  align-items: flex-start; /* 👈 alles links */
+  position: relative;
+  width: 100%;
+  min-height: auto;   /* gleiche Höhe für SVG & Plotly */
+  /* outline: 5px double rgb(3, 202, 106); */ 
+}
+
+
+.image-box img {      /* *** das svg im Abschnitt Watt_Lumen selbst skalieren */
+  display: grid;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  max-width: 100%;    /* diese Zeile ist im style.css nicht enthalten - aber extrem wichtig */
+  /* outline: 3px solid rgb(219, 107, 244); */
+}
+
+
+
+.graphic-area {   /* *** oder flex-start */
+  display: grid;                  /*flex-direction: column;   /* 👈 untereinander */
+  align-items: start;             /* 👈 links */
+  width: 100%;
+  height: auto;
+ /* outline: 12px dashed rgb(195, 195, 79); */
+}
+
+
+/* Button klar unter der Grafik */
+#interactiveBtn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 5px 10px;
+}
+
+
+
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.97); /* fast weiß */
+
+  display: none;           /* initial aus */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+
+#overlay-img {
+  width: 90vw;
+  max-height: 90vh;
+  height: auto;
+}
+
+
+
+
+
+/* =========================
+   Gemeinsame Grafik-Container
+   ========================= */
+#svg-box,
+#plot-container,
+#plotly-box {
+  position: relative;           /* bleibt im normalen Flow */
+  width: 100%;
+  transition: opacity 0.4s ease;
+}
+
+#svg-box,
+#plotly-box {
+  grid-area: 1 / 1;
+  width: 100%;
+  transition: opacity 0.4s ease;
+}
+
+
+#svg-box img {                  /* SVG */
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#plotly-box {                   /*  Plotly-Container (Platzhalter) */
+  height: 600px;                /*  zwingend für plotly - plotly braucht Platz. Der Wert bestimmt die Höhe der Box! 
+                                    Wenn ein plot größer ist, dann geht er über den unteren Rand und die plot-toolbar ist nicht mehr sichtbar */          
+  min-height: 300px;            /*  Sicherheitsnetz */
+  width: 100%;
+  display: none;
+  /* outline: 6px dotted rgb(0,0,155); */
+}
+
+#plot {                         /* Plotly */
+  width: 100%;
+  height: 100%;
+  /* outline: 10px dotted rgb(23, 155, 0); */
+}
+
+.axis-controls {                /*  UI / Controls */
+  margin-top: 10px;
+  transition: opacity 0.4s ease;
+}
+
+
+.axis-controls.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.axis-controls.visible {
+  display: block;
+  opacity: 1;
+}
+
+
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  
+}
+
+.hidden {                       /* Sichtbarkeit + Animation */
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+
+
+
+.plot-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  /* outline: 12px dotted rgb(235, 17, 119); */
+}
+
+/* Plotly-spezifische Buttons */
+.axis-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Sichtbarkeit */
+.axis-controls.hidden {
+  display: none;
+}
+
+.axis-controls.visible {
+  display: flex;
+}
+
+
+/* Abstand der tickmark box vom Wort "Fit" unter der Grafik */
+
+
+
+.fit-control {
+  margin-left: 200px;   /* Abstand NUR nach links  */  
+  margin-right: 50px;   /* Abstand NUR nach rechts -- Fit von Export-Buttons optisch trennen */
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;              /* 👈 Abstand Checkbox ↔ Text */
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Native Checkbox unsichtbar, aber aktiv */
+.fit-control input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Eigene Checkbox */
+.fit-control .checkbox {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Häkchen */
+.fit-control input:checked + .checkbox::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #000;
+}
+
+/* Text */
+.fit-control .label-text {
+  line-height: 1;
+}
+
+
+
+
+  @media (max-width: 768px) {
+    .nav-bar, .nav-bar a, .nav-bar .nav-button {
+      font-size: 14px;          /* kleinere Schrift auf Mobilgeräten */
+      }
+    }
+
+  @media (max-width: 768px) {   /* Noch kleinere Ränder auf sehr kleinen Geräten */
+    .content-wrapper {
+      padding: 0 0.25rem;
+    }
+  }
+
+  @media (max-width: 768px) {   /* Responsive Grafik für mobile Geräte */
+    #plot {
+      height: 400px !important;
+    }
+      
+    .colorbar {                /* Colorbar verkleinern im Portrait-Modus */
+      width: 20px !important;
+    }
+  }
+
+
