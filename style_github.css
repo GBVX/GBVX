@@ -1,4 +1,9 @@
-    /* Vereinheitliche Schriftgröße der Navigationsleiste über alle Seiten */
+.site-header {                     /* Header bar */
+    border-radius: 10px; 
+  }
+
+
+/* Vereinheitliche Schriftgröße der Navigationsleiste über alle Seiten */
 .nav-bar, .nav-bar a, .nav-bar .nav-button {
   font-size: 24px; /* Basisgröße - bei Bedarf anpassen */
   line-height: 1.2;
@@ -35,7 +40,7 @@
   button { cursor: pointer; }
   .axis-controls { margin-top: 10px; }
     
-  #dataTable input { background-color: #FFFFCC; }
+  #dataTable input { background-color: #f0eded; }          /* Hintergrundfarbe der Input Zellen */
   #xlabel, #ylabel { background-color: #ffcc99; border: 1px solid #ccc; }
 
 
