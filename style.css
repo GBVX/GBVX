@@ -1,0 +1,1993 @@
+/* Header und Footer =========================================================================================== */
+/* Navigation Bar ============================================================================================== */
+/* Schriften und Überschriften ================================================================================= */
+/* Tabellen ==================================================================================================== */
+
+/* BOXEN ======================================================================================================= */
+/* Container =================================================================================================== */
+/* left-box, right-box ========================================================================================= */
+/* group_column ================================================================================================ */
+/* group blue, green, ... ====================================================================================== */
+/* output-matrix =============================================================================================== */
+/* cell ======================================================================================================== */
+
+/* MEDIA QUERIES – RESPONSIVE DESIGN =========================================================================== */
+
+
+
+
+/* Colors ====================================================================================================== */
+/* 
+left-box, right-box:
+background: #dddddd;                           = hellgrau 1   
+color: #000000;         
+
+output-matrix11, form-column:nth-child
+background (-color): rgb(230, 230, 230);       = hellgrau 2
+
+group.blue, group_column.blue: 
+background: #6699FF; 
+
+group.green, group_column.green:
+background: #339966; 
+
+.form-column:
+background-color: rgb(255, 255, 255);     = Hintergrundfarbe der Tabellen
+*/
+
+
+
+/*
+* {
+  outline: 1px solid rgba(255,0,0,0.3);   zeigt dir jedes Element auf der Seite und hilft, 
+                                          Layout-Struktur und Container sofort zu erkennen.
+                                          (Lass das aber nur beim Entwickeln aktiv 😅)
+} */
+
+
+/* Globaler Content-Container */
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;   /* Desktop: Lesbare Breite */
+  margin: 0 auto;
+  padding: 0 1rem;     /* Abstand links/rechts auf Mobil */
+  box-sizing: border-box;
+}
+
+
+.content-wrapper h1 {
+  margin-top: 2rem;
+  text-align: center; /* optional */
+  margin-bottom: 2rem;
+ /* font-size: clamp(1.2rem, 5vw, 2.5rem);  */
+}
+
+
+.justified-text {           /* für Blocksatz */
+  text-align: justify;
+  hyphens: auto;
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+:root {                         /* Allgemeine Layout-Einstellungen */
+  --content-width: 1200px;      /* gemeinsame Maximalbreite */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 2rem;
+    background: #ffffff;
+    color: rgb(0, 0, 0);       /* Schrift sichtbar machen */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: clamp(14px, 2vw, 20px);  /* sehr wichtig. Damit sich die Größe des Zeichensatzes mit der Größe des Displays ändert */
+    }
+
+button {
+      padding: 0.4rem 1rem;
+      margin: 0.5rem;
+      background: lightskyblue;
+      cursor: pointer;
+      }
+
+input {
+  margin: 0.2rem;
+  background: rgba(13, 248, 21, 0.75);
+  padding: 0.3rem;
+  font-size: 14px;
+  font-weight: bold;
+  /* outline: 1px solid rgba(255,0,0,0.6);  */
+  }
+
+  .form input {
+    display: block;
+    width: 100%;            /* or set your own width % */
+    margin-bottom: 1rem;
+  }
+
+/* color */
+input::placeholder {
+  color: rgb(130, 130, 130); 
+  opacity: 1;        /* Make sure it's fully visible */
+  font-style: italic;
+  font-size: 12px;
+  }
+
+label {
+  font-weight: bold;
+  display: block;        /* forces line break */
+  margin-bottom: 10px 0 5px;    /* reduce space below the label */
+  }
+
+  .form label {
+    display: block;
+    text-align: left;
+    font-weight: bold;      /* = bold für alle Labels, z.B. bei Derived Values */
+    margin-bottom: 0.25rem;
+  }
+
+.bold-label {            /* geht bis zum Ende aller 8 Spalten */
+  font-weight: bold;
+  }
+
+
+
+
+/* Header ================================================================================================== */
+
+header {
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;            /* Padding zählt zur Breite */
+} 
+
+  .site-header {                     /* Header bar */
+    background-color: #2821a4ea;   /* dark background */
+    border-radius: 8px; 
+  }
+
+
+/* Language selector ======================================================================================= */
+
+.language-selector {
+  position: relative;      /* bleibt im Dokumentfluss */
+  z-index: 10;             /* über der Navigationsebene */
+  top: 10px;
+  right: 0px;
+
+ 
+  display: flex;
+  justify-content: flex-end;  /* Inhalte nach rechts im Container */
+  width: fit-content;         /* Box wird so breit wie nötig */
+  margin-left: auto;          /* schiebt die Box nach rechts */
+
+  align-items: center;
+  gap: 8px;                   /* horizontaler Abstand zwischen den Flaggen */ 
+ 
+  background: rgba(0,0,0,0.05);   /* optional: kleine UI-Box um Flaggen und Sprachauswahl Buttons */
+  padding: 2px 10px;
+  border-radius: 6px;
+  /* outline: 1px solid rgba(255,0,0,0.6);  */
+}
+
+
+.lang-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.lang-btn.active {
+  opacity: 1;
+  text-shadow: 0 0 4px rgba(255,255,255,0.6);
+}
+
+#language {
+  padding: 3px;
+  cursor: pointer;
+}
+
+/* Navigation Bar ========================================================================================== */
+
+.nav-bar {                           /* Navigation container  */
+  display: flex;
+  width: 100%;                       /* volle Breite nutzen */
+  flex-wrap: nowrap;                 /* kein Umbruch – solange es geht - alle Buttons bleiben zunächst in einer Zeile */
+  justify-content: space-between;    /* Platz vollständig verteilen */
+
+  gap: 1rem;                         /* Abstand zwischen Buttons */
+  padding: 5px 10px;                 /* das macht den Balken höher, z.B. 1rem  */
+  box-sizing: border-box;            /* Sicherheit bei Padding */
+  overflow: hidden;                  /* verhindert Überschießen */  
+  /* background-color: #222;         /* Farbe ist gut zum Testen der Größe      */
+}
+
+.nav-button {           /* Button styling */
+  flex: 1 1 0;          /* jeder bekommt exakt 1/4 Breite */
+  min-width: 0;         /* wichtig -- verhindert extreme Schrumpfung, verhindert Layout-Sprengung */
+  font-size: clamp(0.5rem, 2.5vw, 1.5rem);
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: normal;       /* Text darf im Button umbrechen */
+  overflow-wrap: break-word;
+
+  background: #0374e4b5;   /* blue background */
+  color: white;
+  text-decoration: none;     /* remove underline */
+  border-radius: 6px;        /* rounded corners */
+  padding: 10px;
+}
+
+.nav-button:hover {
+  background: #005bb5;     /* darker blue on hover */
+}
+
+
+
+
+
+/* Slider ================================================================================= */
+
+/* --- Container --- */
+.carousel {
+    width: 100%;
+    max-width: auto;   /* adjust as needed */
+    /*height: 400px;*/          /* fixed height or auto */
+    margin: 40px auto;
+    position: relative;
+    overflow: hidden;   /* hide overflow for sliding */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+    /* outline: 2px solid rgba(255,0,0,0.3);  */
+}
+
+/* --- Track Container --- */
+.carousel-track-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+/* --- Track (row of slides) --- */
+.carousel-track {
+    display: flex;
+    transition: transform 8s ease;
+}
+
+/* --- Each Slide --- */
+.slide {
+    min-width: 100%;
+    user-select: none; 
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+.slide img {
+    width: 100%;         /* oder: 100% */
+   /* height: 300px;       /* Höhe des Bildes bestimmt die Größe! adjust or use auto 
+    object-fit: cover;   /* keeps images nicely cropped */
+    display: block;
+    /*outline: 2px solid rgba(21, 0, 255, 0.3); */
+}
+
+/* --- Previous & Next Buttons --- */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.45);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+    /* make sure buttons sit above the track / other page elements */
+    z-index: 1000;
+    transition: background 0.2s;
+}
+
+.prev:hover, .next:hover {
+    background: rgba(0,0,0,0.65);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* --- Optional: remove button highlight on click --- */
+.prev:focus, .next:focus {
+    outline: none;
+}
+
+
+
+/* Footer ---------------------------------------------------------------------------------------------------*/
+
+footer {
+  width: 100%;
+  background-color:  #2821a4ea;
+  color: #ffffff;
+  text-align: center;
+  font-size: clamp(0.75rem, 2.5vw, 1.2rem);
+  padding: 20px 15px;
+  box-sizing: border-box;  /* Padding zählt zur Breite */  
+  }
+
+
+footer a {                  /* die Links im Footer */
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;      /* kein unschöner Linkumbruch */
+  font-size: clamp(0.75rem, 2.5vw, 1.2rem);
+  }
+
+footer a:hover {
+  text-decoration: underline;
+  }
+
+footer hr {                   /* helle Trennlinie */
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.6); /* helle Linie */
+  margin: 1rem 0;
+  }
+
+
+.footer-en {          /* Die englische Version leicht heller oder kursiv, um sie zu unterscheiden */
+  font-style: italic;
+  margin-top: 4px;
+}
+
+
+
+
+
+/* Schriften und Überschriften ================================================================================= */
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }     /* Dynamische Größenabstufung per clamp() */
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+h3 { font-size: clamp(1.4rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.1rem, 2.5vw, 1.6rem); }
+h5 { font-size: clamp(0.9rem, 2vw, 1.3rem); }
+h6 { font-size: clamp(0.8rem, 1.8vw, 1.1rem); }
+
+
+h1, h2, h3, h4, h5, h6 {        /* Dynamische, responsive Überschriften */
+  overflow-wrap: break-word;    /* moderne Lösung für Zeilenumbruch bei langen Wörtern */
+  word-break: break-word;       /* als Sicherheitsnetz, funktioniert in allen Browsern */
+}
+
+
+/* === Hauptinhalt === */
+.main-content {
+  width: 100%;
+  padding: 1rem;
+}
+
+.main-content h1 {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: clamp(1.2rem, 5vw, 2.5rem);
+  text-align: center; /* optional */
+}
+
+
+.main-title {                       /* Gemeinsame Überschrift links */
+  font-size: clamp(1.2rem, 1.2vw, 1.5rem);
+  white-space: nowrap;              /* verhindert Zeilenumbruch */
+  overflow: hidden;
+  text-overflow: ellipsis;          /* zeigt „…“ wenn zu lang */
+
+  grid-column: 1; /*/                /* EINE Spalte */
+  grid-row: 1;                       /* erste Reihe */
+  text-align: center;
+  margin: 0;
+  width: 100%;           /* passt sich an Container an */
+  max-width: 100%;
+  box-sizing: border-box; /* Padding in die Gesamtbreite einrechnen */
+}
+
+.side-title {                /* Eigene Überschrift rechts */
+  grid-column: 4;
+  grid-row: 1;               /* erste Reihe */
+  text-align: center;
+  margin: 0;
+  width: 100%;           /* passt sich an Container an */
+  box-sizing: border-box; /* Padding in die Gesamtbreite einrechnen */
+}
+
+
+
+
+.micro {
+  font-size: clamp(0.6rem, 1vw, 0.8rem);
+}
+
+.tiny {
+  font-size: clamp(0.8rem, 1vw, 1.2rem);
+}
+
+
+
+
+/* Tabellen ==================================================================================================== */
+
+table {                        /* Tabelle zentrieren in der Mitte der Seite */ 
+      width: 100%;
+      margin: 50px auto;         /* oben/unten 50px Abstand, links/rechts automatisch */
+      border-collapse: collapse; /* wichtig für konsistente Linien */
+      width: 100%;
+    }
+
+    table th, table td {
+      padding: 8px;
+      text-align: left;
+      box-sizing: border-box;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+
+    td.no-wrap {               /* kein Zeilenumbruch bei Symbolen in der Tabelle */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
+
+table td:first-child {
+  white-space: nowrap;   /* verhindert Zeilenumbruch, Damit bleiben alle Inhalte in der ersten Spalte in einer Zeile. Gefahr: Bei sehr kleinen Bildschirmen könnten sie überlaufen. */
+}
+
+
+tr.double-line td {
+  border-top: 3px double #000; /* DOPPELTE Linie */
+}
+
+
+tr.separator td {
+  border: 0;
+  border-top: 3px double #000;
+  height: 0;          /* entfernt die sichtbare Höhe */
+  padding: 0;
+  line-height: 0;
+}
+
+
+/* Page 1 ======================================================================================================= */
+
+
+.container, .footer-de {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
+.container-p0 {
+  width: 100%;
+  /* max-width: 100%;       /* volle Breite */
+  padding: 20px;       /* optionaler Innenabstand */
+  box-sizing: border-box;
+  outline: 2px solid rgba(255,0,0,0.3); 
+}
+
+
+.container-p1 {
+  width: 100%;
+  /* max-width: 100%;       /* volle Breite */
+  padding: 20px;       /* optionaler Innenabstand */
+  box-sizing: border-box;
+  /* outline: 1px solid rgba(255,0,0,0.3); */
+}
+
+.image-box {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  position: relative;       /* macht das Bild zum Bezugspunkt */
+  display: inline-block;    /* Box passt sich der Bildgröße an */
+  /* max-width: 400px;   /* Bild kann nicht breiter als 800px werden */
+  margin: 0 auto;     /* zentriert auf Desktop */
+   /* outline: 1px solid rgba(0, 255, 140, 0.932);  */
+}
+
+
+.image-box {
+  text-align: center;
+  max-width: 100%;
+}
+
+
+
+.image-box img {
+  width: 100%;          /* Bild nimmt 100% der übergeordneten Box ein */
+  max-width: 400px;      /* Bild wird nie breiter als die Box */
+  margin: 0 auto;        /* ✅ zentriert alles */
+  position: relative;     /* Bezugspunkt für ISBN */
+
+  /*
+  position: relative;
+  display: block;
+    height: auto;         /* Seitenverhältnis bleibt korrekt */
+   
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+ /* outline: 1px solid rgba(47, 0, 255, 0.932); */
+}
+
+#ISBN {
+  bottom: 8px;   /* Abstand vom unteren Bildrand */
+  right: 10px;   /* Abstand vom rechten Bildrand */
+  background: rgba(255,255,255,0.7);  /* halbtransparenter Hintergrund, optional */
+  padding: 4px 8px; 
+  font-size: 0.9rem;
+  color: #0d2636;
+  border-radius: 4px;
+}
+
+
+/* Page Growth rates ======================================================================================================= */
+
+.preview-img {
+  width: 100%;
+  max-width: 400px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.preview-img:hover {
+  transform: scale(1.03);
+}
+
+.caption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  /* font-style: italic; */ 
+  /* color: #555;  */
+  line-height: 1.3;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Vollbild-Overlay */
+#overlay {
+  display: none; 
+  position: fixed;
+  /*width: 100vw; */
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  padding: 20px;
+}
+
+#overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;    /* damit das Bild seine Proportionen behält */
+  height: auto;   /* damit das Bild seine Proportionen behält */
+}
+
+
+
+
+
+/* Boxen ======================================================================================================= */
+/* Boxen ======================================================================================================= */
+/* Boxen ======================================================================================================= */
+
+
+/* Container =================================================================================================== */
+
+.container {
+  display: flex;
+  flex-direction: row;             /* left-box und right-box nebeneinander */
+                                   /* row: bleibt nebeneinander, sollte standardmäßig row bleiben, und nur bei sehr kleinen Geräten evtl. column */
+  flex-wrap: wrap;                 /* wrap/nowrap: Bilder umbrechen, falls kein Platz */
+                                   /* flex-wrap: nowrap; verhindert den Umbruch bei schmalen Bildschirmen */
+  
+  width: 100%;                     /* Container auf 90 % der Fensterbreite begrenzen */
+  max-width: 1200px;               /* dieselbe Breite wie Header */
+  margin: 0 auto;                  /* zentriert den Container horizontal */
+  
+  justify-content: space-between;  /* Abstand zwischen Boxen, "center" = Bilder zentrieren */
+  align-items: flex-start;         /* obere Kanten ausrichten */
+  gap: 20px;                       /* Abstand zwischen Bildern */
+  box-sizing: border-box;          /* sorgt dafür, dass Padding zur Breite gehört */
+  /* outline: 2px dashed red;      /* zum Prüfen, was tatsächlich im Container liegt */
+}
+
+
+.container img {             /* Bilder passen sich automatisch an die Containerbreite an */
+  display: block;
+  margin: 0 auto;
+  
+  width: calc(50% - 20px);   /* zwei Bilder pro Zeile */
+  height: auto;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+
+.container img:hover {       /* kleiner Hover-Effekt */
+  transform: scale(1.05);
+}
+
+
+.container-1 {               /* Bild + Text nebeneinander, Text unten ausgerichtet -- damit die ISBN links neben dem Bild steht */
+  display: flex;
+  justify-content: center;   /* Abstand zwischen Boxen, "center" = Bilder zentrieren */
+  align-items: center;
+  width: 100%;               /* <--- wichtig! Container muss Platz haben */
+  /* outline: 2px dashed red; */
+}
+
+
+.container-1 img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+
+
+/* left-box, right-box, center-box ========================================================================================= */
+
+.left-box, .right-box {
+  flex: 1 1 48%;               /* gleich groß, dürfen aber schrumpfen. Bis zu 48% Breite nebeneinander */ 
+  max-width: 48%;              /* dieser Wert bestimmt auch die Größe des Zwischenraums zwischen den beiden Boxen  */ 
+  min-width: 0;                /* 200 px: um zu testen, ob die Box zu breit ist. Wenn die Boxen zu breit sind gibt es immer einen Zeilenumbruch, statt dass sie nebeneinander stehen */
+  box-sizing: border-box;
+
+  overflow: visible;           /* ❗ damit Text nicht abgeschnitten wird */
+  overflow-wrap: break-word;   /* Text bricht statt abgeschnitten zu werden */
+  word-break: break-word;
+  white-space: normal;         /* ❗ Text darf umbrechen */
+
+  padding: 20px;
+  border-radius: 12px;
+  background: #dddddd;       /* useful color --- Standardfarbe */
+  color: #000000;            /* useful color  */
+}
+
+
+/* Variante 1: Gelblich */
+.left-box.yellow {
+  background:  #ffff99;
+  color: #333333;
+}
+
+/* Variante 2: Blau */
+.left-box.blue {
+  background: #dceeff;
+  color: #002244;
+}
+
+
+.left-box h4,
+.right-box h4 {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  white-space: normal;       /* bricht lange Texte um */
+  overflow: visible;
+  text-overflow: unset;
+}
+
+
+.center-box {
+  flex: 1 1 100%;        
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 12px;
+  background: #dddddd;        
+  color: #000000;    
+}
+  
+
+
+
+/* group_column ================================================================================================ */
+
+.group_column {
+  flex: 1;                   
+  display: flex;
+  flex-direction: column;       /* <--- NEU: Kinder untereinander statt nebeneinander */
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;  
+  padding-top: 0px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  color: rgb(0, 0, 0);  
+  gap: 10px;                     /* dies ist der Abstand zwischen den hellgrau umrandeten Bereichen */
+  }
+
+.group_column.blue {           
+background:    #6699FF;         /* äußere Box bein INPUT VALUES - hellblau */         
+ font-weight: bold; 
+ /*  grid-column: 1 / -1;   */
+}
+
+
+.group_column.green {        
+ background: #339966;           /* äußeren Box - hellgrün */          
+ font-weight: bold; 
+ /*  grid-column: 1 / -1;   */
+}
+
+.group_column.green .main-title2 {
+  display: block;
+  width: 100%;
+  text-align: center; /* optional, für mittige Ausrichtung */
+  /* margin: 0 auto 20px auto; /* Abstand nach unten */
+  margin-bottom: 20px;     /* Abstand nach unten */
+}
+
+
+
+
+/* group blue, green, ... ====================================================================================== */
+
+.group {
+  flex: 1;                    /* Gruppe nimmt die volle Höhe ein */
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;                /* wichtig! Damit sich die farbigen Boxen dynamisch an die Breite ihrer Eltern (left-box, right-box) anpassen */
+  min-width: 0;
+ 
+  padding: 20px;
+  gap: 10px;                  /* dies ist der Abstand zwischen den hellgrau umrandeten Bereichen */
+  box-sizing: border-box;
+  border-radius: 6px;
+  color: rgb(0, 0, 0);
+  
+  /* align-items: flex-end; */
+  /* flex-direction: column;   /* <--- NEU: Kinder untereinander statt nebeneinander */
+  /* min-width: 10px;          /* optional: Mindestbreite pro Gruppe */
+  /* max-width: 600px; */
+  /* flex-wrap: wrap;         /* damit Labels + Inputs umbrechen dürfen */
+  }
+
+
+/* group_x */
+.container .group_x,
+.left-box .group_x, .right-box .group_x{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+  .group ul {
+  margin-left: 1.5rem;   /* Einrücken */
+  padding-left: 1.5rem;  /* Bullet bleibt */
+  list-style-position: outside;
+}
+
+.group li {
+  margin-bottom: 0.6rem; /* Abstand zwischen Punkten */
+}
+
+.group li::marker {
+  /* color: #f80303; /* VC-Design-Farbton */
+  font-size: 1.2em;
+}
+
+
+  .group.blue {
+  display: flex;
+  flex-direction: row;   /* Spalten nebeneinander */
+  gap: 20px;             /* gleicher Abstand zwischen allen Spalten */
+  align-items: flex-start; 
+  background: #6699FF;             /******** Color der "inneren Box" bein INPUT VALUES - mittelblau */
+  font-weight: bold; 
+}
+
+.group.green {
+  padding: 20px;
+  background: #339966;             /******** useful color:  "innere Box" - mittelgrün */
+  font-weight: bold; 
+  gap: 20px;                         /* Abstand zwischen den beiden hellgrauen Boxen im Feld "green" */
+}
+
+.group.yellow {
+  padding: 20px;
+  background:#ffcc66;             /********* Color der Box bein Variables III: gelb */
+  font-weight: bold; 
+  gap: 20px;         
+}
+
+
+.group_x.yellow {
+  padding: 20px;
+  background:#ffcc66;             /********* Color der Box bein Variables III: gelb */
+  font-weight: bold; 
+  gap: 20px;         
+  /* outline: 3px dotted red; */
+}
+
+
+.group.blue > div,         /* Optional kannst du in der .group.blue oder .group.green definieren, dass die Spalten gleichmäßig teilen: */
+.group.green > div,
+.group.yellow > div, 
+.group {
+  flex: 1;
+  min-width: 0;            /* WICHTIG! verhindert Überlauf durch zu große Kinder -- Sicherstellen, dass Flex-Kinder schrumpfen dürfen */
+}
+
+
+.group.blue0 {
+background:  #99ccff;                /********* Color der Box bein Variables I: hellblau */
+}
+
+.group.green0 {
+background:  #66cc99;                /********* Color der Box bein Variables II: hellgrün */
+}
+
+.group.yellow0{
+  background: #ffff99;              /********* Color der Box bein Variables III: gelb */
+}
+
+.group.grey0 {
+background:  #ffffff; 
+}
+
+.group.page1 {
+background:  #dfefff; 
+}
+
+
+
+
+/* output-matrix =============================================================================================== */
+
+.output-matrix11 {
+   flex: 1 1 30%;
+  /* display: flex;
+  flex-direction: column;
+  align-items: stretch;          /* wichtig: sorgt dafür, dass alle Kinder (divs, inputs etc.) die Containerbreite ausfüllen --- align-items: center; */
+  width: 100%;                   /* passt sich an die Elternbreite an */
+  max-width: 100%;               /* wichtig: verhindert, dass irgendetwas breiter wird als der Container selber */
+  box-sizing: border-box;        /* stellt sicher, dass Padding und Border in die Breite eingerechnet werden*/ 
+                                 /* max-width zusammen mit box-sizing Garantiert, dass kein Element breiter wird als der Elterncontainer. */
+  padding: 10px;
+  gap: 20px;
+  background: rgb(230, 230, 230);   /* Hintergrundfarbe der Eingabebereiche */
+  border-radius: 6px;
+  overflow: hidden;              /* verhindert, dass Inhalte überstehen. Verhindert, dass irgendetwas über den Rand hinausragt */
+   /* outline: 2px dashed red;   /* geht um jeden hellgrauen Ein-/Ausgabebereich */
+  }
+
+.output-matrix11 input, 
+.output-matrix11 .output-box-0{          /* Eingabe-, Ausgabefelder */
+  flex: 1;                               /* bei den Inputs sorgt dafür, dass sie sich flexibel anpassen, aber nicht überlaufen. Nimmt den verfügbaren Platz */
+  max-width: 100%;                       /* überschreitet den Container nie */
+  box-sizing: border-box;
+  overflow-wrap: break-word;             /* ✅ bricht lange Inhalte */
+  word-break: break-all;                 /* ✅ Sicherheitsnetz */
+
+  padding: 4px 6px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  /* outline: 2px dotted rgb(255, 0, 0);   /* geht um jede Input- und Output Zelle */
+}
+
+.output-matrix11 .cell {                   /* Labels innerhalb der Spalten */
+  display: inline-block;
+  max-width: 100%;
+
+  font-size: clamp(0.6rem, 1vw, 1rem);   /* min 0.6rem, max 1rem, flexibel mit Viewport */
+  white-space: nowrap;                     /* KEIN Zeilenumbruch */
+  overflow: hidden;                        /* versteckt überlaufenden Text */
+  text-overflow: ellipsis;                 /* zeigt "…" falls zu lang */
+  line-height: 1.2;
+  /* outline: 1px solid rgba(255,0,0,0.6);  */
+}
+
+.output-matrix11 > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* optional */
+
+  width: 100%;
+  max-width: 100%; /* jetzt volle Containerbreite -- oder 900px */
+  box-sizing: border-box;
+  /* outline: 5px dashed rgba(0, 76, 255, 0.792);   /* wirkt nur bei INPUT */
+}
+
+
+
+
+.output-matrix11 h3,               /* Überschriften in output-matrix11 */
+.output-matrix11 h5 {
+  text-align: center;
+  margin: 0;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  word-break: break-word;
+}
+
+.output-matrix11 h3 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.output-matrix11 h5 {
+  font-size: clamp(0.8rem, 2.5vw, 1.2rem);
+}
+
+
+
+
+/* row ---------------------- */
+
+.output-matrix11 .row {               /* Zeilen: zwei Spalten nebeneinander auf großen Screens --- Jede Zeile enthält zwei Felder nebeneinander --- Optional: etwas breiter insgesamt */
+  display: flex;
+  flex-direction: row;                /* wichtig: Spalten nebeneinander */
+  flex-wrap: wrap;                    /* wichtig: erlaubt Umbruch bei kleiner Breite. Wenn der Platz zu eng wird (z. B. am Handy), brechen die Felder um, statt aus dem Container zu ragen. */
+  justify-content: space-between;
+  
+  align-items: flex-end;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  /* outline: 5px dotted rgba(255, 251, 0, 0.792);     /* geht um die Ausgabezeile */       
+}
+
+
+.output-matrix11 .row > div {      /*     Jede Spalte innerhal einer Zeile */
+  flex: 1 1 45%;                        /* !!! flex: 1 1 45% führt dazu, dass die Überschrift nicht mehr ganz geschrieben wird, sondern nur noch die ersten 1 oder 2 Buchstbaben */
+  display: flex;
+  flex-direction: column;          /* Label oben, Feld unten */
+  align-items: stretch;
+  
+  min-width:0;                     /* !!! min-width: 200px; verhindert zu schmale Felder - verhindert  aber auch 2x2 Matrix und macht stattdessen imm 1 x 4 */
+  /* box-sizing: border-box;
+  /* outline: 3px dotted rgb(4, 12, 240);    /* geht um das Label & die Cell */
+}
+
+
+
+/* form-column ================================================================================================= */
+
+.form-column {          
+  flex: 1;                  /* wächst mit der Elterngröße */
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;              /* nimmt volle Breite ein */
+  min-width: 0;             /* verhindert Überlauf */
+  box-sizing: border-box;
+ 
+  gap: 1rem;
+  min-width: 30%;
+  /* border: 2px solid #dbe6e6;  */
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 0;                    /* nicht nach unten verschieben */
+  color: black          /* useful color */
+}
+
+
+.form-column:nth-child(1),
+.form-column:nth-child(2),
+.form-column:nth-child(3),
+.form-column:nth-child(4){   
+ background-color: rgb(230, 230, 230);       /* color der Tabellen bei LTV-value model */
+}
+
+.form-column-white{
+background-color: rgb(255, 255, 255);       /* color der Tabellen bei LTV-value model */
+}
+
+
+
+
+/* cell ======================================================================================================== */
+
+.cell {
+  font-size: clamp(0.7rem, 1.2vw, 1rem);
+  /* white-space: normal; /* ✅ erlaubt Umbruch, damit nichts rausdrückt */
+  white-space: nowrap;
+  text-overflow: ellipsis;      /* zeigt „…“ wenn zu lang */
+  overflow: hidden;
+  /* outline: 2px dashed rgb(208, 0, 255); 
+  /*white-space: nowrap;          /* verhindert Zeilenumbruch */ 
+}
+
+
+.group.green,
+.group.blue,
+.group.yellow {
+  font-weight: bold;
+}
+
+.group.green .main-title,
+.group.blue .main-title,
+.group.yellow .main-title {
+  font-weight: bold;
+}
+
+
+
+/* cookie Banner ======================================================================================================== */
+
+.cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #222;
+      color: #fff;
+      padding: 15px 20px;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 14px;
+      z-index: 1000;
+    }
+
+.cookie-banner a { 
+  color: #4ea3ff; 
+  text-decoration: underline; 
+}
+
+.cookie-banner button {
+      background: #4ea3ff;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+.cookie-banner button:hover {
+      background: #2f82d3;
+    }
+
+    .cookie-banner .decline {
+      background: #555;
+    }
+
+    .cookie-banner .decline:hover {
+      background: #777;
+    }
+
+
+.cookie-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+
+
+
+
+
+/* MEDIA QUERIES – RESPONSIVE DESIGN =========================================================================== */
+/* MEDIA QUERIES – RESPONSIVE DESIGN =========================================================================== */
+/* MEDIA QUERIES – RESPONSIVE DESIGN =========================================================================== */
+
+
+/* ----------------- Orientierung: Hoch- und Querformat ---------------------- */
+
+
+/* ----------- MOBILE: Portrait ---------- */
+@media (max-width: 600px) {
+  .nav-bar {
+    flex-wrap: wrap;              /* gewünschter Umbruch */
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 10px 15px;
+  }
+
+  .nav-button {
+    flex: 1 1 calc(50% - 1rem);   /* zwei Buttons pro Zeile */
+    min-width: 120px;
+    max-width: 200px;
+    font-size: clamp(0.7rem, 3vw, 1.1rem);
+  }
+
+  footer .footer-de {
+    gap: 0.8rem;
+  }
+
+  footer a {
+    font-size: clamp(0.7rem, 3vw, 1rem);
+  }
+
+  .group ul {
+  margin-left: 1rem;   /* ✅ Einrücken */
+  padding-left: 1rem;  /* ✅ Bullet bleibt */
+  list-style-position: outside;
+}
+
+
+}
+
+
+
+@media (orientation: portrait) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-box,
+  .right-box {
+    max-width: 100%;
+  }
+}
+
+@media (orientation: landscape) {
+  .container {
+    flex-direction: row;
+    flex-wrap: nowrap;               /* ✅ 4 in einer Reihe */
+  }
+
+  .nav-button {
+    flex: 1 1 25%;
+  }
+  
+  .left-box,
+  .right-box {
+    max-width: 47%;
+  }
+}
+
+
+
+
+
+/* @media ----------------- max 600 px -- Smartphones ------------------------------- */
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .container-1{
+    flex-direction: column;     /* untereinander anordnen */
+    align-items: center;        /* horizontal zentrieren */
+    text-align: center;
+  }
+
+
+   #ISBN {
+     margin-top: 10px;           /* etwas Abstand unter dem Bild */
+   }
+
+  .cookie-banner { 
+    flex-direction: column; 
+    align-items: flex-start; 
+  }
+  
+  .cookie-buttons { 
+    flex-direction: column; 
+    gap: 5px; 
+  }
+
+   h1 {
+    font-size: clamp(1.2rem, 5vw, 2rem); /* passt sich Bildschirmbreite an */
+    text-align: center;                  /* optional */
+   }
+
+
+  .left-box,
+  .right-box {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 0;          /* ✅ wichtig: erlaubt echtes Schrumpfen */
+    width: 100%;
+  }
+
+  .left-box h4,
+  .right-box h4 {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .output-matrix11 {
+    max-width: 100%;       /* ✅ passt sich an */
+    overflow-x: auto;      /* falls trotzdem zu breit */
+  }
+
+
+  .output-matrix11 .cell {
+    font-size: clamp(0.5rem, 3vw, 0.9rem); /* kleiner auf Smartphones */
+  }
+
+  .output-matrix11 input,
+  .output-matrix11 .output-box-0 {
+    font-size: clamp(0.6rem, 2.5vw, 1rem);
+  }
+
+  .output-matrix11 .row {
+    flex-direction: row;    /* Spalten untereinander */
+    flex-wrap: wrap;     /* erlaubt Umbruch auf 1 Spalte -- nowrap: bleibt nebeneinander */
+    gap: 10px;
+    /* overflow-x: auto;      /* ✅ horizontales Scrollen statt Umbruch */
+  }
+
+  .output-matrix11 .row > div {
+    flex: 1 1 45%;
+    min-width: 0px;
+  }
+
+
+
+  table {
+    display: block;       /* Tabelle wird scrollbar */
+    overflow-x: auto;     /* horizontales Scrollen */
+    -webkit-overflow-scrolling: touch; /* sanftes Scrollen auf iOS */
+  }
+
+  table td:first-child {
+    white-space: nowrap;  /* Symbole umbrechen weiterhin nicht */
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .output-matrix11 .row {
+    flex-wrap: wrap;
+  }
+
+  .output-matrix11 .row > div {
+    flex: 1 1 48%;   /* zwei Spalten nebeneinander */
+  }
+}
+
+
+@media (max-width: 480px) {
+  .output-matrix11 .row > div {
+    flex: 1 1 100%;  /* bei sehr kleinen Bildschirmen lieber untereinander */
+  }
+}
+
+
+
+
+/* @media ----------- TABLET Querformat ---------- */
+@media (min-width: 600px) and (max-width: 900px) {
+  .nav-bar {
+    gap: 0.75rem;
+  }
+
+  .nav-button {
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+  }
+}
+
+
+
+/* @media ----------------- max 1024 px -- Tablets und kleinere Laptops ------------- */
+
+@media (max-width: 1024px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .left-box,
+  .right-box {
+    flex: 1 1 47%;
+    max-width: 47%;
+    min-width: 280px; /* verhindert zu schmale Boxen */
+  }
+
+  h3.main-title {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+  }
+
+  /* In kleineren Displays: Felder innerhalb .row untereinander */
+  .output-matrix11 .row > div {
+    flex: 1 1 100%;
+  }
+}
+
+
+
+
+/* output-box ====================================================================== */
+
+.output-box-0 {           /* Basis-Klasse für alle Output-Boxen */
+  display: flex; 
+  flex: 1;
+  align-items: stretch;   /* oder center */
+  justify-content: center;
+  font-size: 14px;        /* = neu - und alt!!! -- -WICHTIG*/
+  font-weight: bold;
+  border-radius: 6px;
+  background: white;
+  transition: all 0.3s ease;
+
+  width:100%;               /* diese 3 Punkte sorgen für sauberes Mit-Skalieren */
+  height: 100%;
+  min-height: 60px;          /* gleiche Mindesthöhe für alle */
+  box-sizing: border-box;
+
+    min-width: 10px;    /* gut?? */
+  min-height: 18px;
+
+  overflow: hidden;              /* verhindert Overflow bei langen Inhalten */
+  border: 1px solid #999;
+}
+
+.output-box-white {                           /* Zusatz-Klasse - Class - für Farboptionen */
+  background: #fff;                         /* Unterschied ? */
+  background-color: rgb(252, 252, 252);     /* Unterschied ? */
+  margin-left: 0px;
+  border: 2px solid #ccc;
+}
+
+.output-box:hover {                           /* Hover-Effekt zum Testen */
+  background: #eee;
+  transform: scale(1.03);
+}
+
+
+
+.cell input {
+  margin-left: 10px;
+  flex: 1;              /* makes input stretch inside cell */
+}
+
+.consistency-title {
+  margin-bottom: 14px;
+}
+
+
+.container_4_header {
+  /**** max-width: var(--content-width); */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content {              /* im Zusammenhang mit dem blauen Footer hinzugefügt */
+  min-height: 80vh;     /* Inhalt nimmt Platz ein */
+  padding: 20px;
+  }
+
+
+
+
+.field {
+  flex: 1;             /* make both inputs equal width */
+  padding: 5px;
+  }
+
+
+
+/* form ====================================================================== */
+/* Generelles Styling für Spalten */
+
+.form-column0 {            
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 30%;
+  border: 2px solid transparent;  
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 0;                    /* nicht nach unten verschieben */
+  color: black
+}
+
+
+.form-column1 {            
+  background-color: #bae4f4;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 200px;  /* damit alle Spalten gleich hoch sind - sonst hängt es evt. von der Schriftgröße ab */
+  min-width: 30%;
+  border: 2px solid #06f332;  
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 0;                    /* nicht nach unten verschieben */
+  color: black
+}
+
+
+
+
+
+/* grid ====================================================================== */
+
+ .grid-container {                   /* geht bis zum Ende aller 8 Spalten */
+  display: grid; 
+  grid-template-columns: repeat(1, 1fr 1fr 1fr 1fr 1fr 1fr);
+  align-items: start;                /* alle Inhalte beginnen oben gleich */
+  gap: 20px;                         /* Abstand zwischen 2 benachbarten Container-Bereichen */
+  
+  border: 1px solid #e46d6d;
+  /* align-items: flex-start; 
+  /* align-items: end;                  /* <-- aligns all grid items to the bottom */
+
+  justify-content: center;           /* center columns if they don’t fill */
+  margin: 0 auto;                    /* center the grid on the page */
+  max-width: 1000px;                 /* optional: max. Breite eines containers */
+}
+
+.grid-container3 {           /* für DERIVED VALUES Ausgabefeld (4 Spalten nebeneinander) */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* 3 gleich breite Spalten */
+  gap: 10px;
+  text-align: center;        /* Labels und Boxen zentrieren */
+}
+
+.grid-container4 {           /* für DERIVED VALUES Ausgabefeld (4 Spalten nebeneinander) */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* 4 gleich breite Spalten */
+  gap: 10px;
+  text-align: center;        /* Labels und Boxen zentrieren */
+}
+
+.grid-container > div {
+  background: rgba(44, 136, 136, 0.384); /* Hintergrundfarbe der einzelnen Spalten -- mit dem 4-ten Wert kann man die Transparenz einstellen*/
+  padding: 20px;
+  margin: 0px;
+  align-items: center;
+  border: 2px solid white;
+  border-radius: 8px;
+  min-height: 10px;
+  font-size: 1.0rem;
+  gap: 5px;                 /* vertikaler Abstand zwiwschen den Elementen einer Gruppe */
+  text-align: center;       /* zentriert INPUT in der Mitte über den 3 Spalten */
+  }
+
+  .grid-template-columns {
+  grid-template-columns: repeat(3, 1fr);    /* Definition(?) von grid-template-columns */
+}
+
+  .values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 20px; /* space between columns */
+  width: 100%; /* fill parent */
+}
+
+
+
+
+
+/* group ====================================================================== */
+
+.group.blue2 {
+  background: #6290f4;
+  align-items: flex-start;          /* <-- aligns all grid items to the bottom */
+}
+
+.group.orange {
+  background: rgb(214, 123, 123);  
+}
+
+.group.nocolor {
+  background: transparent;   
+  font-weight: bold;
+}
+
+.group label {
+  font-weight: bold;
+}
+
+.group input,
+.group .output-box-0 {
+  width: 70px;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.group input:disabled {
+  background: rgba(255, 255, 25, 0.915);
+  color: #000;
+}
+
+
+
+/* input ====================================================================== */
+
+.input-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;           /* Abstand zwischen den Feldern */
+  align-items: center; /* Labels + Inputs mittig ausrichten */
+  align-items: stretch;
+  width: 100%;        /* nimmt die volle Breite des Elternelements */
+  box-sizing: border-box;
+}
+
+.input-line label {
+  margin-right: 5px;
+}
+
+.input-line input,
+.input-line .output-box-0 {
+  width: 80px;   /* gleiche Breite für Inputs/Outputs */
+  text-align: center;
+}
+
+
+.input-row {
+  display: flex;           /* Input -- r_M, r_pq, r_B -- und Prozent-Zeichen nebeneinander */
+ align-items: center;     /* vertikal ausrichten */
+  gap: 0.5rem;             /* kleiner Abstand */
+}
+
+.input-row input {
+  width: 80px;             /* feste Breite */
+  text-align: center;       /* Zahlen schön rechtsbündig */
+}
+
+.item-wide h3 {
+  margin-top: 0;        /* verhindert zufällige Abstände */
+}
+
+
+/* 3 Spalten */
+.item-wide {            /* geht bis zum Ende aller 3 Spalten */
+  grid-column: span 3;  /* takes up 3 columns */
+  }
+
+
+
+
+
+
+
+
+
+
+/* ============================================================================= */
+
+.no-spinners::-webkit-outer-spin-button,  /* Chrome, Safari, Edge, Opera */
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinners[type=number] {    /* Firefox */
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+
+.number-input {
+  width: 50%;   /* feste Breite */
+}
+
+
+
+
+/* Output-box ================================================================== */
+/* für DERIVED VALUES & CALCULATED VALUES */
+
+
+.output-box-01 {     
+  margin: 0px;           /* damit das 1-ste Ausgabefeld bei DERIVED VALUES weiter vom linken Rand eingerückt wird */ 
+}
+
+
+.output-box-1 {            /* für Output Boy für Comments bei CALCULATED VALUES */               
+  display: inline-block;
+  padding: 4px 10px;                    
+  margin: 4px;
+  border: 2px solid #fd0303;
+  border-radius: 4px;
+  color: #1a1a1a;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  min-width: 60px;
+  border: none;
+  padding: 0;       /* optional: damit auch innen nichts sichtbar bleibt */
+  margin: 0;        /* optional: wenn keine Lücke sein soll */
+}
+
+.output-box-transparent {
+  border: 2px solid transparent;
+  background-color: transparent;
+}
+
+
+
+.output-box-white-blue {                     
+  border: 1px solid #3300ff;
+  background-color: #ffffff;
+}
+
+.output-box-grey {                           
+  border: 2px solid #000000;
+  background-color: rgb(200, 200, 200);
+}
+
+.output-box-orange {
+  border: 2px solid #000000;
+  background-color: rgba(250, 147, 2, 0.711);
+}
+
+.output-box-green { 
+  border: 2px solid #000000;
+  background-color: rgba(13, 248, 21, 0.75);
+}
+
+
+
+/* output-matrix ====================================================================== */
+ 
+.output-matrix12 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* 2 Spalten */
+  gap: 20px;
+  width: 100%;
+  background: rgb(230, 230, 230);        /* Hintergrundfarbe der Eingabebereiche */
+  border-radius: 6px;
+}
+.output-matrix12 .compare {                /* Add this CSS to make the info span all columns */
+  grid-column: 1 / -1;                     /* Span all columns in the grid */
+  margin-top: 10px;
+  text-align: left;                        /* Or center, as you prefer */
+}
+
+
+
+
+/* overlay ====================================================================== */
+
+#overlay {           /* wg. Vergößerung Bild .png  */
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+  }
+  #overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    box-shadow: 0 0 20px #000;
+  }
+
+
+
+/* ====================================================================== */
+
+.placeholder {
+  color: rgb(130, 130, 130); 
+  opacity: 1;        /* Make sure it's fully visible */
+  font-style: italic;
+  font-size: 12px;
+  }
+
+
+
+
+/* row ====================================================================== */
+
+.row {                                   /* row = row grid */
+  display: flex;
+  flex-wrap: nowrap;
+  /* grid-template-columns: repeat(2, 1fr); */
+  gap: 20px;                    /* Abstand zwischen den Spalten */
+  align-items: flex-end;      /* flex-start: alle starten oben, flex-end: alle Eingabefelder sind an der Unterkante ausgerichtet */
+  /*align-items: stretch;         /* gleiche Höhe */
+  justify-content: space-between;
+  }
+  
+
+.row label {
+  flex: 1;              /* Label nimmt so viel Platz wie möglich */
+  margin-right: 0.5rem; /* kleiner Abstand vor der Box */
+}
+
+.row > div {
+  flex: 1;                   /* alle gleich breit */
+  display: flex;
+  flex-direction: column;  /* Label oben, Box unten */
+  align-items: stretch;      /* Box dehnt sich horizontal */
+  box-sizing: border-box;
+}
+
+
+
+.row4 {                                   /* row = row grid */
+  display: grid;
+  grid-template-columns: repeat(4, 4fr); 
+  gap: 20px;                             /* Abstand zwischen 2 benachbarten Spalten */
+  align-items: stretch;                  /* beide Boxen gleich hoch */
+  /* justify-content: center;
+  /* grid-template-rows: auto auto;         /* 2 Reihen: Überschriften + Inhalt */
+  /*align-items: start;                    /* all form-columns start at the top */
+}
+
+
+
+
+
+/* spacer ===================================================================== */
+
+.negative-spacer-6 {
+  margin-top: -6px;
+}
+
+.negative-spacer-10 {
+  margin-top: -10px;
+}
+.negative-spacer-20 {
+  margin-top: -20px;
+}
+
+.negative-spacer-35 {
+  margin-top: -35px;
+}
+
+.negative-spacer-50 {
+  margin-top: -50px;
+}
+
+.negative-spacer-60 {
+  margin-top: -60px;
+}
+
+
+.spacer-0 {
+  height: 0px;
+}
+
+
+.spacer-02 {
+  height: 0.2px;
+}
+
+.spacer-1 {
+  height: 1px;
+}
+
+.spacer-2 {
+  height: 2px;
+}
+
+.spacer-4 {
+  height: 4px;
+}
+
+
+.spacer-5 {
+  height: 5px;
+}
+
+.spacer-10 {
+  height: 10px;
+}
+
+.spacer-20 {
+  height: 20px; /* Höhe frei wählbar */
+}
+
+.spacer-40 {
+  height: 40px; /* Höhe frei wählbar */
+}
+
+.spacer-60 {
+  height: 60px;
+}
+
+.spacer-80 {
+  height: 80px; 
+}
+
+
+
+
+/* ====================================================================== */
+
+.zero {color: rgb(0, 0, 0);}
+.nonzero {color: rgb(255, 0, 0);}
+
+
+
+
+/* Optional: Overlay fürs Vergrößern */
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+
+
+
+
+/* Overlay für Großansicht */
+#overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#overlay img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+
+
+
+#INVISIBLE {                                     /* mit # beginnen IDs */
+  background-color: transparent; 
+}
+
+#M0 {
+  background-color: rgba(255, 1, 1, 0.75);
+}
+#rM {
+  background-color: rgba(255, 1, 1, 0.75);
+}
+
+#rM::placeholder { 
+  color: #000000;
+  opacity: 1;
+}
+
+
+#LTVnpv {
+  background-color:  rgba(60, 225, 250, 0.642);
+}
+
+#n {
+  background-color: rgb(200, 200, 200);
+}
+
+#rpq {
+  background-color:  rgba(250, 147, 2, 0.711);
+}
+
+
+
+#s0 {
+  margin-top: 4px;    
+}
+
+#c {
+  margin-top: 4px;
+}
+
+#LTVnpB0 {
+  margin-top: 4px;
+}
+
+
+
+.axis-controls {
+  display: flex;          /* alles in einer Reihe */
+  gap: 20px;              /* Abstand zwischen den Feldern */
+  align-items: center;    /* vertikal zentrieren */
+  flex-wrap: wrap;        /* bei kleiner Breite umbrechen */
+  font-family: Arial, sans-serif; /* einheitlicher Zeichensatz */
+  font-size: 14px;        /* gleiche Größe für alle Labels */
+}
+
+.axis-field {
+  display: flex;
+  flex-direction: column; /* Label über Input */
+}
+
+.axis-field input[type="text"] {
+  width: 150px;
+  padding: 3px 5px;
+  font-family: inherit;   /* gleiche Schrift wie Label */
+  font-size: inherit;
+}
+
+.checkbox-field {
+  flex-direction: row;    /* Label + Checkbox nebeneinander */
+  align-items: center;
+  display: flex;
+  gap: 10px; /* Abstand zwischen Checkbox und Gleichung */
+}
+
+
+#fitEquation {
+  color: darkblue;
+  font-weight: bold;
+}
+
+
+.checkbox-field label {
+  display: flex;
+  align-items: center;
+  gap: 5px;               /* Abstand zwischen Checkbox und Text */
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.checkbox-field input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.fit-line {
+  display: inline-block;
+  width: 30px;
+  height: 0;
+  border-bottom: 2px dashed orange;
+}
+
+#fitEquation {
+  font-weight: bold;
+  color: darkblue;
+}
