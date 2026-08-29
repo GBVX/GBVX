@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Watt&Lumen</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style_github.css">
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 </head>
@@ -38,6 +37,7 @@
    <nav class="nav-bar lang lang-de" style="display:none;">
      <a href="index.html"            class="nav-button">Start</a>
      <a href="Watt_Lumen.html"       class="nav-button">Watt und Lumen</a>
+     <a href="Luftfeuchtigkeit.html" class="nav-button">Luftfeuchtigkeit</a>
      <a href="THM.html"              class="nav-button">The Hidden Math Between Market and Sales Development</a>
   </nav>
 </header>
@@ -51,7 +51,7 @@
 
 <div class="container-p1">
   <p class="justified-text" 
-        id="p2_Watt_Lumen">
+        id="p_Watt_Lumen">
   </p>
 </div>
 
@@ -90,7 +90,9 @@
       <input type="checkbox" id="fitToggle">
       Linearen Fit anzeigen
     </label>
-  
+    
+
+
  <!-- Kleine gestrichelte Linie vor Gleichung -->
   <span id="fitLine" class="fit-line" style="display:none;"></span>
    <!-- <span id="fitLine" class="fit-line"></span> -->
@@ -109,7 +111,7 @@
 
 
 <div class="spacer-80"></div>
-<h3 style="margin-bottom: -2.5em;">Beispiel</h3>
+<h3 style="margin-bottom: 0.8em;">Beispiel</h3>
 
 <table id="dataTable">
   <tr>
@@ -185,7 +187,7 @@
 
 <div class="group page1">
   <p class="justified-text" 
-        id="p2_lux">
+        id="p_lux">
   </p>
 </div>
 

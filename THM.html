@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>THM</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style_github.css">
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 </head>
@@ -37,6 +36,7 @@
    <nav class="nav-bar lang lang-de" style="display:none;">
      <a href="index.html"            class="nav-button">Start</a>
      <a href="Watt_Lumen.html"       class="nav-button">Watt und Lumen</a>
+     <a href="Luftfeuchtigkeit.html" class="nav-button">Luftfeuchtigkeit</a>
      <a href="THM.html"              class="nav-button">The Hidden Math Between Market and Sales Development</a>
   </nav>
 </header>
@@ -52,7 +52,7 @@
 
 <div class="container-p1">
   <p class="justified-text" 
-        id="p3_THM">
+        id="p_THM">
   </p>
 </div>
 
@@ -72,10 +72,10 @@
 <div class="container-p1">
 
   <div class="image-box">             <!-- macht das Bild zum Bezugspunkt -->
-   <img src="i-THM.png" 
+   <img class="zoom-thumb" src="i-THM.png" 
          alt="Bild" 
          onclick="openOverlay(this.src)">
-       <p id="ISBN"></p>
+   <p id="ISBN_"></p>
     
     <div id="overlay" 
          onclick="closeOverlay()">
@@ -88,6 +88,19 @@
 
 
 <div class="spacer-80"></div>  <!-- Abstand zum Footer -->
+
+
+
+<div class="container-p1">
+
+  <div class="image-box">             <!-- macht das Bild zum Bezugspunkt -->
+    <p id="ISBN"></p>
+  </div> 
+
+</div>
+
+
+<div class="spacer-40"></div>
 
 
 </main>  
