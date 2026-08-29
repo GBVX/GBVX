@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Luftfeuchtigkeit — Temperatur / Wassergehalt</title>
+<style>
+  :root{
+    --bg: #f4f6f7;
+    --panel: #e7ecee;
+    --line: #cdd6d9;
+    --text: #23303a;
+    --muted: #5d6b73;
+    --accent: #1f7d91;
+    --accent-rgb: 31,125,145;
+    --input-bg: #ffffff;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    --sans: "IBM Plex Sans", Arial, sans-serif;
+  }
+  :root.dark-mode{
+    --bg: #12181c;
+    --panel: #1b2328;
+    --line: #2a3439;
+    --text: #d8e2e6;
+    --muted: #7f9299;
+    --accent: #6fb6c1;
+    --accent-rgb: 111,182,193;
+    --input-bg: #0e1417;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    outline-color: green;
+  }
+  h1{
+    font-size:15px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:600;
+    margin:0 0 4px 0;
+    flex:0 0 auto;
+  }
+  .sub{
+    font-size:13px;
+    color:var(--muted);
+    margin:0 0 14px 0;
+    flex:0 0 auto;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:12px;
+  }
+  .subBtns{ display:flex; gap:8px; flex:0 0 auto; }
+  #toggleBtn, #themeBtn{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--muted);
+    font-family:var(--sans);
+    font-size:11px;
+    padding:5px 10px;
+    border-radius:4px;
+    cursor:pointer;
+    flex:0 0 auto;
+  }
+  .control-button {
+    appearance: none;
+    border: 1px solid rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.95);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    flex: 0 0 auto;
+  }
+  .control-button:hover {
+    background: rgba(255,255,255,1);
+    transform: translateY(-1px);
+  }
+  .control-button:active {
+    transform: translateY(0);
+  }
+
+
+  
+  /* ---- control panel ---- */
+  .panel{
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+    align-items:flex-end;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px 18px;
+    margin-bottom:14px;
+    flex:0 0 auto;
+  }
+  .panel.hidden{ display:none; }       
+  .field{ display:flex; flex-direction:column; gap:5px; }
+  .field label{
+    font-size:11px;        /* Beschriftung control panel */
+    letter-spacing:.06em;
+    /* text-transform:uppercase; */
+    color:var(--muted);
+  }
+  .field .row{ display:flex; gap:6px; align-items:center; }
+  input[type=number]{
+    width:64px;
+    background:var(--input-bg);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-family:var(--mono);
+    font-size:13px;
+    padding:5px 6px;
+    border-radius:4px;
+  }
+  input[type=color]{
+    width:36px;height:28px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:none;
+    padding:0;
+    cursor:pointer;
+  }
+  .field .row span{ color:var(--muted); font-size:12px; }
+  .swatch-label{ font-size:11px; color:var(--muted); margin-top:2px; }
+  .sep{ align-self:stretch; width:2px; background:var(--muted); opacity:.5; }
+
+
+
+
+
+  /* ---- Achsen ---- */
+  .stage{
+    flex:1 1 auto;
+    min-height:0;
+    display:flex;
+    gap:8px;
+  }
+  .yAxisLabel{
+    flex:0 0 auto;
+    width:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    color:var(--muted);
+    font-size:16px;              /* Beschriftung y-Achse */
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .tableCol{
+    flex:1 1 auto;
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+  }
+  .xAxisLabel{
+    flex:0 0 auto;
+    text-align:center;
+    color:var(--muted);
+    font-size:16px;              /* Beschriftung x-Achse */
+    letter-spacing:.02em;
+    padding-top:8px;
+  }
+
+
+
+
+  
+  .wrap{
+    flex:1 1 auto;
+    min-height:0;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-bottom:none;
+    border-radius:8px 8px 0 0;
+    display:flex;
+  }
+  .wrap.scroll-mode{
+    overflow:auto;
+    align-items:flex-start;
+  }
+  .wrap.scroll-mode #gridWrap{ width:auto; height:auto; display:inline-block; }
+  .wrap.scroll-mode tbody th{
+    position:sticky; left:0; z-index:2;
+    background:var(--panel);
+  }
+  .wrap.scroll-mode tfoot th, .wrap.scroll-mode tfoot td{
+    position:sticky; bottom:0; z-index:2;
+  }
+  .wrap.scroll-mode tfoot th{ left:0; z-index:3; }
+  #gridWrap{ position:relative; width:100%; height:100%; }
+  #lineOverlay{ position:absolute; top:0; left:0; pointer-events:none; overflow:visible; z-index:1; }
+  table{
+    border-collapse:collapse;
+    font-family:var(--mono);
+    font-size:var(--cell-font, 12px);
+    white-space:nowrap;
+    table-layout:fixed;
+  }
+  th, td{
+    border:1px solid var(--line);
+    text-align:center;
+    padding:0;
+    width:var(--cell-w, 44px);
+    height:var(--cell-h, 26px);
+    overflow:hidden;
+  }
+  th{
+    background:var(--panel);
+    color:var(--muted);
+    font-weight:600;
+  }
+  tbody th{ font-size:var(--tick-font, 11px); text-align:left; padding:0 6px; }
+  .corner{
+    background:var(--panel);
+    color:var(--muted);
+    font-size:var(--tick-font, 10px);
+    text-align:left;
+    padding:4px 6px;
+  }
+  td.cell{ color:#111; font-weight:600; cursor:pointer; }
+  .pctText{ position:relative; z-index:2; }
+  td.empty{ background:var(--panel); }
+  tfoot th, tfoot td{
+    color:var(--muted);
+    background:var(--panel);
+    font-size:var(--tick-font, 11px);
+  }
+  tfoot th{ text-align:left; padding:4px 6px; }
+  tfoot td[data-col]{ cursor:pointer; }
+  tbody th{ cursor:pointer; }
+
+  /* ---- Hervorhebung (Spalte / Zeile) ---- */
+
+  .colSelected{
+  outline:2px solid var(--selectionColor, var(--accent));
+  outline-offset:-2px;
+}
+.rowSelected{
+  box-shadow: inset 0 0 0 2px var(--selectionColor, var(--accent));
+}
+tbody th.rowSelected, tfoot td.colSelected, tbody th.colSelected{
+  background:var(--selectionColor, var(--accent)) !important;
+  color:#fff !important;
+}
+
+
+  /* ---- Zoom (Flächenauswahl) ---- */
+  #zoomRect{
+    position:absolute;
+    display:none;
+    pointer-events:none;
+    z-index:5;
+    border:1.5px dashed var(--accent);
+    background: rgba(var(--accent-rgb), 0.15);
+  }
+  body.no-select{ user-select:none; }
+  #grid tbody td[data-col]{ cursor:crosshair; }
+  .dewSelected{ font-weight:700; cursor:help; }
+
+
+
+
+/* wg. "Beispiele" bei Luftfeuchtigkeit */
+.markedPoint{
+  outline: 3px solid #d1495b;
+  outline-offset: -3px;
+}
+
+.markedRow{
+  box-shadow: inset 0 0 0 2px var(--marked-row-color, #d1495b);
+}
+tbody th.markedRow{
+  background: var(--marked-row-color, #d1495b) !important;
+  color:#fff !important;
+}
+
+
+#exampleSelect{
+  background:var(--input-bg);
+  color:var(--text);
+  border:1px solid var(--line);
+  font-family:var(--sans);
+  font-size:13px;
+  padding:5px 6px;
+  border-radius:4px;
+}
+#exampleSelect optgroup{
+  color:var(--text);
+  font-weight:600;
+}
+#exampleSelect option{
+  color:var(--text);
+  background:var(--input-bg);
+}
+#exampleSelect optgroup{
+  color:var(--text) !important;
+}
+
+</style>
+</head>
+
+
+
+
+<body>
+
+<h1>Luftfeuchtigkeit</h1>
+<p class="sub">
+  <!-- <span>Temperatur (x) &middot; absoluter Wassergehalt in g/m&sup3; (y) &middot; Zellwert = relative Luftfeuchtigkeit</span>  -->
+  <span class="subBtns">
+    <button id="themeBtn" class="control-button">Dark Mode</button>
+    <button id="toggleBtn" class="control-button">Menüleiste ausblenden</button>
+    <button id="fullscreenBtn" class="control-button" type="button">⛶</button>
+  </span>
+</p>
+
+<div class="panel">
+  <div class="field">
+    <label>Temperatur °C</label>
+    <div class="row">
+      <input type="number" id="tMin" value="-5" step="1" min="-45" max="65">
+      <span>bis</span>
+      <input type="number" id="tMax" value="30" step="1" min="-45" max="65">
+      <span>Schrittweite</span>
+      <input type="number" id="tStep" value="1" step="1" min="1">
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="field">
+    <label>Wassergehalt g/m&sup3;</label>
+    <div class="row">
+      <input type="number" id="hMin" value="1" step="0.5" min="0">
+      <span>bis</span>
+      <input type="number" id="hMax" value="20" step="0.5">
+      <span>Schrittweite</span>
+      <input type="number" id="hStep" value="0.5" step="0.5" min="0.1">
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="field">
+    <label>Relative Luftfeuchtigkeit</label>                    <!-- Farben der %-Werte -->
+    <div class="row">
+      <input type="color" id="colLow" value="#e8815a">
+      <input type="color" id="colMid" value="#ffffff">
+      <input type="color" id="colHigh" value="#2f8fe0">
+    </div>
+    <div class="swatch-label">niedrig &rarr; optimal &rarr; hoch</div>
+  </div>
+
+  <div class="field">
+    <label>Optimalwert (%)</label>
+    <div class="row">
+      <input type="number" id="optPct" value="57" step="1" min="1" max="99">
+    </div>
+    <div class="swatch-label">&nbsp</div>
+  </div>
+
+  <div class="field">
+    <label>100%-Linie</label>
+    <div class="row">
+      <input type="color" id="colLine" value="#2f8fe0">
+    </div>
+      <div class="swatch-label">&nbsp</div>
+  </div>
+
+  <div class="sep"></div>
+
+<div class="field">
+  <label>Beispiele</label>
+  <div class="row">
+    <select id="exampleSelect"></select>
+  </div>
+  <div class="swatch-label">&nbsp</div>
+  <div class="spacer-0"></div>
+</div>
+
+</div>
+
+<div class="stage">
+  <div class="yAxisLabel">Wassergehalt der Luft in g/m&sup3;</div>
+  <div class="tableCol">
+    <div class="wrap">
+      <div id="gridWrap">
+        <table id="grid"></table>
+        <svg id="lineOverlay"></svg>
+        <div id="zoomRect"></div>
+      </div>
+    </div>
+    <div class="xAxisLabel">Temperatur in &deg;C</div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+// Sättigungsdampfdichte (g/m^3) bei gegebener Temperatur (Magnus-Formel)
+function saturationDensity(tempC){
+  const es = 6.112 * Math.exp((17.62 * tempC) / (243.12 + tempC)); // hPa
+  return 216.7 * es / (273.15 + tempC); // g/m^3
+}
+
+// Umkehrfunktion: Taupunkt-Temperatur, bei der saturationDensity(t) == h (g/m^3)
+function dewPointTemp(h){
+  let lo = -90, hi = 80;
+  for(let i = 0; i < 60; i++){
+    const mid = (lo + hi) / 2;
+    if(saturationDensity(mid) < h){ lo = mid; } else { hi = mid; }
+  }
+  return (lo + hi) / 2;
+}
+
+
+
+// Examples
+
+const EXAMPLE_GROUPS = [
+  {
+    name: 'Allgemeine Beispiele',                   // example=0-0
+    items: [
+        {
+        label: 'abrupter Temperaturwechsel',// Aufruf mit: example=<Gruppenindex>-<Beispielindex>, z.B. ?example=0-0
+        points: [
+          { t: 5,  pct: 90, color:'blue'},          // Kühlschrank
+          { t: 20, pct: 58, color:'DarkOrange' },   // Raumtemp. -- DarkOrange = color: '#FF8C00'
+          { t: 30, pct: 60, color:'red' }           // Außentemp.
+        ]
+      }
+    ]
+  },
+
+  {
+    name: 'Spezielle Wetterlagen',                     // example=1-...
+    items: [
+      {
+        label: 'schwüle Tage',                         // example=1-0
+        rows: [ 
+          { h: 13.5, color: 'DarkOrange' },
+          ]
+      },
+      { 
+        label: 'Beispiel: 34 °C, 60 % r.F.',          // example=1-1
+        points: [ 
+          { t: 34, pct: 60, color: '#CCCC00' } 
+          ] 
+      },
+      { 
+        label: 'Beispiel: 32 °C, 30 % r.F.',          // example=1-2
+        points: [ 
+          { t: 32, pct: 30, color: '#CCCC00' } 
+          ] 
+      },
+    ]
+  },
+
+  {
+    name: 'Gebäude', 
+    items: [
+      { label: 'Wohnraum: 20 °C, 58 % r.F.',          // example=2-0
+        points: [ { t: 20, pct: 58, color: '#CC9966' } ] },
+        { label: 'Schimmelrisiko: 16 °C, 90 % r.F.',  // example=2-1
+        points: [ { t: 16, pct: 90, color: 'DarkGreen' } ] 
+      },
+      {
+        label: 'Keller lüften',                       // example=2-2
+        points: [
+          { t: 24, pct: 50, color:'red' },            // Außentemp. 2
+          { t: 16, pct: 70, color:'green'},           // Keller jetzt
+          { t: 14, pct: 50, color:'blue' },           // Außentemp. 1    
+        ]
+      }, 
+    ]
+  }
+];
+
+// Feste Randfarben für die 3er-Vergleichsgruppe, nach Position (A, B, C).
+// Reihenfolge entspricht der Reihenfolge in "points" pro Eintrag oben.
+const TRIPLE_POINT_COLORS = ['blue', 'green', 'red', 'yellow'];
+
+// Randfarbe für Einzelpunkte und 2er-Vergleiche
+const DEFAULT_POINT_COLOR = '#d1495b';
+
+
+function resolveExample(ex){
+  let { t, h, pct } = ex;
+  if(t !== undefined && h !== undefined){
+    // beide Achsenwerte schon gegeben
+  } else if(t !== undefined && pct !== undefined){
+    h = saturationDensity(t) * pct / 100;
+  } else if(h !== undefined && pct !== undefined){
+    t = dewPointTemp(h * 100 / pct);
+  } else {
+    return null;
+  }
+  return { t, h };
+}
+
+
+
+function resolveItemPoints(item){
+  const resolved = [];
+  for(const raw of (item.points || [])){
+    const pt = resolveExample(raw);
+    if(!pt) return null;
+    resolved.push({ t: pt.t, h: pt.h, color: raw.color });
+  }
+  return resolved;
+}
+
+
+
+
+function colorsForItem(count){
+  if(count === 3) return TRIPLE_POINT_COLORS.slice(0, count);
+  return new Array(count).fill(DEFAULT_POINT_COLOR);
+}
+
+
+
+function populateExamples(){
+  const sel = document.getElementById('exampleSelect');
+  sel.innerHTML = '<option value="">  </option>';  // Beispiele (Text im Auswahlmenü)
+  EXAMPLE_GROUPS.forEach((group, gi) => {
+    const optgroup = document.createElement('optgroup');
+    optgroup.label = group.name;
+    group.items.forEach((item, ii) => {
+      const opt = document.createElement('option');
+      opt.value = gi + '-' + ii;
+      opt.textContent = item.label;
+      optgroup.appendChild(opt);
+    });
+    sel.appendChild(optgroup);
+  });
+}
+
+
+// Wendet einen Beispiel-Eintrag (1-3 Punkte) an. Wird sowohl vom Dropdown
+// als auch von der URL-Parameter-Übergabe genutzt.
+
+
+function applyExampleItem(groupIndex, itemIndex){
+  const group = EXAMPLE_GROUPS[groupIndex];
+  if(!group) return false;
+  const item = group.items[itemIndex];
+  if(!item) return false;
+
+  const resolvedPoints = resolveItemPoints(item);
+  if(!resolvedPoints) return false;
+
+  const fallbackColors = colorsForGroup(resolvedPoints.length);
+
+  function colorsForGroup(count){
+  if(count === 3) return TRIPLE_POINT_COLORS.slice(0, count);
+  return new Array(count).fill(DEFAULT_POINT_COLOR);
+}
+  clearSelection();
+
+  markedPoints = resolvedPoints.map((pt, i) => ({
+    t: pt.t,
+    h: pt.h,
+    label: item.label,
+    color: pt.color || fallbackColors[i]
+  }));
+
+  markedRows = (item.rows || []).map(r => ({
+  h: r.h,
+  color: r.color,
+  label: r.label || item.label
+}));
+
+  const tMinInput = document.getElementById('tMin');
+  const tMaxInput = document.getElementById('tMax');
+  const hMinInput = document.getElementById('hMin');
+  const hMaxInput = document.getElementById('hMax');
+  resolvedPoints.forEach(pt => {
+    if(pt.t < parseFloat(tMinInput.value)) tMinInput.value = Math.floor(pt.t);
+    if(pt.t > parseFloat(tMaxInput.value)) tMaxInput.value = Math.ceil(pt.t);
+    if(pt.h < parseFloat(hMinInput.value)) hMinInput.value = Math.floor(pt.h);
+    if(pt.h > parseFloat(hMaxInput.value)) hMaxInput.value = Math.ceil(pt.h);
+  });
+  markedRows.forEach(r => {
+    if(r.h < parseFloat(hMinInput.value)) hMinInput.value = Math.floor(r.h);
+    if(r.h > parseFloat(hMaxInput.value)) hMaxInput.value = Math.ceil(r.h);
+  });
+
+  build();
+
+  // der letzte Punkt der Gruppe erhält zusätzlich die volle "T"-Markierung,
+  // in seiner eigenen Farbe statt des festen Akzentwerts
+  if(resolvedPoints.length){
+  const activePt = resolvedPoints[resolvedPoints.length - 1];
+  const activeColor = markedPoints[markedPoints.length - 1].color;
+  document.documentElement.style.setProperty('--selectionColor', activeColor);
+  const col = findNearestIndex(lastTemps, activePt.t);
+  const row = findNearestIndex(lastHums, activePt.h);
+  selectedColIndex = String(col);
+  selectedRowIndex = String(row);
+  }
+  applySelection();
+
+  const sel = document.getElementById('exampleSelect');
+  if(sel) sel.value = groupIndex + '-' + itemIndex;
+
+  return true;
+}
+
+
+
+// Übergabe der Parameter von HTML zur Grafik
+// Format: ?example=<Gruppenindex>-<Beispielindex>, z.B. ?example=2-0
+function applyExampleFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const val = params.get('example');
+  if(val === null) return;
+  const [gi, ii] = val.split('-').map(Number);
+  if(Number.isNaN(gi) || Number.isNaN(ii)) return;
+  applyExampleItem(gi, ii);
+}
+// ENDE Übergabe der Parameter von HTML zur Grafik
+
+// ENDE Examples
+
+
+
+
+function hexToRgb(hex){
+  const v = hex.replace('#','');
+  return {
+    r: parseInt(v.substring(0,2),16),
+    g: parseInt(v.substring(2,4),16),
+    b: parseInt(v.substring(4,6),16)
+  };
+}
+
+function mix(c1, c2, t){
+  return {
+    r: Math.round(c1.r + (c2.r - c1.r) * t),
+    g: Math.round(c1.g + (c2.g - c1.g) * t),
+    b: Math.round(c1.b + (c2.b - c1.b) * t)
+  };
+}
+
+function colorForPct(pct, low, mid, high, optPct){
+  let rgb;
+  if(pct <= optPct){
+    const t = pct / optPct;
+    rgb = mix(low, mid, Math.max(0, Math.min(1, t)));
+  } else {
+    const t = (pct - optPct) / (100 - optPct);
+    rgb = mix(mid, high, Math.max(0, Math.min(1, t)));
+  }
+  return `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+}
+
+function textColorFor(rgbStr){
+  const [r,g,b] = rgbStr.match(/\d+/g).map(Number);
+  const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return luminance > 0.6 ? '#111' : '#fff';
+}
+
+function range(min, max, step){
+  const out = [];
+  const n = Math.round((max - min) / step);
+  for(let i=0;i<=n;i++){
+    out.push(+(min + i*step).toFixed(2));
+  }
+  return out;
+}
+
+function fmtDE(n){
+  return n.toLocaleString('de-DE', {maximumFractionDigits:2});
+}
+
+// nur für die Temperatur-Achse (x): immer ganzzahlig, keine Nachkommastellen
+function fmtTemp(n){
+  return Math.round(n).toLocaleString('de-DE', {maximumFractionDigits:0});
+}
+
+// ---- Auswahl-Status (Spalten-/Zellen-Hervorhebung) ----
+let selectedColIndex = null;
+let selectedRowIndex = null;
+
+// ---- Zoom-Status (Flächenauswahl per Maus) ----
+let lastTemps = [];
+let lastHums = [];
+let isDragging = false;
+let dragStartClient = null;
+let dragStartCell = null;
+let lastHoverCell = null;
+let suppressNextClick = false;
+let dewCellEl = null; // aktuell markierte Taupunkt-Zelle auf der x-Achse
+let markedPoints = [];  // wg. Datenübergabe der Beispiele
+let markedRows = [];   // wg. frei einfärbbarer Zeilen-Hervorhebung pro Beispiel, z.B. bei 12g/m^3
+
+
+
+
+function clearSelection(){
+  document.querySelectorAll('.colSelected, .rowSelected').forEach(el=>{
+    el.classList.remove('colSelected','rowSelected');
+  });
+  clearDewHighlight();
+  selectedColIndex = null;
+  selectedRowIndex = null;
+  document.documentElement.style.removeProperty('--selectionColor');
+}
+
+
+
+function clearDewHighlight(){
+  document.querySelectorAll('.dewSelected').forEach(el => {
+    el.classList.remove('dewSelected');
+    el.style.background = '';
+    el.style.color = '';
+    el.title = '';
+  });
+  dewCellEl = null;
+}
+
+
+function applySelection(){
+  if(selectedRowIndex !== null){
+    const tr = document.querySelector(`#grid tbody tr[data-row="${selectedRowIndex}"]`);
+    if(tr){
+      tr.querySelectorAll('td, th').forEach(el => {
+        if(el.classList.contains('empty')) return;
+        el.classList.add('rowSelected');
+      });
+    }
+    markDewPoint(selectedRowIndex);
+  }
+  if(selectedColIndex !== null){
+    const limitRow = selectedRowIndex !== null ? parseInt(selectedRowIndex, 10) : null;
+    document.querySelectorAll(`#grid [data-col="${selectedColIndex}"]`).forEach(el=>{
+      if(el.classList.contains('empty')) return;
+      if(limitRow !== null){
+        const rowTr = el.closest('tr');
+        const rowAttr = rowTr ? rowTr.dataset.row : undefined;
+        // Zeilen oberhalb des Punkts (kleinerer Index = höhere Luftfeuchtigkeit, weiter oben)
+        // von der Spalten-Hervorhebung ausschließen. Die tfoot-Zelle (x-Achse) hat kein
+        // dataset.row und bleibt dadurch immer eingefärbt = Fußpunkt des T-Stamms.
+        if(rowAttr !== undefined && parseInt(rowAttr, 10) < limitRow) return;
+      }
+      el.classList.add('colSelected');
+    });
+  }
+}
+
+
+
+
+
+
+// markiert auf der x-Achse die Temperatur, bei der der Wassergehalt der gewählten
+// Zeile die Sättigung (100 %) erreicht -> Taupunkt
+function markDewPoint(rowIndex){
+  if(!lastTemps.length || !lastHums.length) return;
+  const h = lastHums[rowIndex];
+  const dewT = dewPointTemp(h);
+
+  let bestIdx = 0, bestDiff = Infinity;
+  lastTemps.forEach((t, i) => {
+    const diff = Math.abs(t - dewT);
+    if(diff < bestDiff){ bestDiff = diff; bestIdx = i; }
+  });
+
+  const tStepVal = parseFloat(document.getElementById('tStep').value) || 1;
+  if(bestDiff > tStepVal) return; // Taupunkt liegt außerhalb des sichtbaren Temperaturbereichs
+
+  const footerCell = document.querySelector(`#grid tfoot td[data-col="${bestIdx}"]`);
+  if(!footerCell) return;
+
+  const lineHex = document.getElementById('colLine').value;
+  const rgb = hexToRgb(lineHex);
+  const bgStr = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+  footerCell.classList.add('dewSelected');
+  footerCell.style.background = bgStr;
+  footerCell.style.color = textColorFor(bgStr);
+  footerCell.title = `Taupunkt bei ${fmtDE(h)} g/m\u00b3: ${fmtDE(dewT)} \u00b0C`;
+  dewCellEl = footerCell;
+}
+
+
+
+// wg. Datenübergabe Beispiele
+function findNearestIndex(arr, value){
+  let bestIdx = 0, bestDiff = Infinity;
+  arr.forEach((v, i) => {
+    const diff = Math.abs(v - value);
+    if(diff < bestDiff){ bestDiff = diff; bestIdx = i; }
+  });
+  return bestIdx;
+}
+
+function clearMarkedPoints(){
+  document.querySelectorAll('.markedPoint').forEach(el => {
+    el.classList.remove('markedPoint');
+    el.style.outlineColor = '';
+    el.title = '';
+  });
+}
+
+function applyMarkedPoints(){
+  clearMarkedPoints();
+  if(!lastTemps.length || !lastHums.length) return;
+
+  const tLo = Math.min(...lastTemps), tHi = Math.max(...lastTemps);
+  const hLo = Math.min(...lastHums), hHi = Math.max(...lastHums);
+
+  markedPoints.forEach(p => {
+    if(p.t < tLo - 1e-6 || p.t > tHi + 1e-6) return;
+    if(p.h < hLo - 1e-6 || p.h > hHi + 1e-6) return;
+
+    const col = findNearestIndex(lastTemps, p.t);
+    const row = findNearestIndex(lastHums, p.h);
+    const cell = document.querySelector(`#grid tbody tr[data-row="${row}"] td[data-col="${col}"]`);
+    if(!cell || cell.classList.contains('empty')) return;
+
+    cell.classList.add('markedPoint');
+    cell.style.outlineColor = p.color || 'blue';
+    if(p.label) cell.title = p.label;
+  });
+}
+
+
+function applyMarkedRows(){  // für horizontale 12 g/m^3 Linie
+  if(!markedRows.length || !lastHums.length) return;
+
+  markedRows.forEach(row => {
+    if(row.h < Math.min(...lastHums) - 1e-6 || row.h > Math.max(...lastHums) + 1e-6) return;
+    const rowIndex = findNearestIndex(lastHums, row.h);
+    const tr = document.querySelector(`#grid tbody tr[data-row="${rowIndex}"]`);
+    if(!tr) return;
+
+    tr.querySelectorAll('td, th').forEach(el => {
+      if(el.classList.contains('empty')) return;
+      el.classList.add('markedRow');
+      el.style.setProperty('--marked-row-color', row.color || DEFAULT_POINT_COLOR);
+    });
+    if(row.label) tr.title = row.label;
+
+    markDewPoint(rowIndex);
+  });
+}
+
+
+
+
+window.addEventListener('message', (e) => {
+  if(e.data && e.data.type === 'set-points' && Array.isArray(e.data.points)){
+    markedPoints = e.data.points;
+    build();
+  }
+});
+
+window.setGrafikPoints = function(points){
+  markedPoints = Array.isArray(points) ? points : [];
+  build();
+};
+
+
+// ENDE wg. Datenübergabe Beispiele
+
+
+
+
+function build(){
+  const tMinInput = document.getElementById('tMin');
+  const tMaxInput = document.getElementById('tMax');
+  const TEMP_LIMIT_MIN = -45, TEMP_LIMIT_MAX = 65;
+  let tMin = Math.min(Math.max(parseFloat(tMinInput.value), TEMP_LIMIT_MIN), TEMP_LIMIT_MAX);
+  let tMax = Math.min(Math.max(parseFloat(tMaxInput.value), TEMP_LIMIT_MIN), TEMP_LIMIT_MAX);
+  tMinInput.value = tMin;
+  tMaxInput.value = tMax;
+  const tStep = parseFloat(document.getElementById('tStep').value);
+  const hMinInput = document.getElementById('hMin');
+  let hMin = Math.max(parseFloat(hMinInput.value), 0);
+  hMinInput.value = hMin;
+  const hMax = parseFloat(document.getElementById('hMax').value);
+  const hStep = parseFloat(document.getElementById('hStep').value);
+  const optPct = parseFloat(document.getElementById('optPct').value);
+
+  const low = hexToRgb(document.getElementById('colLow').value);
+  const mid = hexToRgb(document.getElementById('colMid').value);
+  const high = hexToRgb(document.getElementById('colHigh').value);
+  const lineColor = document.getElementById('colLine').value;
+
+  const temps = range(tMin, tMax, tStep);
+  const hums = range(hMin, hMax, hStep).reverse();
+  lastTemps = temps;
+  lastHums = hums;
+
+  const table = document.getElementById('grid');
+  table.innerHTML = '';
+  dewCellEl = null;
+
+  const wrap = document.getElementById('gridWrap');
+  const wrapOuter = document.querySelector('.wrap');
+  const availW = wrapOuter.clientWidth;
+  const availH = wrapOuter.clientHeight;
+  const colCount = temps.length + 1;
+  const rowCount = hums.length + 1;
+
+  const MIN_FIT_W = 32, MIN_FIT_H = 20;
+  const fitW = availW / colCount;
+  const fitH = availH / rowCount;
+
+  let cellW, cellH;
+  if(fitW < MIN_FIT_W || fitH < MIN_FIT_H){
+    cellW = 44;
+    cellH = 26;
+    wrapOuter.classList.add('scroll-mode');
+  } else {
+    cellW = Math.max(6, Math.floor(fitW));
+    cellH = Math.max(6, fitH);
+    wrapOuter.classList.remove('scroll-mode');
+  }
+  const fontPx = Math.max(6, Math.min(cellW, cellH) * 0.42);
+
+  document.documentElement.style.setProperty('--cell-w', cellW + 'px');
+  document.documentElement.style.setProperty('--cell-h', cellH + 'px');
+  document.documentElement.style.setProperty('--cell-font', fontPx + 'px');
+
+  const tickFontPx = Math.max(9, Math.min(13, fontPx * 1.3));
+  document.documentElement.style.setProperty('--tick-font', tickFontPx + 'px');
+
+  const minRowLabelH = 15;
+  const yLabelStep = Math.max(1, Math.ceil(minRowLabelH / cellH));
+
+
+
+  function niceStep(rawStep){
+    const candidates = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
+    for(const c of candidates){ if(c >= rawStep) return c; }
+    return Math.pow(10, Math.ceil(Math.log10(rawStep)));
+  }
+  const minColLabelW = 24;
+  const rawColStepUnits = (minColLabelW / cellW) * tStep;
+  const xStepUnits = niceStep(rawColStepUnits);
+
+  const colgroup = document.createElement('colgroup');
+  for(let i=0;i<colCount;i++){
+    const col = document.createElement('col');
+    col.style.width = cellW + 'px';
+    colgroup.appendChild(col);
+  }
+  table.appendChild(colgroup);
+
+  const tbody = document.createElement('tbody');
+
+  hums.forEach((h, rowI) => {
+    const tr = document.createElement('tr');
+    tr.dataset.row = rowI;
+    const rowTh = document.createElement('th');
+    const forceLabel = Math.abs(h) < 1e-9 || (Number.isInteger(h) && h % 10 === 0);
+    if(rowI % yLabelStep === 0 || rowI === hums.length - 1 || forceLabel){
+      rowTh.textContent = fmtDE(h);
+    }
+    tr.appendChild(rowTh);
+
+    temps.forEach((t, i) => {
+      const sat = saturationDensity(t);
+      const pct = (h / sat) * 100;
+      const td = document.createElement('td');
+      td.dataset.col = i;
+      if(pct > 100.4){
+        td.className = 'empty';
+      } else {
+        const p = Math.min(100, pct);
+        const bg = colorForPct(p, low, mid, high, optPct);
+        td.className = 'cell';
+        td.style.background = bg;
+        td.style.color = textColorFor(bg);
+        if(cellW >= 22 && cellH >= 16){
+          const span = document.createElement('span');
+          span.className = 'pctText';
+          span.textContent = Math.round(p) + '%';
+          td.appendChild(span);
+        }
+      }
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+
+  const tfoot = document.createElement('tfoot');
+  const footRow = document.createElement('tr');
+  const footLabel = document.createElement('th');
+  footLabel.textContent = '';
+  footRow.appendChild(footLabel);
+  temps.forEach((t, i) => {
+    const td = document.createElement('td');
+    td.dataset.col = i;
+    const onNiceStep = Math.abs(t % xStepUnits) < 1e-6 || Math.abs(Math.abs(t % xStepUnits) - xStepUnits) < 1e-6;
+    if(onNiceStep || i === 0 || i === temps.length - 1){
+      td.textContent = fmtTemp(t);
+    }
+    footRow.appendChild(td);
+  });
+  tfoot.appendChild(footRow);
+  table.appendChild(tfoot);
+
+  if(selectedColIndex !== null && selectedColIndex >= temps.length){
+    selectedColIndex = null;
+    selectedRowIndex = null;
+  }
+  if(selectedRowIndex !== null && selectedRowIndex >= hums.length){
+    selectedRowIndex = null;
+  }
+  applySelection();
+
+  drawSaturationLine(temps, hums, hStep, lineColor);
+  applyMarkedPoints();
+  applyMarkedRows();   // neu
+
+}
+
+
+
+
+
+
+
+
+function drawSaturationLine(temps, hums, hStep, lineColor){
+  const gridWrap = document.getElementById('gridWrap');
+  const table = document.getElementById('grid');
+  const svg = document.getElementById('lineOverlay');
+
+  const w = table.offsetWidth;
+  const hgt = table.offsetHeight;
+  svg.setAttribute('width', w);
+  svg.setAttribute('height', hgt);
+  svg.innerHTML = '';
+
+  const wrapRect = gridWrap.getBoundingClientRect();
+
+  // y-Referenz: Mittelpunkte der ersten beiden Datenzeilen messen -> exakte Zeilenhöhe in px
+  const bodyRows = table.querySelectorAll('tbody tr');
+  if(bodyRows.length < 1) return;
+  const th0 = bodyRows[0].querySelector('th').getBoundingClientRect();
+  const y0 = th0.top + th0.height / 2 - wrapRect.top; // y-Position von hums[0] (höchster Wert, oberste Zeile)
+  let rowHeightPx = th0.height;
+  if(bodyRows.length > 1){
+    const th1 = bodyRows[1].querySelector('th').getBoundingClientRect();
+    rowHeightPx = th1.top - th0.top;
+  }
+
+  // x-Referenz: Mittelpunkte der Fußzeilen-Zellen (eine pro Temperatur-Spalte)
+  const footCells = table.querySelectorAll('tfoot td');
+
+  // sichtbarer Bereich = nur die Datenzeilen (Kopf- und Fußzeile ausgeschlossen)
+  const topBound = y0 - rowHeightPx / 2;
+  const bottomBound = y0 + (hums.length - 1) * rowHeightPx + rowHeightPx / 2;
+
+  const points = [];
+  temps.forEach((t, i) => {
+    const sat = saturationDensity(t);
+    const rowIndexFrac = (hums[0] - sat) / hStep; // gebrochene Position zwischen den Zeilen
+    const y = y0 + rowIndexFrac * rowHeightPx;
+
+    const r = footCells[i].getBoundingClientRect();
+    const x = r.left + r.width / 2 - wrapRect.left;
+    points.push({x, y});
+  });
+
+  // Segment gegen den sichtbaren Datenbereich clippen, damit die Linie exakt an der
+  // obersten/untersten Zeile endet, statt in Kopf-/Fußzeile hineinzulaufen.
+  function clipSegment(A, B, lo, hi){
+    const dy = B.y - A.y;
+    let tMin = 0, tMax = 1;
+    if(dy === 0){
+      if(A.y < lo - 1e-6 || A.y > hi + 1e-6) return null;
+    } else {
+      const tLo = (lo - A.y) / dy, tHi = (hi - A.y) / dy;
+      tMin = Math.max(0, Math.min(tLo, tHi));
+      tMax = Math.min(1, Math.max(tLo, tHi));
+      if(tMin > tMax + 1e-6) return null;
+    }
+    const Pa = { x: A.x + tMin * (B.x - A.x), y: A.y + tMin * dy };
+    const Pb = { x: A.x + tMax * (B.x - A.x), y: A.y + tMax * dy };
+    return { Pa, Pb, aInside: tMin <= 1e-6, bInside: tMax >= 1 - 1e-6 };
+  }
+
+  const runs = [];
+  let current = [];
+  for(let i = 0; i < points.length - 1; i++){
+    const clipped = clipSegment(points[i], points[i + 1], topBound, bottomBound);
+    if(!clipped){
+      if(current.length){ runs.push(current); current = []; }
+      continue;
+    }
+    if(current.length === 0){
+      current.push(clipped.Pa);
+    } else if(!clipped.aInside){
+      runs.push(current);
+      current = [clipped.Pa];
+    }
+    current.push(clipped.Pb);
+    if(!clipped.bInside){
+      runs.push(current);
+      current = [];
+    }
+  }
+  if(current.length) runs.push(current);
+
+  const ns = 'http://www.w3.org/2000/svg';
+  runs.forEach(run => {
+    const d = run.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
+    const path = document.createElementNS(ns, 'path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', lineColor);
+    path.setAttribute('stroke-width', '2.5');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(path);
+  });
+
+  points.forEach(p => {
+    if(p.y < topBound - 0.01 || p.y > bottomBound + 0.01) return; // nur Punkte im sichtbaren Datenbereich zeichnen
+    const dot = document.createElementNS(ns, 'circle');
+    dot.setAttribute('cx', p.x.toFixed(1));
+    dot.setAttribute('cy', p.y.toFixed(1));
+    dot.setAttribute('r', '2.5');
+    dot.setAttribute('fill', lineColor);
+    svg.appendChild(dot);
+  });
+}
+
+
+
+document.querySelectorAll('input').forEach(el => {
+  el.addEventListener('change', build);
+});
+
+populateExamples();
+build();
+
+
+
+document.getElementById('toggleBtn').addEventListener('click', () => {
+  const panel = document.querySelector('.panel');
+  panel.classList.toggle('hidden');
+  document.getElementById('toggleBtn').textContent =
+    panel.classList.contains('hidden') ? 'Menüleiste einblenden' : 'Menüleiste ausblenden';
+  requestAnimationFrame(build);
+});
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const isDark = document.documentElement.classList.toggle('dark-mode');
+  document.getElementById('themeBtn').textContent = isDark ? 'Bright Mode' : 'Dark Mode';
+});
+
+document.getElementById('fullscreenBtn').addEventListener('click', () => {
+  window.parent.postMessage({ type: 'toggle-fullscreen' }, '*');
+});
+
+// Klick-Delegation auf der Tabelle: a) Fußzeile (Temperatur) -> Spalte hervorheben,
+// b) Prozent-Zelle -> Zeile + Spalte hervorheben. Erneuter Klick auf dieselbe
+// Auswahl hebt sie wieder auf.
+document.getElementById('grid').addEventListener('click', (e) => {
+  if(suppressNextClick){
+    suppressNextClick = false;
+    return;
+  }
+  const rowTh = e.target.closest('tbody th');
+  if(rowTh){
+    // Zeilen-Klick (Wassergehalt-Achse)
+    const row = rowTh.closest('tr').dataset.row;
+    if(selectedRowIndex === row && selectedColIndex === null){
+      clearSelection();
+    } else {
+      clearSelection();
+      selectedRowIndex = row;
+      selectedColIndex = null;
+      applySelection();
+    }
+    return;
+  }
+
+  const td = e.target.closest('td');
+  if(!td || td.dataset.col === undefined) return;
+  const col = td.dataset.col;
+
+  if(td.closest('tfoot')){
+    // Spalten-Klick (Temperatur-Achse)
+    if(selectedColIndex === col && selectedRowIndex === null){
+      clearSelection();
+    } else {
+      clearSelection();
+      selectedColIndex = col;
+      selectedRowIndex = null;
+      applySelection();
+    }
+  } else if(td.classList.contains('cell')){
+    // Zell-Klick (Prozentwert) -> Zeile + Spalte
+    const row = td.closest('tr').dataset.row;
+    if(selectedColIndex === col && selectedRowIndex === row){
+      clearSelection();
+    } else {
+      clearSelection();
+      selectedColIndex = col;
+      selectedRowIndex = row;
+      applySelection();
+    }
+  }
+});
+
+// ---- Zoom per Flächenauswahl ----
+const zoomRectEl = document.getElementById('zoomRect');
+
+// liefert {col, row} der Datenzelle unter dem Mauszeiger, oder null außerhalb des Datenbereichs
+function cellAt(clientX, clientY){
+  const el = document.elementFromPoint(clientX, clientY);
+  if(!el) return null;
+  const td = el.closest('#grid tbody td[data-col]');
+  if(!td) return null;
+  const tr = td.closest('tr');
+  if(!tr || tr.dataset.row === undefined) return null;
+  return { col: +td.dataset.col, row: +tr.dataset.row };
+}
+
+function updateZoomRect(a, b){
+  const wrapRect = document.getElementById('gridWrap').getBoundingClientRect();
+  const x1 = Math.min(a.x, b.x) - wrapRect.left;
+  const y1 = Math.min(a.y, b.y) - wrapRect.top;
+  const x2 = Math.max(a.x, b.x) - wrapRect.left;
+  const y2 = Math.max(a.y, b.y) - wrapRect.top;
+  zoomRectEl.style.left = x1 + 'px';
+  zoomRectEl.style.top = y1 + 'px';
+  zoomRectEl.style.width = (x2 - x1) + 'px';
+  zoomRectEl.style.height = (y2 - y1) + 'px';
+}
+
+function applyZoom(startCell, endCell){
+  const minCol = Math.min(startCell.col, endCell.col);
+  const maxCol = Math.max(startCell.col, endCell.col);
+  const minRow = Math.min(startCell.row, endCell.row);
+  const maxRow = Math.max(startCell.row, endCell.row);
+  if(minCol === maxCol && minRow === maxRow) return; // zu kleine Auswahl -> kein Zoom
+
+  const tMinNew = lastTemps[minCol];
+  const tMaxNew = lastTemps[maxCol];
+  const hMinNew = lastHums[maxRow];  // Zeilen sind absteigend sortiert (höchster Wert oben)
+  const hMaxNew = lastHums[minRow];
+
+  document.getElementById('tMin').value = tMinNew;
+  document.getElementById('tMax').value = tMaxNew;
+  document.getElementById('hMin').value = hMinNew;
+  document.getElementById('hMax').value = hMaxNew;
+
+  clearSelection();
+  build();
+}
+
+function onDragMove(e){
+  const dx = e.clientX - dragStartClient.x;
+  const dy = e.clientY - dragStartClient.y;
+  if(!isDragging && Math.hypot(dx, dy) > 4){
+    isDragging = true;
+    zoomRectEl.style.display = 'block';
+    document.body.classList.add('no-select');
+  }
+  if(isDragging){
+    updateZoomRect(dragStartClient, { x: e.clientX, y: e.clientY });
+    const c = cellAt(e.clientX, e.clientY);
+    if(c) lastHoverCell = c;
+  }
+}
+
+function onDragEnd(e){
+  document.removeEventListener('mousemove', onDragMove);
+  document.removeEventListener('mouseup', onDragEnd);
+  document.body.classList.remove('no-select');
+  zoomRectEl.style.display = 'none';
+
+  if(isDragging){
+    suppressNextClick = true;
+    const endCell = cellAt(e.clientX, e.clientY) || lastHoverCell || dragStartCell;
+    applyZoom(dragStartCell, endCell);
+  }
+  isDragging = false;
+}
+
+
+
+// wg. Beispiele Luftfeuchtigkeit
+
+document.getElementById('exampleSelect').addEventListener('change', (e) => {
+  const val = e.target.value;
+  if(val === ''){
+    clearSelection();
+    markedPoints = [];
+    markedRows = [];   // neu
+    build();
+    return;
+  }
+  const [gi, ii] = val.split('-').map(Number);
+  applyExampleItem(gi, ii);
+});
+
+// ENDE wg. Beispiele Luftfeuchtigkeit
+
+
+
+
+
+document.getElementById('grid').addEventListener('mousedown', (e) => {
+  if(e.button !== 0) return; // nur linke Maustaste
+  const cell = cellAt(e.clientX, e.clientY);
+  if(!cell) return;
+  dragStartClient = { x: e.clientX, y: e.clientY };
+  dragStartCell = cell;
+  lastHoverCell = cell;
+  e.preventDefault(); // verhindert Textmarkierung beim Ziehen
+  document.addEventListener('mousemove', onDragMove);
+  document.addEventListener('mouseup', onDragEnd);
+});
+
+// Doppelklick irgendwo in der Grafik: Auswahl aufheben UND Zoom auf Standardbereich zurücksetzen
+document.getElementById('gridWrap').addEventListener('dblclick', (e) => {
+  e.preventDefault();
+  clearSelection();
+  document.getElementById('tMin').value = -5;
+  document.getElementById('tMax').value = 30;
+  document.getElementById('tStep').value = 1;
+  document.getElementById('hMin').value = 1;
+  document.getElementById('hMax').value = 20;
+  document.getElementById('hStep').value = 0.5;
+  build();
+});
+
+// reagiert auf jede Größenänderung des Tabellenbereichs (Fenster, eingebetteter Container, Panel ein/aus)
+new ResizeObserver(() => requestAnimationFrame(build)).observe(document.querySelector('.wrap'));
+
+build();
+</script>
+
+
+<script>
+function sendHeight() {
+  const h = document.documentElement.scrollHeight;
+  window.parent.postMessage({ type: 'resize-grafik', height: Math.ceil(h) }, '*');
+}
+window.addEventListener('load', sendHeight);
+window.addEventListener('resize', sendHeight);
+new ResizeObserver(sendHeight).observe(document.body);
+
+// 
+populateExamples();
+applyExampleFromURL();
+// ENDE Übergabe der Parameter von HTML zur Grafik 
+</script>
+
+
+</body>
+</html>
