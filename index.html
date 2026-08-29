@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>index</title>
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style_github.css">
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 </head>
@@ -17,9 +16,6 @@
 
 <script> const availableLangs = ['en', 'de']; </script>
 
-<!-- <script src="script_calc.js" defer></script> -->   <!-- defer ist wichtig. Ohne defer muss das script am Ende der html stehen -->
-<script src="script_lang_gh.js" defer></script>
-<script src="script_other.js" defer> </script>
 
 
 <div class="language-selector">
@@ -34,14 +30,20 @@
 
 
 <header class="site-header">
-   <nav class="nav-bar lang lang-de" style="display:none;">
-     <a href="index.html"            class="nav-button">Start</a>
-     <a href="Watt_Lumen.html"       class="nav-button">Watt und Lumen</a>
-     <a href="THM.html"              class="nav-button">The Hidden Math Between Market and Sales Development</a>
+
+  <nav class="nav-bar lang lang-de" style="display:none;">
+    <a class="nav-button" href="index.html"                >Start </a>
+    <a class="nav-button" href="Watt_Lumen.html"           >Watt und Lumen</a>
+    <a class="nav-button" href="Luftfeuchtigkeit.html"     >Luftfeuchtigkeit</a>
+    <a class="nav-button" href="THM.html"                  >The Hidden Math Between Market and Sales Development</a>
   </nav>
+  
 </header>
 
 
+<!-- <script src="script_calc.js" defer></script> -->   <!-- defer ist wichtig. Ohne defer muss das script am Ende der html stehen -->
+<script src="script_lang_gh.js" defer></script>
+<script src="script_other.js" defer> </script>
 
 
 
@@ -67,7 +69,7 @@
 <div class="container-p1">
   <div class="spacer-60"></div>
   <p class="justified-text" 
-        id="p1_intro">
+        id="p_intro">
   </p>
 </div>
 
