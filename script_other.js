@@ -48,9 +48,18 @@ function updateActiveFlag(lang) {                          // wegen der Flaggen
 
 // en --> de für GBVX - sonst werden die deutschen Texte nicht automatisch geladen 
 document.addEventListener('DOMContentLoaded', function() {
-  const savedLang = localStorage.getItem("lang") || "de";   // Initialisierung beim Laden ergänzen -- Beim Laden aktivieren
+  const savedLang = localStorage.getItem("lang") || "de";
   setLanguage(savedLang);
-  updateActiveFlag(savedLang);                              // wegen der Flaggen - Damit beim Start die Flagge gleich korrekt markiert ist
+  updateActiveFlag(savedLang);
+
+  const overlay = document.getElementById("overlay");
+  if (overlay) {
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) {
+        closeOverlay();
+      }
+    });
+  }
 });
 
 document.getElementById("language").addEventListener("change", function () {
@@ -70,24 +79,9 @@ document.getElementById("language").addEventListener("change", function () {
 function openOverlay(src) {
   const overlay = document.getElementById("overlay");
   const overlayImg = document.getElementById("overlay-img");
+  if (!overlay || !overlayImg) return;
   overlayImg.src = src;
   overlay.style.display = "flex";
-  
-  document.getElementById("overlay-img").src = src;
-  document.getElementById("overlay").style.display = "flex";
- // toggle zoom on double-click/tap
-
-overlayImg.addEventListener('dblclick', function (e) {
-  this.classList.toggle('zoomed');
-});
-
-// close overlay on click outside image (optional)
-overlay.addEventListener('click', function (e) {
-  if (e.target === overlay) { // clicked the backdrop
-    closeOverlay();
-    overlayImg.classList.remove('zoomed'); // reset zoom state
-  }
-});
 }
 
 
