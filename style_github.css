@@ -1,38 +1,436 @@
-/* Vereinheitliche Schriftgröße der Navigationsleiste über alle Seiten */
+
 .nav-bar, .nav-bar a, .nav-bar .nav-button {
-  font-size: 24px; /* Basisgröße - bei Bedarf anpassen */
+  font-size: 24px;
   line-height: 1.2;
   pointer-events: auto;
 }
 
 
+
+body {
+    padding: 0.62em;
+    margin: 1em auto;
+    max-width:90%;
+    background: #ffffff;
+    color: rgb(0, 0, 0);       /* Schrift sichtbar machen */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: clamp(14px, 2vw, 20px);  /* sehr wichtig. Damit sich die Größe des Zeichensatzes mit der Größe des Displays ändert */
+    outline-color: green;}
+
+
+  .form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+
+.checkbox-field input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+
+.group.page1 {
+  padding: 20px;
+  background:  #dfefff; 
+}
+
+
+
+/* Schriften und Überschriften ================================================================================= */
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }     /* Dynamische Größenabstufung per clamp() */
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+h3 { font-size: clamp(1.4rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.1rem, 2.5vw, 1.6rem); }
+h5 { font-size: clamp(0.9rem, 2vw, 1.3rem); }
+h6 { font-size: clamp(0.8rem, 1.8vw, 1.1rem); }
+
+
+h1, h2, h3, h4, h5, h6 {        /* Dynamische, responsive Überschriften */
+  overflow-wrap: break-word;    /* moderne Lösung für Zeilenumbruch bei langen Wörtern */
+  word-break: break-word;       /* als Sicherheitsnetz, funktioniert in allen Browsern */
+}
+
+
+/* === Hauptinhalt === */
+.main-content {
+  width: 100%;
+  padding: 1rem;
+}
+
+.main-content h1, .main-content h2, .main-content h3,
+.main-content h4, .main-content h5, .main-content h6 {
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: center; /* optional */
+}
+
+
+/* für automatische Silbentrennung, z.B. in der Navigation-Bar*/
+a { 
+  overflow-wrap: break-word; 
+  word-wrap: break-word; 
+  word-break: break-word; 
+  hyphens: auto; 
+}
+
+
+
 .content-wrapper {     /* Globaler Content-Container */
     width: 100%;
-    max-width: 1200px;   /* Desktop: Lesbare Breite */
-    margin: 0 auto;
-    padding: 0 0.5rem;   /* Kleinerer Abstand links/rechts auf Mobil */
+    max-width: 80ch;   /* Desktop: Lesbare Breite */
+    margin: 2rem auto;
+    padding: 20px;   /* Kleinerer Abstand links/rechts auf Mobil */
     box-sizing: border-box;
   }
 
+.content-wrapper h1 {
+  margin-top: 2rem;
+  text-align: center; /* optional */
+  margin-bottom: 2rem;
+ /* font-size: clamp(1.2rem, 5vw, 2.5rem);  */
+}
 
-  :root {                         /* Allgemeine Layout-Einstellungen */
-    --content-width: 1200px;      /* gemeinsame Maximalbreite */
-  }
+.content-wrapper h2, .content-wrapper h3, .content-wrapper h4,
+.content-wrapper h5, .content-wrapper h6 {
+  text-align: center;
+}
 
+
+
+
+ /* body{ margin:1em auto; max-width:80ch; padding:0 .62em; } */
 
   .justified-text {           /* für Blocksatz */
     text-align: justify;
     hyphens: auto;
   }
 
+.justified-text,
+figcaption.justified-text {
+    text-align: justify;
+    hyphens: auto;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 
 
 
-  table { border-collapse: collapse; margin-top: 100px; table-layout: fixed; }
-  td, th { border: 1px solid #ccc; padding: 5px; text-align: center; }
-  input { width: 140px; max-width: 100%; }
-  button { cursor: pointer; }
+/* Header ================================================================================================== */
+
+header {
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;            /* Padding zählt zur Breite */
+} 
+
+  .site-header {                     /* Header bar */
+    background-color: #2821a4ea;   /* dark background */
+    border-radius: 8px; 
+  }
+
+
+/* Language selector ======================================================================================= */
+
+.language-selector {
+  position: relative;      /* bleibt im Dokumentfluss */
+  z-index: 10;             /* über der Navigationsebene */
+  top: 10px;
+  right: 0px;
+
+ 
+  display: flex;
+  justify-content: flex-end;  /* Inhalte nach rechts im Container */
+  width: fit-content;         /* Box wird so breit wie nötig */
+  margin-left: auto;          /* schiebt die Box nach rechts */
+
+  align-items: center;
+  gap: 8px;                   /* horizontaler Abstand zwischen den Flaggen */ 
+ 
+  background: rgba(0,0,0,0.05);   /* optional: kleine UI-Box um Flaggen und Sprachauswahl Buttons */
+  padding: 2px 10px;
+  border-radius: 6px;
+  /* outline: 1px solid rgba(255,0,0,0.6);  */
+}
+
+
+.lang-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 4px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.lang-btn.active {
+  opacity: 1;
+  text-shadow: 0 0 4px rgba(255,255,255,0.6);
+}
+
+#language {
+  padding: 3px;
+  cursor: pointer;
+}
+
+/* Navigation Bar ========================================================================================== */
+
+.nav-bar {                           /* Navigation container  */
+  display: flex;
+  width: 100%;                       /* volle Breite nutzen */
+  flex-wrap: nowrap;                 /* kein Umbruch – solange es geht - alle Buttons bleiben zunächst in einer Zeile */
+  justify-content: space-between;    /* Platz vollständig verteilen */
+
+  gap: 1rem;                         /* Abstand zwischen Buttons */
+  padding: 5px 10px;                 /* das macht den Balken höher, z.B. 1rem  */
+  box-sizing: border-box;            /* Sicherheit bei Padding */
+  overflow: hidden;                  /* verhindert Überschießen */  
+  /* background-color: #222;         /* Farbe ist gut zum Testen der Größe      */
+}
+
+.nav-button {           /* Button styling */
+  flex: 1 1 0;          /* jeder bekommt exakt 1/4 Breite */
+  min-width: 0;         /* wichtig -- verhindert extreme Schrumpfung, verhindert Layout-Sprengung */
+  font-size: clamp(0.5rem, 2.5vw, 1.5rem);
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: normal;       /* Text darf im Button umbrechen */
+  overflow-wrap: break-word;
+
+  background: #0374e4b5;   /* blue background */
+  color: white;
+  text-decoration: none;     /* remove underline */
+  border-radius: 6px;        /* rounded corners */
+  padding: 10px;
+}
+
+.nav-button:hover {
+  background: #005bb5;     /* darker blue on hover */
+}
+
+
+
+
+
+
+/* ============================== T A B E L L E N ============================  */
+
+/* Grundregeln für alle Tabellen */
+
+table, td, th, caption {
+  font-size: 1em;
+}
+
+table.data {
+  border-collapse: collapse;
+  line-height: 1.2;
+  margin-top: 100px; 
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: fixed; 
+  page-break-inside: avoid;  /* um zu vemeiden, dass eine Tabelle über Seiten hinweg zerrissen wird (Kindle epub)*/
+  break-inside: avoid;
+}
+
+#dataTable td, 
+#dataTable th {                             /* td gilt für alle Tabellenzellen */
+  vertical-align: top;               /* wg leerer vertikaler Abstände */
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  border: 1px solid #ccc; 
+  padding: 5px; 
+  text-align: center; }
+
+
+caption {
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  page-break-inside: avoid;  
+}
+  
+
+
+/* table.tabular ---- */
+
+table.tabular {
+  width: 100%;          /* WICHTIG! Damit die rechte Spalte wirklich am rechten Bildschirmrand ist */
+  line-height: 1.5;
+}
+
+
+table.tabular td {
+  padding: 0.1em;
+  vertical-align: top !important;
+  overflow-wrap: break-word;
+}
+
+
+table.tabular td p {
+    text-align: left;
+}
+
+
+table.tabular p { 
+  margin: 0;             /* vertikale Abstände für Absätze */
+  padding: 0;
+  line-height: inherit;  /* damit die Zeilenhöhe der Tabelle übernommen wird */
+}
+
+
+
+
+
+/* Ausrichtung der Werte in der linken und rechten Spalte */
+table.tabular td:nth-child(1) p {
+ text-align:left;
+}
+
+table.tabular td:nth-child(2) p {
+    text-align:right;
+}
+
+
+/* nur für Tabellen in der Umgebung tabular_blue_appendix_left */
+/*.tabular_blue_appendix_left table.tabular td:nth-child(2) p {
+    text-align:left;
+}  */
+  
+
+table.tabular_blue_appendix_left td:nth-child(2) p {
+    text-align:left;
+}
+
+
+
+
+
+/*  narrowtable  ---- */
+div.narrowtable table.tabular { 
+  text-align: left !important;
+  margin-left: 1em;
+  width: auto; 
+  font-weight: normal;
+} 
+/* Diese Regel wirkt auf die gesamte Tabelle (table.tabular) */
+
+
+.narrowtable table.tabular > tbody > tr > td:nth-child(2) {
+    text-align: left !important;
+    font-weight: normal;
+}
+/* Diese Regel wirkt auf die 2. Zelle (td:nth-child(2)) jeder Zeile einer Tabelle, die 
+sich innerhalb eines Elements mit der Klasse narrowtable befindet. */
+
+
+
+
+
+/*  centertable  ---- */
+div.centered {            /* Äußerer Wrapper: zentriert den Inhalt */
+    text-align: center;   /* fallback */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+div.centered table
+{
+    width: auto !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.centered table {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;       
+}
+
+
+
+/*  narrowtable zero  ---- */
+div.narrowtablezero table.tabular { 
+  width: auto; 
+  margin-left: 0; 
+} 
+
+.zero {
+  display: inline-block;
+  padding-bottom: -0.5em;
+}
+
+table.tabular math {
+    math-style: normal !important;
+} 
+
+
+
+table.equation-star {
+  width: auto !important;
+  margin: 0 auto !important;
+  border-collapse: collapse;
+}
+
+table.equation-star td {
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: center;
+}
+
+math.equation {
+  display: inline !important;
+  width: auto !important;
+}
+
+table.equation-star {
+  width: auto !important;
+  margin: 0 auto !important;
+  border-collapse: collapse;
+}
+
+
+
+
+/* Watt_Lumen-Tabelle */
+
+ /* table { border-collapse: collapse; margin-top: 100px; table-layout: fixed; } */
+  /* td, th { border: 1px solid #ccc; padding: 5px; text-align: center; } */
+  input { width: 140px; 
+    max-width: 100%; 
+    margin: 0.2rem;
+    background: rgba(13, 248, 21, 0.75);
+    padding: 0.3rem;
+    font-size: 14px;
+    font-weight: bold;
+    /* outline: 1px solid rgba(255,0,0,0.6);  */
+  }
+
+  button { 
+    padding: 0.4rem 1rem;
+    margin: 0.5rem;
+    background: lightskyblue;
+    cursor: pointer;
+  }
   .axis-controls { margin-top: 10px; }
     
   #dataTable input { background-color: #f0eded; }          /* Hintergrundfarbe der Input Zellen */
@@ -71,7 +469,12 @@
 }
 
 
+
+
+
 /* Grafikbereich */
+
+
 .image-box {
   display: grid;
   flex-direction: column;
@@ -114,31 +517,32 @@
 
 
 
-#overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.97); /* fast weiß */
+/* overlay ====================================================================== */
 
-  display: none;           /* initial aus */
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+#overlay {           /* wg. Vergößerung Bild .png  */
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.96);
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    z-index: 9999;
+  }
+  #overlay img {
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;    /* damit das Bild seine Proportionen behält */
+    height: auto;   /* damit das Bild seine Proportionen behält */
 }
 
 
-#overlay-img {
-  width: 90vw;
-  max-height: 90vh;
-  height: auto;
-}
 
+  
 
+/* Grafik Watt und Lumen ===================================================================== */
 
-
-
-/* =========================
-   Gemeinsame Grafik-Container
-   ========================= */
 #svg-box,
 #plot-container,
 #plotly-box {
@@ -267,6 +671,8 @@
   box-sizing: border-box;
 }
 
+label { font-weight: 700; }  /* Linearen Fit anzeigen in bf */
+
 /* Häkchen */
 .fit-control input:checked + .checkbox::after {
   content: "";
@@ -282,6 +688,161 @@
 
 
 
+
+
+/* Grafik Luftfeuchtigkeit ===================================================================== */
+
+#grafikContainer {
+    position: relative;
+    width: 95%;
+    max-width: 1200px;
+   
+    margin: auto;
+    outline-color: green;
+}
+/* Erzwinge einen BFC, damit nachfolgender Inhalt nicht von absolut/fixed Elementen überlappt */
+#grafikContainer {
+  overflow: auto;
+}
+
+
+
+#grafikContainer.fullscreen {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    z-index: 9999;
+    background: white;
+    outline-color: blue;
+}
+
+
+#fullscreenButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10000;
+}
+
+.control-button {
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.control-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+.control-button:active {
+  transform: translateY(0);
+}
+
+/* Entfernt zusätzlichen Inline-Abstand unter eingebetteten Grafiken (iframes) */
+#grafik, figure iframe {
+  display: block;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+figure { margin: 0; }
+figcaption { margin-top: 0.5rem; }
+
+/* Stellt sicher, dass die Grafik den nachfolgenden Text nicht überlappt */
+figure {
+  display: block;
+  clear: both;
+  overflow: visible;
+  margin-bottom: 1.25rem; /* sorgt für Abstand nach der Grafik */
+}
+
+#grafik {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Fullscreen: nur die Grafik (ohne Caption) zeigen, iframe den Viewport füllen */
+#grafikContainer.fullscreen figure figcaption {
+  display: none !important;
+}
+#grafikContainer.fullscreen figure {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#grafikContainer.fullscreen #grafik {
+  height: 100vh !important;
+  width: 100%;
+  max-height: 100vh;
+}
+
+/* Stellt sicher, dass direkt folgendes Element unterhalb der Figure beginnt */
+figure + * {
+  clear: both;
+}
+
+/* Figure selbst auf eigene Ebene */
+figure { position: relative; z-index: 1; }
+
+
+
+
+
+/* Footer ===================================================================== */
+
+footer {
+  width: 100%;
+  background-color:  #2821a4ea;
+  color: #ffffff;
+  text-align: center;
+  font-size: clamp(0.75rem, 2.5vw, 1.2rem);
+  padding: 20px 15px;
+  box-sizing: border-box;  /* Padding zählt zur Breite */  
+  }
+
+
+footer a {                  /* die Links im Footer */
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;      /* kein unschöner Linkumbruch */
+  font-size: clamp(0.75rem, 2.5vw, 1.2rem);
+  }
+
+footer a:hover {
+  text-decoration: underline;
+  }
+
+footer hr {                   /* helle Trennlinie */
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.6); /* helle Linie */
+  margin: 1rem 0;
+  }
+
+
+.footer-en {          /* Die englische Version leicht heller oder kursiv, um sie zu unterscheiden */
+  font-style: italic;
+  margin-top: 4px;
+}
+
+
+
+
+
+
+/* media ===================================================================== */
 
   @media (max-width: 768px) {
     .nav-bar, .nav-bar a, .nav-bar .nav-button {
@@ -306,3 +867,91 @@
   }
 
 
+
+
+
+  
+
+/* spacer ===================================================================== */
+
+.negative-spacer-6 {
+  margin-top: -6px;
+}
+
+.negative-spacer-10 {
+  margin-top: -10px;
+}
+.negative-spacer-20 {
+  margin-top: -20px;
+}
+
+.negative-spacer-35 {
+  margin-top: -35px;
+}
+
+.negative-spacer-50 {
+  margin-top: -50px;
+}
+
+.negative-spacer-60 {
+  margin-top: -60px;
+}
+
+
+.spacer-0 {
+  height: 0px;
+}
+
+
+.spacer-02 {
+  height: 0.2px;
+}
+
+.spacer-1 {
+  height: 1px;
+}
+
+.spacer-2 {
+  height: 2px;
+}
+
+.spacer-4 {
+  height: 4px;
+}
+
+
+.spacer-5 {
+  height: 5px;
+}
+
+.spacer-10 {
+  height: 10px;
+}
+
+.spacer-20 {
+  height: 20px;
+}
+
+
+.spacer-30 {
+  height: 30px;
+}
+
+.spacer-40 {
+  height: 40px;
+}
+
+.spacer-60 {
+  height: 60px;
+}
+
+.spacer-80 {
+  height: 80px; 
+}
+
+
+
+.eq-gap-br { 
+  display: block; 
+  margin-top: 0.5em; 
+}
