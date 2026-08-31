@@ -87,11 +87,13 @@ p_Luft_intro:
 In der Luft ist immer auch ein gewisser Anteil an Wasser enthalten, das sich im gasförmigen Zustand befindet. 
 Der Anteil von Wasser in der Luft wird in Gramm pro Kubikmeter (g/m<sup>3</sup>) gemessen.<br>
 
+
 Die maximale Menge an Wasserdampf, die die Luft aufnehmen kann, hängt von der Temperatur ab. Luft mit höherer 
 Temperatur kann mehr Wasserdampf aufnehmen.<br>
 
 Die Menge an Wasserdampf in der Luft, im Vergleich zur maximalen Menge, die die Luft bei einer bestimmten Temperatur aufnehmen kann, wird 
-als relative Luftfeuchtigkeit, <em>F<sub>rel</sub></em>, bezeichnet.<br><br>
+als relative Luftfeuchtigkeit <math display='inline'> <mrow> <mi>φ</mi> </mrow> </math>
+bezeichnet.<br><br>
 
 Im ersten Teil unten ist eine Tabelle gezeigt, die den Zusammenhang zwischen Temperatur, Wassergehalt und Luftfeuchtigkeit darstellt.
 Im zweiten Teil folgen einige Beispiele. Im dritten Teil werden die Grundlagen der Berechnung beschrieben.<br><br>
@@ -363,7 +365,7 @@ Wassergehalt von Luft berechnet werden.
 129,98 </span><!-- l. 263 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
 </span><br class='newline' /><br class='newline' /><br class='newline' />
 </p><!-- l. 267 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Relative Luftfeuchtigkeit:</span>
-</p><!-- l. 269 --><p class='indent'>   Die relative Luftfeuchtigkeit <!-- l. 269 --><math display='inline'><msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub></math>
+</p><!-- l. 269 --><p class='indent'>   Die relative Luftfeuchtigkeit <!-- l. 269 --><math display='inline'><mi>φ</mi></math>
 ist das Verhältnis der in der Luft enthaltenen Wassermenge
 <!-- l. 269 --><math display='inline'><mi>n</mi></math> zur maximal möglichen
 Wassermenge <!-- l. 269 --><math display='inline'><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub></math>.
@@ -376,12 +378,12 @@ die Wassermenge in Mol:
 
                                                                                 
 <!-- tex4ht:inline --><!-- l. 276 --><math display='block'><mtable class='align' columnalign='left' displaystyle='true' rowlines='none' style=''>
-                            <mtr><mtd class='align-odd' columnalign='right'><msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub></mtd>                            <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mi>n</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>V</mi> </mrow> 
+                             <mtr><mtd class='align-odd' columnalign='right'><mi>φ</mi></mtd>                             <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mi>n</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>V</mi> </mrow> 
 <mrow><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>V</mi> </mrow></mfrac> <mo class='MathClass-rel' stretchy='false'>=</mo>  <mfrac><mrow><mi>p</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi mathvariant='italic'>𝑅𝑇</mi></mrow> 
-<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-bin' stretchy='false'>∕</mo><mi mathvariant='italic'>𝑅𝑇</mi></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                        <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-6r1'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(4a)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
-                            </mtd></mtr><mtr><mtd class='align-odd' columnalign='right'><mtr><mtd columnspan='3' style='height:2em;'></mtd></mtr><msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub></mtd>                            <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mi>n</mi></mrow> 
+<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-bin' stretchy='false'>∕</mo><mi mathvariant='italic'>𝑅𝑇</mi></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                          <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-6r1'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(4a)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
+                             </mtd></mtr><mtr><mtd class='align-odd' columnalign='right'><mtr><mtd columnspan='3' style='height:2em;'></mtd></mtr><mi>φ</mi></mtd>                             <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mi>n</mi></mrow> 
 <mrow><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub></mrow></mfrac> <mo class='MathClass-rel' stretchy='false'>=</mo>  <mfrac><mrow><mi>p</mi></mrow> 
-<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                               <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-7r2'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(4b)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
+<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                                 <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-7r2'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(4b)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
    </mtd></mtr>
    </mtable></math>
    </div>
@@ -393,11 +395,11 @@ berechnet werden, Gleichung (<a href='#x1-7r2'>4b<!-- tex4ht:ref: eq_rFtwo  --><
 </p><!-- l. 283 --><p class='indent'>   <h2 id='eq_ppp'></h2>
 </p><!-- l. 285 --><p class='indent'>   <span class='vspace20'></span> </p><table class='equation'><tr><td>
 <!-- l. 286 --><math class='equation' display='block'><mrow>
-                                  <mstyle class='label' id='x1-8r5'></mstyle><!-- endlabel --><mi>p</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub>
+                                   <mstyle class='label' id='x1-8r5'></mstyle><!-- endlabel --><mi>p</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>φ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub>
 </mrow></math></td><td class='eq-no'>(5)</td></tr></table>
 <!-- l. 288 --><p class='noindent'>
 </p>
-
+    
 `,
 
 
@@ -410,14 +412,14 @@ p_Taupunkt_Intro:
 
 
 
-p_Taupunkt_Txt:
+p_Taupunkt:
 `
 <!-- l. 160 --><p class='noindent'><span class='ec-lmbx-10x-x-109'>Punkt A:</span><br class='newline' />Sättigungsdampfdruck <!-- l. 161 --><math display='inline'><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></math> bei
 einer bestimmten Temperatur <!-- l. 161 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></math>.
 Die Luftfeuchtigkeit an diesem Punkt beträgt <span class='nowrap'>100 %.</span> <br class='newline' />
 </p><!-- l. 164 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Punkt B:</span><br class='newline' />Bei Punkt B herrscht die gleiche Temperatur, aber die Luftfeuchtigkeit liegt unter 100
 %.
-</p><!-- l. 168 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Punkt C:</span><br class='newline' />Wenn Luft mit einer bestimmten Feuchtigkeit abkühlt (der Feuchtigkeit in Punkt B), wird bei einer bestimmten
+</p><!-- l. 168 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Punkt D:</span><br class='newline' />Wenn Luft mit einer bestimmten Feuchtigkeit abkühlt (der Feuchtigkeit in Punkt B), wird bei einer bestimmten
 Temperatur <!-- l. 169 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></math>
 der Taupunkt erreicht. Der Sättigungsdampfdruck beim Taupunkt                 
 
@@ -428,13 +430,13 @@ in Punkt B, der durch Gleichung (<a href='##eq_ppp'>5</a>) beschrieben wird:
 </p>
    <div class='subequations'>
 <!-- tex4ht:inline --><!-- l. 180 --><math display='block'><mtable class='align' columnalign='left' displaystyle='true' rowlines='none none none' style=''>
-                     <mtr><mtd class='align-odd' columnalign='right'><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>                           <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo> <msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mspace width='2em'></mspace></mtd>                                                <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-3r1'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(6a)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
-                     </mtd></mtr><mtr><mtd class='align-odd' columnalign='right'><mtr><mtd columnspan='3' style='height:2.5em;'></mtd></mtr><mi>c</mi><mspace class='thinspace' width='0.17em'></mspace> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>exp</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mspace class='negthinspace' width='-0.17em'></mspace> <mrow><mo fence='true' form='prefix'>(</mo><mrow> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow>
-<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow></mtd>                     <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo> <msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mi>c</mi><mspace class='thinspace' width='0.17em'></mspace> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>exp</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mspace class='negthinspace' width='-0.17em'></mspace> <mrow><mo fence='true' form='prefix'>(</mo><mrow> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow>
-<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mspace width='2em'></mspace></mtd>                                          <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-4r2'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(6b)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
-                     </mtd></mtr><mtr><mtd class='align-odd' columnalign='right'><mtr><mtd columnspan='3' style='height:2.5em;'></mtd></mtr> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow>
-<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow></mfrac></mtd>                           <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝑙𝑛</mi><mspace class='thinspace' width='0.17em'></mspace><msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo>  <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow> 
-<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow></mfrac><mspace width='2em'></mspace></mtd>                                             <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-5r3'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(6c)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
+                      <mtr><mtd class='align-odd' columnalign='right'><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo></mtd>                             <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>φ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-open' stretchy='false'>(</mo><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub><mo class='MathClass-close' stretchy='false'>)</mo><mspace width='2em'></mspace></mtd>                                                   <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-3r1'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(6a)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
+                      </mtd></mtr><mtr><mtd class='align-odd' columnalign='right'><mtr><mtd columnspan='3' style='height:2.5em;'></mtd></mtr><mi>c</mi><mspace class='thinspace' width='0.17em'></mspace> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>exp</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mspace class='negthinspace' width='-0.17em'></mspace> <mrow><mo fence='true' form='prefix'>(</mo><mrow> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow>
+<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow></mtd>                      <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>φ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mi>c</mi><mspace class='thinspace' width='0.17em'></mspace> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>exp</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mspace class='negthinspace' width='-0.17em'></mspace> <mrow><mo fence='true' form='prefix'>(</mo><mrow> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow>
+<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mspace width='2em'></mspace></mtd>                                            <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-4r2'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(6b)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
+                      </mtd></mtr><mtr><mtd class='align-odd' columnalign='right'><mtr><mtd columnspan='3' style='height:2.5em;'></mtd></mtr> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow>
+<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow></mfrac></mtd>                            <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝑙𝑛</mi><mspace class='thinspace' width='0.17em'></mspace><mi>φ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo>  <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow> 
+<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow></mfrac><mspace width='2em'></mspace></mtd>                                               <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-5r3'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(6c)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
    </mtd></mtr>
    </mtable></math>
    </div>
@@ -444,7 +446,7 @@ in Punkt B, der durch Gleichung (<a href='##eq_ppp'>5</a>) beschrieben wird:
 zu berechnen, wird zunächst eine Abkürzung eingeführt. Der Ausdruck
 rechts des Gleichheitszeichens in Gleichung (<a href='#x1-5r3'>6c<!-- tex4ht:ref: eq_ln  --></a>), der die aktuelle Temperatur
 <!-- l. 190 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></math> und die aktuelle
-Luftfeuchtigkeit <!-- l. 190 --><math display='inline'><msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub></math>
+Luftfeuchtigkeit <!-- l. 190 --><math display='inline'><mi>φ</mi></math>
 enthält, wird mit Gamma abgekürzt:
 </p><!-- l. 192 --><p class='indent'>   <span class='vspace20'></span>
 </p>
@@ -453,7 +455,7 @@ enthält, wird mit Gamma abgekürzt:
 
                                                                                 
 <!-- l. 194 --><math class='equation' display='block'><mrow>
-                              <mstyle class='label' id='x1-6r7'></mstyle><!-- endlabel --><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝑙𝑛</mi><mspace class='thinspace' width='0.17em'></mspace><msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub> <mo class='MathClass-bin' stretchy='false'>+</mo>  <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow> 
+                                <mstyle class='label' id='x1-6r7'></mstyle><!-- endlabel --><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi mathvariant='italic'>𝑙𝑛</mi><mspace class='thinspace' width='0.17em'></mspace><mi>φ</mi> <mo class='MathClass-bin' stretchy='false'>+</mo>  <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow> 
 <mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow></mfrac>
 </mrow></math></td><td class='eq-no'>(7)</td></tr></table>
 <!-- l. 196 --><p class='noindent'>
@@ -472,7 +474,7 @@ enthält, wird mit Gamma abgekürzt:
 </mrow></math></td><td class='eq-no'>(9)</td></tr></table>
 <!-- l. 213 --><p class='noindent'><br class='newline' />
 </p><!-- l. 217 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-8r9'><span class='ec-lmbxi-10x-x-109'>9</span><!-- tex4ht:ref: eq_Td  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>Die Temperatur beträgt </span><!-- l. 224 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20°C
-und die relative Luftfeuchtigkeit </span><!-- l. 224 --><math display='inline'><mrow><msub><mrow><mi>F</mi></mrow><mrow><mi mathvariant='italic'>𝑟𝑒𝑙</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>58</mn><mi>%</mi></mrow></math><span class='ec-lmri-10x-x-109'>.</span><br class='newline' /><span class='ec-lmri-10x-x-109'>a = 17.62 und b = 243,12, wie in Gleichung 3. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Damit wird </span><!-- l. 224 --><math display='inline'><mrow><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>79</mn></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
+und die relative Luftfeuchtigkeit </span><!-- l. 224 --><math display='inline'><mrow><mi>φ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>58</mn><mi>%</mi></mrow></math><span class='ec-lmri-10x-x-109'>.</span><br class='newline' /><span class='ec-lmri-10x-x-109'>a = 17.62 und b = 243,12, wie in Gleichung 3. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Damit wird </span><!-- l. 224 --><math display='inline'><mrow><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>79</mn></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
                                                                                 
 
                                                                                 
