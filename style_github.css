@@ -141,15 +141,46 @@ header {
   }
 
 
+/* Logo ================================================================================================== */
+
+.header-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 10px 0 8px;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  line-height: 1;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+}
+
+.site-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+
+
+
 /* Language selector ======================================================================================= */
 
 .language-selector {
   position: relative;      /* bleibt im Dokumentfluss */
   z-index: 10;             /* über der Navigationsebene */
-  top: 10px;
   right: 0px;
 
- 
   display: flex;
   justify-content: flex-end;  /* Inhalte nach rechts im Container */
   width: fit-content;         /* Box wird so breit wie nötig */
