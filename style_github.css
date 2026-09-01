@@ -158,6 +158,8 @@ header {
   text-decoration: none;
   color: inherit;
   line-height: 1;
+  cursor: default;
+  pointer-events: none;
 }
 
 .logo {

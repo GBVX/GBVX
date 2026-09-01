@@ -84,16 +84,16 @@ Sie wird in Watt pro Quadratmeter (W/m<sup>2</sup>) gemessen.
 
 p_Luft_intro:
 `
-In der Luft ist immer auch ein gewisser Anteil an Wasser enthalten, das sich im gasförmigen Zustand befindet. 
-Der Anteil von Wasser in der Luft wird in Gramm pro Kubikmeter (g/m<sup>3</sup>) gemessen.<br>
+Luft ist nie wirklich trocken, da sich immer ein gewisser Anteil an Wasser im gasförmigen Zustand 
+darin befindet. Dieser Anteil wird in Gramm pro Kubikmeter (g/m<sup>3</sup>) gemessen.<br>
 
+Wie viel Wasserdampf die Luft aufnehmen kann, hängt von der Temperatur ab. Je wärmer die Luft, 
+desto mehr Feuchtigkeit kann sie aufnehmen. <br>
 
-Die maximale Menge an Wasserdampf, die die Luft aufnehmen kann, hängt von der Temperatur ab. Luft mit höherer 
-Temperatur kann mehr Wasserdampf aufnehmen.<br>
+Das Verhältnis zwischen der tatsächlich vorhandenen Wasserdampfmenge und der maximal 
+möglichen Menge bei einer bestimmten Temperatur wird als relative 
+Luftfeuchtigkeit <math display='inline'> <mrow> <mi>φ</mi> </mrow> </math> bezeichnet.<br><br>
 
-Die Menge an Wasserdampf in der Luft, im Vergleich zur maximalen Menge, die die Luft bei einer bestimmten Temperatur aufnehmen kann, wird 
-als relative Luftfeuchtigkeit <math display='inline'> <mrow> <mi>φ</mi> </mrow> </math>
-bezeichnet.<br><br>
 
 Im ersten Teil unten ist eine Tabelle gezeigt, die den Zusammenhang zwischen Temperatur, Wassergehalt und Luftfeuchtigkeit darstellt.
 Im zweiten Teil folgen einige Beispiele. Im dritten Teil werden die Grundlagen der Berechnung beschrieben.<br><br>
@@ -426,7 +426,7 @@ der Taupunkt erreicht. Der Sättigungsdampfdruck beim Taupunkt
                                                                                 
 <!-- l. 170 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></math> ist gleich dem
 Dampfdruck <!-- l. 170 --><math display='inline'><mi>p</mi></math>
-in Punkt B, der durch Gleichung (<a href='##eq_ppp'>5</a>) beschrieben wird:
+in Punkt B, der durch Gleichung (<a href='#eq_ppp'>5</a>) beschrieben wird:
 </p>
    <div class='subequations'>
 <!-- tex4ht:inline --><!-- l. 180 --><math display='block'><mtable class='align' columnalign='left' displaystyle='true' rowlines='none none none' style=''>
