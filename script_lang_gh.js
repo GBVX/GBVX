@@ -510,7 +510,7 @@ ISBN:
 ISBN: 978-3-00-080521-9<br>
 277 Seiten, 47 Abbildungen<br>
 Gebundene Ausgabe <br>
-E-book: September 2026<br><br>`,
+E-book: Oktober 2026<br><br>`,
 
 
   },
