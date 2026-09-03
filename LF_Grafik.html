@@ -232,7 +232,7 @@
     text-align:left;
     padding:4px 6px;
   }
-  td.cell{ color:#111; font-weight:600; cursor:pointer; }
+  td.cell{ position:relative; z-index:2; color:#111; font-weight:600; cursor:pointer; }
   .pctText{ position:relative; z-index:2; }
   td.empty{ background:var(--panel); }
   tfoot th, tfoot td{
@@ -325,6 +325,8 @@ tbody th.markedRow{
   <span class="subBtns">
     <button id="themeBtn" class="control-button">Dark Mode</button>
     <button id="toggleBtn" class="control-button">Menüleiste ausblenden</button>
+    <button id="exportSvgBtn" class="control-button" type="button">SVG Export</button>
+    <button id="exportPngBtn" class="control-button" type="button">PNG Export</button>
     <button id="fullscreenBtn" class="control-button" type="button">⛶</button>
   </span>
 </p>
@@ -925,16 +927,16 @@ function build(){
   const fitW = availW / colCount;
   const fitH = availH / rowCount;
 
-  let cellW, cellH;
-  if(fitW < MIN_FIT_W || fitH < MIN_FIT_H){
-    cellW = 44;
-    cellH = 26;
-    wrapOuter.classList.add('scroll-mode');
-  } else {
-    cellW = Math.max(6, Math.floor(fitW));
-    cellH = Math.max(6, fitH);
-    wrapOuter.classList.remove('scroll-mode');
-  }
+  // Breite und Höhe unabhängig voneinander bestimmen: die Spalten sollen die
+  // volle verfügbare Breite ausfüllen, auch wenn wegen vieler Zeilen vertikal
+  // gescrollt werden muss (vorher koppelte eine gemeinsame if/else-Bedingung
+  // beides, sodass ein kleinerer Temperaturbereich bei zu vielen Zeilen nicht
+  // die ganze Seitenbreite nutzte).
+  let cellW = Math.max(6, Math.floor(fitW));
+  if(cellW < MIN_FIT_W) cellW = 44;
+  let cellH = Math.max(6, fitH);
+  if(cellH < MIN_FIT_H) cellH = 26;
+  wrapOuter.classList.add('scroll-mode'); // steuert nur Sticky-Header/Auto-Sizing; ohne Überlauf erscheint ohnehin kein Scrollbalken
   const fontPx = Math.max(6, Math.min(cellW, cellH) * 0.42);
 
   document.documentElement.style.setProperty('--cell-w', cellW + 'px');
@@ -1354,6 +1356,334 @@ document.getElementById('gridWrap').addEventListener('dblclick', (e) => {
 
 // reagiert auf jede Größenänderung des Tabellenbereichs (Fenster, eingebetteter Container, Panel ein/aus)
 new ResizeObserver(() => requestAnimationFrame(build)).observe(document.querySelector('.wrap'));
+
+/* ============================================================
+   Export (SVG / PNG) — exportiert NUR die Daten (Achsen + Tabelle
+   + 100%-Linie), nicht das Menü/Bedienfeld darüber.
+   ============================================================ */
+
+/* ============================================================
+   Export (SVG / PNG) — exportiert NUR die Daten (Achsen + Tabelle
+   + 100%-Linie), nicht das Menü/Bedienfeld darüber.
+
+   Der Export wird als natives SVG (echte <rect>/<text>-Elemente)
+   aus den Live-Zelldaten aufgebaut, statt die HTML-Tabelle per
+   <foreignObject> einzubetten. foreignObject-basierte SVGs werden
+   von vielen Betrachtern beim Verkleinern/Skalieren nicht neu
+   gelayoutet (Text verschwindet, Inhalte werden abgeschnitten) und
+   lösen in Chrome zudem eine Canvas-Sicherheitssperre beim
+   PNG-Export aus. Natives SVG skaliert dagegen verlustfrei und
+   lässt sich gefahrlos in ein <canvas> zeichnen.
+   ============================================================ */
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function escapeXml(str){
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function svgText(text, x, y, opts){
+  const { fontSize, fill, anchor = 'middle', weight = 400, fontFamily } = opts;
+  return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-family="${fontFamily}" `
+    + `font-size="${fontSize}" fill="${fill}" text-anchor="${anchor}" `
+    + `dominant-baseline="central" font-weight="${weight}">${escapeXml(text)}</text>`;
+}
+
+// Baut das Datenraster (Zeilenbeschriftung, Zellen, Fußzeile, 100%-Linie)
+// rein arithmetisch aus den aktuellen Zellwerten — table-layout:fixed
+// garantiert, dass jede Spalte/Zeile exakt --cell-w/--cell-h groß ist.
+function buildGridSvgFragment(){
+  const cs = getComputedStyle(document.documentElement);
+  const num = (name, fallback) => parseFloat(cs.getPropertyValue(name)) || fallback;
+  const col = name => (cs.getPropertyValue(name).trim() || '');
+
+  const cellW = num('--cell-w', 44);
+  const cellH = num('--cell-h', 26);
+  const cellFont = num('--cell-font', 12);
+  const tickFont = num('--tick-font', 11);
+  const lineColor = col('--line') || '#cdd6d9';
+  const panelColor = col('--panel') || '#e7ecee';
+  const mutedColor = col('--muted') || '#5d6b73';
+  const monoFont = (col('--mono') || 'monospace').replace(/"/g, "'");
+
+  const numCols = lastTemps.length;
+  const numRows = lastHums.length;
+  const gridW = cellW * (numCols + 1);
+  const gridH = cellH * (numRows + 1);
+
+  const parts = [];
+  const cs2 = getComputedStyle(document.documentElement);
+  const selectionColor = (cs2.getPropertyValue('--selectionColor').trim() || cs2.getPropertyValue('--accent').trim() || '#1f7d91');
+
+  // Rand-Highlight (Zeilen-/Spaltenauswahl, "Beispiele"-Markierungen) als zusätzliches
+  // Rahmen-Rect nachbilden — CSS nutzt dafür box-shadow/outline, was foreignObject-frei
+  // (also im nativen SVG) nicht direkt existiert.
+  function selectionBorders(el){
+    const out = [];
+    if(el.classList.contains('rowSelected')){
+      out.push({ color: selectionColor, width: 2, inset: 1 });
+    }
+    if(el.classList.contains('colSelected')){
+      out.push({ color: selectionColor, width: 2, inset: 1 });
+    }
+    if(el.classList.contains('markedPoint')){
+      out.push({ color: el.style.outlineColor || '#d1495b', width: 3, inset: 1.5 });
+    }
+    if(el.classList.contains('markedRow')){
+      const c = el.style.getPropertyValue('--marked-row-color') || '#d1495b';
+      out.push({ color: c, width: 2, inset: 1 });
+    }
+    return out;
+  }
+
+  function borderRects(x, y, w, h, el){
+    return selectionBorders(el).map(b =>
+      `<rect x="${x + b.inset}" y="${y + b.inset}" width="${w - b.inset * 2}" height="${h - b.inset * 2}" `
+      + `fill="none" stroke="${b.color}" stroke-width="${b.width}"/>`
+    ).join('');
+  }
+
+  parts.push(`<rect x="0" y="0" width="${gridW}" height="${gridH}" fill="${panelColor}"/>`);
+
+  // 100%-Sättigungslinie: direkt nach dem Hintergrund und VOR den Datenzellen
+  // gezeichnet, damit gefüllte Zellen (Hintergrund + Prozentzahl) sie beim
+  // Export überdecken, genau wie jetzt auch auf der Live-Seite (td.cell liegt
+  // per z-index über dem Overlay). In leeren Zellen (kein fill) bleibt sie
+  // weiterhin sichtbar.
+  parts.push(buildSaturationLineSvg(cellW, cellH));
+
+  const table = document.getElementById('grid');
+  table.querySelectorAll('tbody > tr').forEach(tr => {
+    const rowI = +tr.dataset.row;
+    const y = rowI * cellH;
+    const th = tr.querySelector('th');
+    if(th && th.textContent){
+      const thHighlighted = th.classList.contains('rowSelected') || th.classList.contains('markedRow');
+      if(thHighlighted){
+        const thBg = th.classList.contains('markedRow')
+          ? (th.style.getPropertyValue('--marked-row-color') || '#d1495b')
+          : selectionColor;
+        parts.push(`<rect x="0" y="${y}" width="${cellW}" height="${cellH}" fill="${thBg}"/>`);
+      }
+      parts.push(svgText(th.textContent, 6, y + cellH / 2, {
+        fontSize: tickFont, fill: thHighlighted ? '#fff' : mutedColor, anchor: 'start', weight: 600, fontFamily: monoFont
+      }));
+    }
+    tr.querySelectorAll('td').forEach(td => {
+      const colI = +td.dataset.col;
+      const x = (colI + 1) * cellW;
+      const isEmpty = td.classList.contains('empty');
+      if(isEmpty){
+        // kein Fill -> die zuvor gezeichnete Linie bleibt hier sichtbar, nur der Rahmen wird nachgezogen
+        parts.push(`<rect x="${x}" y="${y}" width="${cellW}" height="${cellH}" fill="none" stroke="${lineColor}" stroke-width="1"/>`);
+        return;
+      }
+      const bg = td.style.background || panelColor;
+      parts.push(`<rect x="${x}" y="${y}" width="${cellW}" height="${cellH}" fill="${bg}" stroke="${lineColor}" stroke-width="1"/>`);
+      parts.push(borderRects(x, y, cellW, cellH, td));
+      const span = td.querySelector('.pctText');
+      if(span && span.textContent){
+        const txtColor = td.style.color || '#111';
+        parts.push(svgText(span.textContent, x + cellW / 2, y + cellH / 2, {
+          fontSize: cellFont, fill: txtColor, weight: 700, fontFamily: monoFont
+        }));
+      }
+    });
+  });
+
+  const footRow = table.querySelector('tfoot > tr');
+  if(footRow){
+    const y = numRows * cellH;
+    parts.push(`<rect x="0" y="${y}" width="${cellW}" height="${cellH}" fill="${panelColor}" stroke="${lineColor}" stroke-width="1"/>`);
+    footRow.querySelectorAll('td').forEach(td => {
+      const colI = +td.dataset.col;
+      const x = (colI + 1) * cellW;
+      // Priorität wie im Original-CSS: Spaltenauswahl (!important) schlägt die
+      // inline gesetzte Taupunkt-Hintergrundfarbe.
+      let bg = panelColor, txtColor = mutedColor;
+      if(td.classList.contains('colSelected')){
+        bg = selectionColor; txtColor = '#fff';
+      } else if(td.style.background){
+        bg = td.style.background; txtColor = td.style.color || mutedColor;
+      }
+      parts.push(`<rect x="${x}" y="${y}" width="${cellW}" height="${cellH}" fill="${bg}" stroke="${lineColor}" stroke-width="1"/>`);
+      if(td.textContent){
+        parts.push(svgText(td.textContent, x + cellW / 2, y + cellH / 2, {
+          fontSize: tickFont, fill: txtColor, weight: 600, fontFamily: monoFont
+        }));
+      }
+    });
+  }
+
+  return { fragment: parts.join(''), width: gridW, height: gridH };
+}
+
+function buildSaturationLineSvg(cellW, cellH){
+  if(!lastTemps.length || lastHums.length < 1) return '';
+  const lineColor = document.getElementById('colLine').value;
+  const hStep = lastHums.length > 1 ? Math.abs(lastHums[1] - lastHums[0]) : 1;
+
+  const y0 = cellH / 2; // Mittelpunkt der obersten Datenzeile (höchster Wassergehalt)
+  const points = lastTemps.map((t, i) => {
+    const sat = saturationDensity(t);
+    const rowIndexFrac = (lastHums[0] - sat) / hStep;
+    const y = y0 + rowIndexFrac * cellH;
+    const x = (i + 1) * cellW + cellW / 2; // Mitte der Datenspalte i (wie tfoot-Zelle)
+    return { x, y };
+  });
+
+  const topBound = y0 - cellH / 2;
+  const bottomBound = y0 + (lastHums.length - 1) * cellH + cellH / 2;
+
+  function clipSegment(A, B, lo, hi){
+    const dy = B.y - A.y;
+    let tMin = 0, tMax = 1;
+    if(dy === 0){
+      if(A.y < lo - 1e-6 || A.y > hi + 1e-6) return null;
+    } else {
+      const tLo = (lo - A.y) / dy, tHi = (hi - A.y) / dy;
+      tMin = Math.max(0, Math.min(tLo, tHi));
+      tMax = Math.min(1, Math.max(tLo, tHi));
+      if(tMin > tMax + 1e-6) return null;
+    }
+    const Pa = { x: A.x + tMin * (B.x - A.x), y: A.y + tMin * dy };
+    const Pb = { x: A.x + tMax * (B.x - A.x), y: A.y + tMax * dy };
+    return { Pa, Pb, aInside: tMin <= 1e-6, bInside: tMax >= 1 - 1e-6 };
+  }
+
+  const runs = [];
+  let current = [];
+  for(let i = 0; i < points.length - 1; i++){
+    const clipped = clipSegment(points[i], points[i + 1], topBound, bottomBound);
+    if(!clipped){
+      if(current.length){ runs.push(current); current = []; }
+      continue;
+    }
+    if(current.length === 0){
+      current.push(clipped.Pa);
+    } else if(!clipped.aInside){
+      runs.push(current);
+      current = [clipped.Pa];
+    }
+    current.push(clipped.Pb);
+    if(!clipped.bInside){
+      runs.push(current);
+      current = [];
+    }
+  }
+  if(current.length) runs.push(current);
+
+  const parts = [];
+  runs.forEach(run => {
+    const d = run.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
+    parts.push(`<path d="${d}" fill="none" stroke="${lineColor}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`);
+  });
+  points.forEach(p => {
+    if(p.y < topBound - 0.01 || p.y > bottomBound + 0.01) return;
+    parts.push(`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.5" fill="${lineColor}"/>`);
+  });
+
+  return parts.join('');
+}
+
+function buildExportSvgString(){
+  const cs = getComputedStyle(document.documentElement);
+  const bgColor = cs.getPropertyValue('--bg').trim() || '#f4f6f7';
+  const lineColor = cs.getPropertyValue('--line').trim() || '#cdd6d9';
+  const mutedColor = cs.getPropertyValue('--muted').trim() || '#5d6b73';
+  const sansFont = (cs.getPropertyValue('--sans').trim() || 'sans-serif').replace(/"/g, "'");
+
+  const { fragment, width: gridW, height: gridH } = buildGridSvgFragment();
+
+  const padding = 16;
+  const yAxisW = 22;
+  const gap = 8;
+  const xAxisLabelEl = document.querySelector('.xAxisLabel');
+  const xAxisH = (xAxisLabelEl && xAxisLabelEl.offsetHeight) || 32;
+
+  const gridOriginX = padding + yAxisW + gap;
+  const gridOriginY = padding;
+
+  const totalW = gridOriginX + gridW + padding;
+  const totalH = gridOriginY + gridH + gap + xAxisH + padding;
+
+  const yLabelText = (document.querySelector('.yAxisLabel')?.textContent || '').trim();
+  const xLabelText = (xAxisLabelEl?.textContent || '').trim();
+
+  const yCx = padding + yAxisW / 2;
+  const yCy = gridOriginY + gridH / 2;
+  const xCx = gridOriginX + gridW / 2;
+  const xCy = gridOriginY + gridH + gap + xAxisH / 2;
+
+  const svg = [];
+  svg.push(`<svg xmlns="${SVG_NS}" width="${totalW}" height="${totalH}" viewBox="0 0 ${totalW} ${totalH}">`);
+  svg.push(`<rect x="0" y="0" width="${totalW}" height="${totalH}" fill="${bgColor}"/>`);
+  // y-Achsen-Beschriftung (vertikal, von unten nach oben lesbar wie im Original)
+  svg.push(`<text x="${yCx}" y="${yCy}" font-family="${sansFont}" font-size="14" fill="${mutedColor}" `
+    + `text-anchor="middle" dominant-baseline="central" transform="rotate(-90 ${yCx} ${yCy})">${escapeXml(yLabelText)}</text>`);
+  // Rahmen um das Datenraster (entspricht .wrap-Border, unten offen)
+  svg.push(`<path d="M${gridOriginX},${gridOriginY + gridH} V${gridOriginY} H${gridOriginX + gridW} V${gridOriginY + gridH}" `
+    + `fill="none" stroke="${lineColor}" stroke-width="1"/>`);
+  svg.push(`<g transform="translate(${gridOriginX},${gridOriginY})">${fragment}</g>`);
+  // x-Achsen-Beschriftung
+  svg.push(`<text x="${xCx}" y="${xCy}" font-family="${sansFont}" font-size="14" fill="${mutedColor}" `
+    + `text-anchor="middle" dominant-baseline="central">${escapeXml(xLabelText)}</text>`);
+  svg.push('</svg>');
+
+  return { svgString: svg.join(''), width: totalW, height: totalH };
+}
+
+function triggerDownload(blob, filename){
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function exportSvg(){
+  const { svgString } = buildExportSvgString();
+  const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+  triggerDownload(blob, 'luftfeuchtigkeit.svg');
+}
+
+function exportPng(){
+  const { svgString, width, height } = buildExportSvgString();
+  const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+
+  const img = new Image();
+  img.onload = () => {
+    const scale = 2; // schärferer Export (Retina)
+    const canvas = document.createElement('canvas');
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(scale, scale);
+    ctx.drawImage(img, 0, 0, width, height);
+    URL.revokeObjectURL(url);
+    canvas.toBlob(blob => {
+      if(blob) triggerDownload(blob, 'luftfeuchtigkeit.png');
+      else alert('PNG-Export fehlgeschlagen.');
+    }, 'image/png');
+  };
+  img.onerror = () => {
+    URL.revokeObjectURL(url);
+    alert('PNG-Export fehlgeschlagen.');
+  };
+  img.src = url;
+}
+
+document.getElementById('exportSvgBtn').addEventListener('click', exportSvg);
+document.getElementById('exportPngBtn').addEventListener('click', exportPng);
 
 build();
 </script>
