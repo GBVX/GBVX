@@ -1652,7 +1652,7 @@ function triggerDownload(blob, filename){
 function exportSvg(){
   const { svgString } = buildExportSvgString();
   const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-  triggerDownload(blob, 'luftfeuchtigkeit.svg');
+  triggerDownload(blob, 'Luftfeuchtigkeit.svg');
 }
 
 function exportPng(){
@@ -1671,7 +1671,7 @@ function exportPng(){
     ctx.drawImage(img, 0, 0, width, height);
     URL.revokeObjectURL(url);
     canvas.toBlob(blob => {
-      if(blob) triggerDownload(blob, 'luftfeuchtigkeit.png');
+      if(blob) triggerDownload(blob, 'Luftfeuchtigkeit.png');
       else alert('PNG-Export fehlgeschlagen.');
     }, 'image/png');
   };
