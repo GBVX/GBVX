@@ -95,8 +95,8 @@ möglichen Menge bei einer bestimmten Temperatur wird als relative
 Luftfeuchtigkeit <math display='inline'> <mrow> <mi>φ</mi> </mrow> </math> bezeichnet.<br><br>
 
 
-Im ersten Teil unten ist eine Tabelle gezeigt, die den Zusammenhang zwischen Temperatur, Wassergehalt und Luftfeuchtigkeit darstellt.
-Im zweiten Teil folgen einige Beispiele. Im dritten Teil werden die Grundlagen der Berechnung beschrieben.<br><br>
+Im ersten Teil unten ist eine Tabelle gezeigt, die den Zusammenhang zwischen <strong>Temperatur, Wassergehalt und Luftfeuchtigkeit </strong> darstellt.
+Im zweiten Teil folgen einige <strong>Beispiele</strong>. Im dritten Teil werden die <strong>Grundlagen der Berechnung</strong> beschrieben.<br><br>
 
 `,
 
@@ -331,36 +331,36 @@ muss hier in °C eingesetzt werden.
 </mrow></math></td><td class='eq-no'>(3)</td></tr></table>
 <!-- l. 213 --><p class='noindent'>
 </p>
-   <div class='narrowtable'>  <!-- tex4ht:inline --><div class='tabular'> <table class='tabular' id='TBL-2'><colgroup id='TBL-2-1g'><col id='TBL-2-1' /><col id='TBL-2-2' /></colgroup><tr id='TBL-2-1-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-1-1' style='text-align:left; white-space:nowrap;'> c  </td><td class='td11' id='TBL-2-1-2' style='text-align:left; white-space:nowrap;'> : 6,112 hPa  </td>
-</tr><tr id='TBL-2-2-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-2-1' style='text-align:left; white-space:nowrap;'> a  </td><td class='td11' id='TBL-2-2-2' style='text-align:left; white-space:nowrap;'> : 17,62        </td>
-</tr><tr id='TBL-2-3-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-3-1' style='text-align:left; white-space:nowrap;'> b  </td><td class='td11' id='TBL-2-3-2' style='text-align:left; white-space:nowrap;'> : 243,12      </td> </tr></table>                                                                                     </div>
+   <div class='narrowtable'>  <!-- tex4ht:inline --><div class='tabular'> <table class='tabular' id='TBL-2'><colgroup id='TBL-2-1g'><col id='TBL-2-1' /><col id='TBL-2-2' /></colgroup><tr id='TBL-2-1-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-1-1' style='text-align:left; white-space:nowrap;'> c  </td><td class='td11' id='TBL-2-1-2' style='text-align:left; white-space:nowrap;'> : 611,2 Pa  </td>
+</tr><tr id='TBL-2-2-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-2-1' style='text-align:left; white-space:nowrap;'> a  </td><td class='td11' id='TBL-2-2-2' style='text-align:left; white-space:nowrap;'> : 17,62      </td>
+</tr><tr id='TBL-2-3-' style='vertical-align:baseline;'><td class='td11' id='TBL-2-3-1' style='text-align:left; white-space:nowrap;'> b  </td><td class='td11' id='TBL-2-3-2' style='text-align:left; white-space:nowrap;'> : 243,12     </td> </tr></table>                                                                                      </div>
 </div>
 <!-- l. 223 --><p class='indent'>   <!-- l. 223 --><math display='inline'><mi>T</mi></math>:
 Temperatur in °C<br class='newline' /><br class='newline' />
 </p><!-- l. 225 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiele – Gleichung (</span><a href='#x1-4r3'><span class='ec-lmbxi-10x-x-109'>3</span><!-- tex4ht:ref: eq_Magnus  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>a) Die Temperatur beträgt </span><!-- l. 230 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 23,33 hPa. </span></span>
+<br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 2,33 kPa. </span></span>
 </p><!-- l. 235 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>b) Die Temperatur beträgt </span><!-- l. 235 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>60°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 199.93 hPa. </span></span>
+<br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 19,99 kPa. </span></span>
                                                                                 
 
                                                                                 
 </p><!-- l. 240 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>c) Die Temperatur beträgt </span><!-- l. 240 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>100°C.</span>
 <br class='newline' /><span class='ec-lmri-10x-x-109'>Diese Temperatur liegt zwar außerhalb des zulässigen Bereichs für die Anwendung der
 Magnus-Formel, liefert aber immer noch gute Ergebnisse. Der damit berechnete
-Sättigungsdampfdruck von Wasser beträgt 1038 hPa. Dies entspricht nahezu dem Luftdruck
-auf Meereshöhe (1013 hPa). </span></span><br class='newline' /><br class='newline' /><span class='ec-lmri-10x-x-109'>Eine Flüssigkeit beginnt zu sieden, wenn ihr Dampfdruck den atmosphärischen Druck
+Sättigungsdampfdruck von Wasser beträgt 103,8 kPa. Dies entspricht nahezu dem Luftdruck
+auf Meereshöhe (101,3 kPa). </span></span><br class='newline' /><br class='newline' /><span class='ec-lmri-10x-x-109'>Eine Flüssigkeit beginnt zu sieden, wenn ihr Dampfdruck den atmosphärischen Druck
 erreicht (weil sich dann im Inneren der Flüssigkeit Blasen bilden können, die an die
 Oberfläche aufsteigen) </span><br class='newline' /><br class='newline' /><br class='newline' />
 </p><!-- l. 247 --><p class='noindent'><span class='ec-lmbx-10x-x-109'>Maximal möglicher Wassergehalt von Luft</span>: <span class='spacer20'></span>
 </p><!-- l. 251 --><p class='indent'>   Mit Hilfe des Sättigungsdampfdruckes und zusammen mit Gleichung (<a href='#x1-3r2'>2<!-- tex4ht:ref: eq_nV  --></a>) kann jetzt der
 Wassergehalt von Luft berechnet werden.
 </p><!-- l. 253 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-3r2'><span class='ec-lmbxi-10x-x-109'>2</span><!-- tex4ht:ref: eq_nV  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>a) Die Temperatur beträgt </span><!-- l. 258 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 23,33 hPa – erhält man 0,957</span>
+<br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 2,33 kPa – erhält man 0,957</span>
 <!-- l. 258 --><math display='inline'><mrow><mi mathvariant='italic'>𝑚𝑜𝑙</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math> <span class='ec-lmri-10x-x-109'>bzw.
 17,2 </span><!-- l. 258 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
 </span>
 </p><!-- l. 263 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>b) Die Temperatur beträgt </span><!-- l. 263 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>60°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 199,93 hPa – erhält man 7,22</span>
+<br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 19,99 kPa – erhält man 7,22</span>
 <!-- l. 263 --><math display='inline'><mrow><mi mathvariant='italic'>𝑚𝑜𝑙</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math> <span class='ec-lmri-10x-x-109'>bzw.
 129,98 </span><!-- l. 263 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
 </span><br class='newline' /><br class='newline' /><br class='newline' />
@@ -399,7 +399,7 @@ berechnet werden, Gleichung (<a href='#x1-7r2'>4b<!-- tex4ht:ref: eq_rFtwo  --><
 </mrow></math></td><td class='eq-no'>(5)</td></tr></table>
 <!-- l. 288 --><p class='noindent'>
 </p>
-    
+
 `,
 
 
@@ -442,9 +442,10 @@ in Punkt B, der durch Gleichung (<a href='#eq_ppp'>5</a>) beschrieben wird:
    </div>
 <!-- l. 186 --><p class='indent'>   <span class='vspace60'></span><br class='newline' />
 </p><!-- l. 188 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Taupunkt:</span><br class='newline' />
-</p><!-- l. 190 --><p class='indent'>   Um den Taupunkt <!-- l. 190 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></math>
-zu berechnen, wird zunächst eine Abkürzung eingeführt. Der Ausdruck
-rechts des Gleichheitszeichens in Gleichung (<a href='#x1-5r3'>6c<!-- tex4ht:ref: eq_ln  --></a>), der die aktuelle Temperatur
+</p><!-- l. 190 --><p class='indent'>   Bevor aus Gleichung (<a href='#x1-5r3'>6c<!-- tex4ht:ref: eq_ln  --></a>) der Taupunkt
+<!-- l. 190 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></math>
+berechnet wird, wird zunächst eine Abkürzung eingeführt. Der
+Ausdruck rechts des Gleichheitszeichens, der die aktuelle Temperatur
 <!-- l. 190 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></math> und die aktuelle
 Luftfeuchtigkeit <!-- l. 190 --><math display='inline'><mi>φ</mi></math>
 enthält, wird mit Gamma abgekürzt:
@@ -459,14 +460,14 @@ enthält, wird mit Gamma abgekürzt:
 <mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub></mrow></mfrac>
 </mrow></math></td><td class='eq-no'>(7)</td></tr></table>
 <!-- l. 196 --><p class='noindent'>
-</p><!-- l. 200 --><p class='indent'>   Damit wird Gleichung (<a href='#x1-5r3'>6c<!-- tex4ht:ref: eq_ln  --></a>) zu:
+</p><!-- l. 200 --><p class='indent'>   Damit wird Gleichung (<a href='#x1-5r3'>6c<!-- tex4ht:ref: eq_ln  --></a>):
 </p><!-- l. 202 --><p class='indent'>   <span class='vspace20'></span> </p><table class='equation'><tr><td>
 <!-- l. 203 --><math class='equation' display='block'><mrow>
                                    <mstyle class='label' id='x1-7r8'></mstyle><!-- endlabel --> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow>
 <mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></mrow></mfrac> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>γ</mi>
 </mrow></math></td><td class='eq-no'>(8)</td></tr></table>
 <!-- l. 205 --><p class='noindent'>
-</p><!-- l. 208 --><p class='indent'>   Daraus kann nun der Taupunkt berechnet werden:
+</p><!-- l. 208 --><p class='indent'>   Der Taupunkt ergibt sich zu:
 </p><!-- l. 210 --><p class='indent'>   <span class='vspace20'></span> </p><table class='equation'><tr><td>
 <!-- l. 211 --><math class='equation' display='block'><mrow>
                                    <mstyle class='label' id='x1-8r9'></mstyle><!-- endlabel --><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo>   <mfrac><mrow><mi mathvariant='italic'>𝛾𝑏</mi></mrow> 
@@ -474,7 +475,7 @@ enthält, wird mit Gamma abgekürzt:
 </mrow></math></td><td class='eq-no'>(9)</td></tr></table>
 <!-- l. 213 --><p class='noindent'><br class='newline' />
 </p><!-- l. 217 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-8r9'><span class='ec-lmbxi-10x-x-109'>9</span><!-- tex4ht:ref: eq_Td  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>Die Temperatur beträgt </span><!-- l. 224 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20°C
-und die relative Luftfeuchtigkeit </span><!-- l. 224 --><math display='inline'><mrow><mi>φ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>58</mn><mi>%</mi></mrow></math><span class='ec-lmri-10x-x-109'>.</span><br class='newline' /><span class='ec-lmri-10x-x-109'>a = 17.62 und b = 243,12, wie in Gleichung 3. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Damit wird </span><!-- l. 224 --><math display='inline'><mrow><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>79</mn></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
+und die relative Luftfeuchtigkeit </span><!-- l. 224 --><math display='inline'><mrow><mi>φ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>58</mn><mi>%</mi></mrow></math><span class='ec-lmri-10x-x-109'>.</span><br class='newline' /><span class='ec-lmri-10x-x-109'>a = 17.62 und b = 243,12, siehe Gleichung 3. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Damit wird </span><!-- l. 224 --><math display='inline'><mrow><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>79</mn></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
                                                                                 
 
                                                                                 
