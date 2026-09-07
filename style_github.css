@@ -448,17 +448,19 @@ table.equation-star {
 
  /* table { border-collapse: collapse; margin-top: 100px; table-layout: fixed; } */
   /* td, th { border: 1px solid #ccc; padding: 5px; text-align: center; } */
-  input { width: 140px; 
-    max-width: 100%; 
+  input:not([type="checkbox"]) {
+    width: 140px;
+    max-width: 100%;
     margin: 0.2rem;
-    background: rgba(13, 248, 21, 0.75);
+    background: #ffffff;
+    border: 1px solid #bcc3c9;
     padding: 0.3rem;
     font-size: 14px;
     font-weight: bold;
     /* outline: 1px solid rgba(255,0,0,0.6);  */
   }
 
-  button { 
+  button {
     padding: 0.4rem 1rem;
     margin: 0.5rem;
     background: lightskyblue;
@@ -547,7 +549,37 @@ table.equation-star {
   padding: 5px 10px;
 }
 
+.table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
+.example-table,
+#dataTable {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.example-table th,
+.example-table td,
+#dataTable th,
+#dataTable td {
+  padding: 8px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+#dataTable input,
+.example-table input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 
 /* overlay ====================================================================== */
