@@ -337,15 +337,15 @@ muss hier in °C eingesetzt werden.
 </div>
 <!-- l. 223 --><p class='indent'>   <!-- l. 223 --><math display='inline'><mi>T</mi></math>:
 Temperatur in °C<br class='newline' /><br class='newline' />
-</p><!-- l. 225 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiele – Gleichung (</span><a href='#x1-4r3'><span class='ec-lmbxi-10x-x-109'>3</span><!-- tex4ht:ref: eq_Magnus  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>a) Die Temperatur beträgt </span><!-- l. 230 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 2,33 kPa. </span></span>
-</p><!-- l. 235 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>b) Die Temperatur beträgt </span><!-- l. 235 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>60°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 19,99 kPa. </span></span>
+</p><!-- l. 225 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiele – Gleichung (</span><a href='#x1-4r3'><span class='ec-lmbxi-10x-x-109'>3</span><!-- tex4ht:ref: eq_Magnus  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>a) Die Temperatur beträgt </span><!-- l. 230 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20
+°C. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 2,33 kPa. </span></span>
+</p><!-- l. 235 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>b) Die Temperatur beträgt </span><!-- l. 235 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>60
+°C. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Der Sättigungsdampfdruck von Wasser beträgt 19,99 kPa. </span></span>
                                                                                 
 
                                                                                 
-</p><!-- l. 240 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>c) Die Temperatur beträgt </span><!-- l. 240 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>100°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Diese Temperatur liegt zwar außerhalb des zulässigen Bereichs für die Anwendung der
+</p><!-- l. 240 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>c) Die Temperatur beträgt </span><!-- l. 240 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>100
+°C. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Diese Temperatur liegt zwar außerhalb des zulässigen Bereichs für die Anwendung der
 Magnus-Formel, liefert aber immer noch gute Ergebnisse. Der damit berechnete
 Sättigungsdampfdruck von Wasser beträgt 103,8 kPa. Dies entspricht nahezu dem Luftdruck
 auf Meereshöhe (101,3 kPa). </span></span><br class='newline' /><br class='newline' /><span class='ec-lmri-10x-x-109'>Eine Flüssigkeit beginnt zu sieden, wenn ihr Dampfdruck den atmosphärischen Druck
@@ -353,51 +353,68 @@ erreicht (weil sich dann im Inneren der Flüssigkeit Blasen bilden können, die 
 Oberfläche aufsteigen) </span><br class='newline' /><br class='newline' /><br class='newline' />
 </p><!-- l. 247 --><p class='noindent'><span class='ec-lmbx-10x-x-109'>Maximal möglicher Wassergehalt von Luft</span>: <span class='spacer20'></span>
 </p><!-- l. 251 --><p class='indent'>   Mit Hilfe des Sättigungsdampfdruckes und zusammen mit Gleichung (<a href='#x1-3r2'>2<!-- tex4ht:ref: eq_nV  --></a>) kann jetzt der
-Wassergehalt von Luft berechnet werden.
-</p><!-- l. 253 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-3r2'><span class='ec-lmbxi-10x-x-109'>2</span><!-- tex4ht:ref: eq_nV  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>a) Die Temperatur beträgt </span><!-- l. 258 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 2,33 kPa – erhält man 0,957</span>
-<!-- l. 258 --><math display='inline'><mrow><mi mathvariant='italic'>𝑚𝑜𝑙</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math> <span class='ec-lmri-10x-x-109'>bzw.
-17,2 </span><!-- l. 258 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
+Wassergehalt von Luft berechnet werden. <br class='newline' />In der allgemeinen Gasgleichung (<a href='#x1-3r2'>2<!-- tex4ht:ref: eq_nV  --></a>) muss die Temperatur
+<!-- l. 252 --><math display='inline'><mi>T</mi></math> in
+Kelvin eingesetzt werden. Um dies zu kennzeichnen, wird unten die Schreibweise
+<!-- l. 252 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>K</mi></mrow></msub></math>
+verwendet:
+</p><!-- l. 254 --><p class='indent'>   <span class='vspace20'></span> </p><table class='equation'><tr><td>
+<!-- l. 255 --><math class='equation' display='block'><mrow>
+                 <mstyle class='label' id='x1-5r4'></mstyle><!-- endlabel --> <mfrac><mrow><mi>n</mi></mrow>
+<mrow><mi>V</mi> </mrow></mfrac> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mn>1</mn></mrow> 
+<mrow><mi>R</mi><msub><mrow><mi>T</mi></mrow><mrow><mi>K</mi></mrow></msub></mrow></mfrac> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mi>c</mi><mspace class='thinspace' width='0.17em'></mspace> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>exp</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mspace class='negthinspace' width='-0.17em'></mspace> <mrow><mo fence='true' form='prefix'>(</mo><mrow> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mi>T</mi></mrow>
+<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>T</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mspace class='qquad' width='2em'></mspace><mstyle class='text'><mtext class='textrm' mathvariant='normal'>für -45°C</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo> <mi>T</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mstyle class='text'><mtext class='textrm' mathvariant='normal'>65°C</mtext></mstyle>
+</mrow></math></td><td class='eq-no'>(4)</td></tr></table>
+<!-- l. 257 --><p class='noindent'><br class='newline' />
+</p><!-- l. 260 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-5r4'><span class='ec-lmbxi-10x-x-109'>4</span><!-- tex4ht:ref: eq_nVp  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>a) Die Temperatur beträgt </span><!-- l. 265 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20
+°C bzw. </span><!-- l. 265 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>K</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math>
+<span class='ec-lmri-10x-x-109'>293,15 K. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 2,33 kPa – erhält man 0,957</span>
+<!-- l. 265 --><math display='inline'><mrow><mi mathvariant='italic'>𝑚𝑜𝑙</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math> <span class='ec-lmri-10x-x-109'>bzw.
+17,2 </span><!-- l. 265 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
 </span>
-</p><!-- l. 263 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>b) Die Temperatur beträgt </span><!-- l. 263 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>60°C.</span>
-<br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 19,99 kPa – erhält man 7,22</span>
-<!-- l. 263 --><math display='inline'><mrow><mi mathvariant='italic'>𝑚𝑜𝑙</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math> <span class='ec-lmri-10x-x-109'>bzw.
-129,98 </span><!-- l. 263 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
-</span><br class='newline' /><br class='newline' /><br class='newline' />
-</p><!-- l. 267 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Relative Luftfeuchtigkeit:</span>
-</p><!-- l. 269 --><p class='indent'>   Die relative Luftfeuchtigkeit <!-- l. 269 --><math display='inline'><mi>φ</mi></math>
-ist das Verhältnis der in der Luft enthaltenen Wassermenge
-<!-- l. 269 --><math display='inline'><mi>n</mi></math> zur maximal möglichen
-Wassermenge <!-- l. 269 --><math display='inline'><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub></math>.
-<!-- l. 269 --><math display='inline'><mi>n</mi></math> und
-<!-- l. 269 --><math display='inline'><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub></math> sind
-die Wassermenge in Mol:
-</p>
-   <div class='subequations'>
                                                                                 
 
                                                                                 
-<!-- tex4ht:inline --><!-- l. 276 --><math display='block'><mtable class='align' columnalign='left' displaystyle='true' rowlines='none' style=''>
+</p><!-- l. 270 --><p class='indent'>   <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>b) Die Temperatur beträgt </span><!-- l. 270 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>60
+°C bzw. </span><!-- l. 270 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>K</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math>
+<span class='ec-lmri-10x-x-109'>333,15 K. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 19,99 kPa – erhält man 7,22</span>
+<!-- l. 270 --><math display='inline'><mrow><mi mathvariant='italic'>𝑚𝑜𝑙</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math> <span class='ec-lmri-10x-x-109'>bzw.
+129,98 </span><!-- l. 270 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
+</span><br class='newline' /><br class='newline' /><br class='newline' />
+</p><!-- l. 274 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Relative Luftfeuchtigkeit:</span>
+</p><!-- l. 276 --><p class='indent'>   Die relative Luftfeuchtigkeit <!-- l. 276 --><math display='inline'><mi>φ</mi></math>
+ist das Verhältnis der in der Luft enthaltenen Wassermenge
+<!-- l. 276 --><math display='inline'><mi>n</mi></math> zur maximal möglichen
+Wassermenge <!-- l. 276 --><math display='inline'><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub></math>.
+<!-- l. 276 --><math display='inline'><mi>n</mi></math> und
+<!-- l. 276 --><math display='inline'><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub></math> sind
+die Wassermenge in Mol:
+</p>
+   <div class='subequations'>
+<!-- tex4ht:inline --><!-- l. 283 --><math display='block'><mtable class='align' columnalign='left' displaystyle='true' rowlines='none' style=''>
                              <mtr><mtd class='align-odd' columnalign='right'><mi>φ</mi></mtd>                             <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mi>n</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>V</mi> </mrow> 
 <mrow><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub><mo class='MathClass-bin' stretchy='false'>∕</mo><mi>V</mi> </mrow></mfrac> <mo class='MathClass-rel' stretchy='false'>=</mo>  <mfrac><mrow><mi>p</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><mi mathvariant='italic'>𝑅𝑇</mi></mrow> 
-<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-bin' stretchy='false'>∕</mo><mi mathvariant='italic'>𝑅𝑇</mi></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                          <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-6r1'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(4a)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
+<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub><mo class='MathClass-bin' stretchy='false'>∕</mo><mi mathvariant='italic'>𝑅𝑇</mi></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                          <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-7r1'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(5a)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
                              </mtd></mtr><mtr><mtd class='align-odd' columnalign='right'><mtr><mtd columnspan='3' style='height:2em;'></mtd></mtr><mi>φ</mi></mtd>                             <mtd class='align-even'> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mi>n</mi></mrow> 
 <mrow><msub><mrow><mi>n</mi></mrow><mrow><mi mathvariant='italic'>𝑚𝑎𝑥</mi></mrow></msub></mrow></mfrac> <mo class='MathClass-rel' stretchy='false'>=</mo>  <mfrac><mrow><mi>p</mi></mrow> 
-<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                                 <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-7r2'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(4b)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
+<mrow><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></mrow></mfrac><mspace width='2em'></mspace></mtd>                                                                 <mtd class='align-label' columnalign='right'><mstyle class='label' id='x1-8r2'></mstyle><!-- endlabel --><mstyle class='maketag'><mtext>(5b)</mtext></mstyle><mspace class='nbsp' width='0.33em'></mspace>
    </mtd></mtr>
    </mtable></math>
    </div>
-<!-- l. 279 --><p class='indent'>   Ein Quotient von 0,6 entspricht einer Luftfeuchtigkeit von 60%.
-</p><!-- l. 281 --><p class='indent'>   Der tatsächliche Dampfdruck <!-- l. 281 --><math display='inline'><mi>p</mi></math>
+<!-- l. 286 --><p class='indent'>   Ein Quotient von 0,6 entspricht einer Luftfeuchtigkeit von 60%.
+</p><!-- l. 288 --><p class='indent'>   Der tatsächliche Dampfdruck <!-- l. 288 --><math display='inline'><mi>p</mi></math>
 kann aus der relativen Luftfeuchtigkeit und dem Sättigungsdampfdruck
-<!-- l. 281 --><math display='inline'><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></math>
-berechnet werden, Gleichung (<a href='#x1-7r2'>4b<!-- tex4ht:ref: eq_rFtwo  --></a>):
-</p><!-- l. 283 --><p class='indent'>   <h2 id='eq_ppp'></h2>
-</p><!-- l. 285 --><p class='indent'>   <span class='vspace20'></span> </p><table class='equation'><tr><td>
-<!-- l. 286 --><math class='equation' display='block'><mrow>
-                                   <mstyle class='label' id='x1-8r5'></mstyle><!-- endlabel --><mi>p</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>φ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub>
-</mrow></math></td><td class='eq-no'>(5)</td></tr></table>
-<!-- l. 288 --><p class='noindent'>
+<!-- l. 288 --><math display='inline'><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></math>
+berechnet werden, Gleichung (<a href='#x1-8r2'>5b<!-- tex4ht:ref: eq_rFtwo  --></a>):
+</p><!-- l. 290 --><p class='indent'>   <h2 id='eq_ppp'></h2>
+</p><!-- l. 292 --><p class='indent'>   <span class='vspace20'></span> </p><table class='equation'><tr><td>
+                                                                                
+
+                                                                                
+<!-- l. 293 --><math class='equation' display='block'><mrow>
+                                   <mstyle class='label' id='x1-9r6'></mstyle><!-- endlabel --><mi>p</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>φ</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub>
+</mrow></math></td><td class='eq-no'>(6)</td></tr></table>
+<!-- l. 295 --><p class='noindent'>
 </p>
 
 `,
@@ -426,7 +443,7 @@ der Taupunkt erreicht. Der Sättigungsdampfdruck beim Taupunkt
                                                                                 
 <!-- l. 170 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></math> ist gleich dem
 Dampfdruck <!-- l. 170 --><math display='inline'><mi>p</mi></math>
-in Punkt B, der durch Gleichung (<a href='#eq_ppp'>5</a>) beschrieben wird:
+in Punkt B, der durch Gleichung (<a href='#eq_ppp'>6</a>) beschrieben wird:
 </p>
    <div class='subequations'>
 <!-- tex4ht:inline --><!-- l. 180 --><math display='block'><mtable class='align' columnalign='left' displaystyle='true' rowlines='none none none' style=''>
