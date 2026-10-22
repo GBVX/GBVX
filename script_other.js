@@ -19,9 +19,8 @@ function setLanguage(lang) {                      // Sichtbarkeit Header/Footer 
   }
 
   document.getElementById("language").value = lang;   // Dropdown synchron halten
-  try {
-    localStorage.setItem("lang", lang);               // Sprache speichern
-  } catch (e) {}                                      // Safari blockiert localStorage bei lokal geöffneten Dateien (file://)
+  // Sprache wird nicht gespeichert (kein localStorage), solange es nur Deutsch gibt.
+  // Bei Einführung eines Sprachwechsels: Speichern ergänzen UND Datenschutzerklärung anpassen.
 
 }
 
@@ -50,11 +49,7 @@ function updateActiveFlag(lang) {                          // wegen der Flaggen
 
 // en --> de für GBVX - sonst werden die deutschen Texte nicht automatisch geladen 
 document.addEventListener('DOMContentLoaded', function() {
-  let savedLang = "de";
-  try {
-    savedLang = localStorage.getItem("lang") || "de";
-  } catch (e) {}                                      // Safari blockiert localStorage bei lokal geöffneten Dateien (file://)
-  if (!texts[savedLang]) savedLang = "de";            // gespeicherte Sprache ohne Texte (z.B. "en") -> Deutsch
+  const savedLang = "de";                             // zur Zeit nur Deutsch
   setLanguage(savedLang);
   updateActiveFlag(savedLang);
 
