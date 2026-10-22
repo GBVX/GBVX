@@ -208,12 +208,14 @@ function draw() {
     Plotly.Plots.resize("plot");
   }, 0);
 
-  traces.push({                           // linearFitThroughOrigin 
+  if (fit) {                              // fit ist null, wenn kein Punkt ausgewählt ist
+  traces.push({                           // linearFitThroughOrigin
   x: [0, Math.max(...x)],
   y: [0, fit.a * Math.max(...x)],
   mode: "lines",
   line: { dash: "dash", width: 2, color: "orange" }
-});
+  });
+  }
 
 } // f5 - draw
 
@@ -271,51 +273,58 @@ function clearTableInputs() {
 
 
 
-// Live-Update
-document.addEventListener("input", e => {
-  if (e.target.tagName === "INPUT") draw();
-});
-fitToggle.addEventListener("change", () => {
-  // Alle Fit-Checkboxen auf den gleichen Status setzen wie fitToggle
-  const allFitCheckboxes = document.querySelectorAll(".fitCheckbox");
-  allFitCheckboxes.forEach(checkbox => {
-    checkbox.checked = fitToggle.checked;
+// Nur auf der Seite mit dem Rechner (Watt und Lumen) ausführen - 
+// auf anderen Seiten (z.B. Luftfeuchtigkeit) gibt es fitToggle nicht
+const fitToggle = document.getElementById("fitToggle");
+if (fitToggle) {
+
+  // Live-Update
+  document.addEventListener("input", e => {
+    if (e.target.tagName === "INPUT") draw();
   });
-  draw();
-});
+  fitToggle.addEventListener("change", () => {
+    // Alle Fit-Checkboxen auf den gleichen Status setzen wie fitToggle
+    const allFitCheckboxes = document.querySelectorAll(".fitCheckbox");
+    allFitCheckboxes.forEach(checkbox => {
+      checkbox.checked = fitToggle.checked;
+    });
+    draw();
+  });
 
-// Checkboxen für Fit-Auswahl auf change überwachen
-document.addEventListener("change", e => {
-  if (e.target.classList.contains("fitCheckbox")) {
-    // Zähle wie viele fitCheckboxes aktiviert sind
-    const checkedCount = document.querySelectorAll(".fitCheckbox:checked").length;
+  // Checkboxen für Fit-Auswahl auf change überwachen
+  document.addEventListener("change", e => {
+    if (e.target.classList.contains("fitCheckbox")) {
+      // Zähle wie viele fitCheckboxes aktiviert sind
+      const checkedCount = document.querySelectorAll(".fitCheckbox:checked").length;
     
-    // Wenn mindestens 2 aktiviert sind, aktiviere fitToggle automatisch
-    if (checkedCount >= 2) {
-      fitToggle.checked = true;
-    } else {
-      fitToggle.checked = false;
+      // Wenn mindestens 2 aktiviert sind, aktiviere fitToggle automatisch
+      if (checkedCount >= 2) {
+        fitToggle.checked = true;
+      } else {
+        fitToggle.checked = false;
+      }
+    
+      draw();
     }
-    
-    draw();
-  }
-});
+  });
 
-// Grafik neu zeichnen beim Drehen des Geräts oder Fenstergrößenänderung
-window.addEventListener("resize", () => {
+  // Grafik neu zeichnen beim Drehen des Geräts oder Fenstergrößenänderung
+  window.addEventListener("resize", () => {
+    draw();
+  });
+
+  // Spezifisch für Geräte-Rotation (orientationchange Event)
+  window.addEventListener("orientationchange", () => {
+    // Warte kurz, bis das Betriebssystem die neue Ausrichtung vollständig registriert hat
+    setTimeout(() => {
+      draw();
+      Plotly.Plots.resize("plot");
+    }, 100);
+  });
+
   draw();
-});
 
-// Spezifisch für Geräte-Rotation (orientationchange Event)
-window.addEventListener("orientationchange", () => {
-  // Warte kurz, bis das Betriebssystem die neue Ausrichtung vollständig registriert hat
-  setTimeout(() => {
-    draw();
-    Plotly.Plots.resize("plot");
-  }, 100);
-});
-
-draw();
+}  // end if (fitToggle)
 
 
 // 1️⃣ Beispiel-Daten
