@@ -1992,3 +1992,21 @@ background-color: rgb(255, 255, 255);       /* color der Tabellen bei LTV-value 
   font-weight: bold;
   color: darkblue;
 }
+
+
+/* Rechtliche Seiten (Impressum, Datenschutz, Haftungsausschluss) ---------------------------------------------*/
+
+.wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.wrap h2 {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  margin-top: 1.5rem;
+}
+
+.wrap p {
+  margin: 0 0 1rem;
+}
