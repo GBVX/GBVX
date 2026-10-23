@@ -491,14 +491,15 @@ enthält, wird mit Gamma abgekürzt:
 <mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo> <mi>γ</mi></mrow></mfrac>
 </mrow></math></td><td class='eq-no'>(9)</td></tr></table>
 <!-- l. 213 --><p class='noindent'><br class='newline' />
-</p><!-- l. 217 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-8r9'><span class='ec-lmbxi-10x-x-109'>9</span><!-- tex4ht:ref: eq_Td  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>Die Temperatur beträgt </span><!-- l. 224 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20 °C
+</p><!-- l. 217 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichungen (</span><a href='#x1-6r7'><span class='ec-lmbxi-10x-x-109'>7</span><!-- tex4ht:ref: eq_gamma  --></a><span class='ec-lmbxi-10x-x-109'>) und (</span><a href='#x1-8r9'><span class='ec-lmbxi-10x-x-109'>9</span><!-- tex4ht:ref: eq_Td  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>Die Temperatur beträgt </span><!-- l. 224 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20 °C
 und die relative Luftfeuchtigkeit </span><!-- l. 224 --><math display='inline'><mrow><mi>φ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>58</mn><mi>%</mi></mrow></math><span class='ec-lmri-10x-x-109'>.</span><br class='newline' /><span class='ec-lmri-10x-x-109'>a = 17,62 und b = 243,12, siehe Gleichung 3. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Damit wird </span><!-- l. 224 --><math display='inline'><mrow><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>79</mn></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
-                                                                                
 
-                                                                                
 <br class='newline' /><span class='ec-lmri-10x-x-109'>Der Taupunkt </span><!-- l. 224 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></math>
 <span class='ec-lmri-10x-x-109'>beträgt 11 °C. </span></span>
 </p>
+
+
+
 
 `,
 
