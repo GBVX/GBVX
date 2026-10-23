@@ -19,8 +19,8 @@ p_intro:
 `
 Diese Seite ist experimentell und befindet sich noch im Aufbau.
 
-Es werden Themen behandelt, mit denen sich der Autor - aus unterschiedlichen Gründen - wiederholt beschäftigt und die wahrscheinlich auch von allgemeinem Interesse sind.
-Der Schwerpunkt der Themen liegt dabei auf physikalischen oder wirtschaftlichen Zusammenhängen, oft in Verbindung mit - sehr einfacher - Mathematik. 
+Es werden Themen behandelt, mit denen sich der Autor – aus unterschiedlichen Gründen – wiederholt beschäftigt und die wahrscheinlich auch von allgemeinem Interesse sind.
+Der Schwerpunkt der Themen liegt dabei auf physikalischen oder wirtschaftlichen Zusammenhängen, oft in Verbindung mit – sehr einfacher – Mathematik. 
 `,
 
 
@@ -30,7 +30,7 @@ Der Schwerpunkt der Themen liegt dabei auf physikalischen oder wirtschaftlichen 
 p_Watt_Lumen:
 `
 <div class="spacer-60"></div>
-<h1> Leistungsaufnahme und erzeugter Lichtstrom bei (LED) Leuchtmitteln</h1>
+<h1> Leistungsaufnahme und erzeugter Lichtstrom bei (LED-)Leuchtmitteln</h1>
 
 
 Sie möchten ein neues Leuchtmittel erwerben. Sollten Sie sich mit der Frage beschäftigen, 
@@ -41,7 +41,7 @@ emittierte Strahlungsleistung) wird in Watt gemessen.
 Das menschliche Auge ist aber nur für einen schmalen Bereich des elektromagnetischen Spektrums empfindlich. 
 Der Lichtstrom (Lumen) ist der Strahlungsfluss (Watt), gewichtet mit der spektralen Empfindlichkeit des menschlichen Auges. 
 Der Lichtstrom gibt an, wie viel <strong> sichtbare Strahlung</strong> eine Lichtquelle insgesamt abgibt.<br>
-Grünes Licht (λ = 555 nm): 683 lm/W, rotes oder blaues Licht: < 10 lm/W, Infrarot oder Ultraviolett: 0 lm/W.
+Grünes Licht (λ = 555 nm): 683 lm/W, rotes Licht (650 nm): ca. 73 lm/W, blaues Licht (450 nm): ca. 26 lm/W, Infrarot oder Ultraviolett: 0 lm/W.
 <br><br><br>
 
 Die untenstehende Grafik vergleicht verschiedene Leuchtmittel. 
@@ -56,8 +56,8 @@ Es ist zu erkennen, dass eine Glühlampe mit einer Leistung von 60 Watt einen ve
 wie eine LED-Leuchte mit einer Leistung von 8 Watt ("Raum 2").<br><br>
 
 Es besteht die Option, einen linearen Fit in die Grafik zu legen. 
-Dies ist jedoch nur sinnvoll, wenn Gleiches mit Gleichem verglichen wird (z.B. zum Vergleich verschiedener LED-Leuchten).
-Die Steigung der Fitkurve gibt die durchschnittliche Effizienz der Leuchtmittel an (im Beispiel etwa 115 Lumen pro Watt bei LED-Leuchtmitteln).
+Dies ist jedoch nur sinnvoll, wenn Gleiches mit Gleichem verglichen wird (z. B. zum Vergleich verschiedener LED-Leuchten).
+Die Steigung der Fitgeraden gibt die durchschnittliche Effizienz der Leuchtmittel an (im Beispiel etwa 115 Lumen pro Watt bei LED-Leuchtmitteln).
 <br><br>
 
 Die Grafik ist wahrscheinlich am nützlichsten, wenn man eigene Werte einträgt. Denn man selbst weiß 
@@ -70,7 +70,7 @@ haben sollte.<br><br>
 
 p_lux:
 `
-<strong> Beleuchtungsstärke - Bestrahlungsstärke: </strong> <br>
+<strong> Beleuchtungsstärke – Bestrahlungsstärke: </strong> <br>
 Die Beleuchtungsstärke beschreibt, wie viele Lumen auf einen Quadratmeter treffen. Ein Lumen pro 
 Quadratmeter entspricht 1 Lux. <br>
 Das strahlungstechnische Äquivalent ist die Bestrahlungsstärke. 
@@ -95,7 +95,7 @@ möglichen Menge bei einer bestimmten Temperatur wird als relative
 Luftfeuchtigkeit <math display='inline'> <mrow> <mi>φ</mi> </mrow> </math> bezeichnet.<br><br>
 
 
-Im ersten Teil unten ist eine Tabelle gezeigt, die den Zusammenhang zwischen <strong>Temperatur, Wassergehalt und Luftfeuchtigkeit </strong> darstellt.
+Im ersten Teil unten ist eine Grafik gezeigt, die den Zusammenhang zwischen <strong>Temperatur, Wassergehalt und Luftfeuchtigkeit </strong> darstellt.
 Im zweiten Teil folgen einige <strong>Beispiele</strong>. Im dritten Teil werden die <strong>Grundlagen der Berechnung</strong> beschrieben.<br><br>
 
 `,
@@ -111,7 +111,7 @@ Durch Klicken auf einen bestimmten Prozentwert der Luftfeuchtigkeit werden der z
 Wassergehalt und die Temperatur angezeigt. Auf der x-Achse wird zudem der Taupunkt (blau) dargestellt.
 Ein Doppelklick löscht die Auswahl. <br>
 
-Der Temperaturbereich kann zwischen -45°C und +65°C gewählt werden (Gültigkeitsbereich 
+Der Temperaturbereich kann zwischen -45 °C und +65 °C gewählt werden (Gültigkeitsbereich 
 der Magnus-Formel, siehe unten).<br>
 
 Durch Klicken auf den Button mit dem Quadrat rechts oben kann man in den Vollbildmodus 
@@ -130,7 +130,7 @@ p_Luft_Beispiel_1:
 Die Temperatur im Kühlschrank beträgt 5 °C und die Luftfeuchtigkeit ist 100 %. Die 
 Raumtemperatur beträgt 20 °C, die Luftfeuchtigkeit liegt bei 58 %. Dies entspricht 
 einem Wassergehalt von 10 g/m<sup>3</sup>. Der Taupunkt der Raumluft liegt bei 11 °C.<br>
-Wenn man eine Flasche aus dem Kühlschrank nimmt und in der Raum stellt, dann kühlt 
+Wenn man eine Flasche aus dem Kühlschrank nimmt und in den Raum stellt, dann kühlt 
 die Raumluft in der Umgebung der Flasche auf 5 °C ab. Dies ist kälter als der 
 Taupunkt der Raumluft, die Flasche beschlägt mit Wasser.<br><br>
 
@@ -138,16 +138,16 @@ Taupunkt der Raumluft, die Flasche beschlägt mit Wasser.<br><br>
 
 <strong>Klimatisierter Raum</strong> <br>
 <div class="spacer-10"></div>
-Ein Raum ist auf eine Temperatur von 20 °C klimatisiert. Die Außemtemperatur beträgt 
+Ein Raum ist auf eine Temperatur von 20 °C klimatisiert. Die Außentemperatur beträgt 
 30 °C bei einer Feuchtigkeit von 60 %. Der Taupunkt liegt bei 21 °C. <br>
 Geht jemand aus dem klimatisierten Raum ins Freie, beschlagen kühle Gegenstände (zum Beispiel 
 Flaschen oder Brillengläser).<br><br>
 
 
-In der <a href="LF_Grafik.html?example=0-0" target="_blank">Tabelle</a> sind die beiden Fälle von oben
+In der <a href="LF_Grafik.html?example=0-0" target="_blank">Grafik</a> sind die beiden Fälle von oben
 dargestellt.<br> 
 Orange steht für die Temperatur der Raumluft, Blau für die Temperatur im Kühlschrank und Rot für 
-die Temperatur in Außenbereich.<br><br>
+die Temperatur im Außenbereich.<br><br>
 
 `,
 
@@ -163,9 +163,9 @@ schwül empfunden (&rarr;
 <a href='https://de.wikipedia.org/wiki/Schw%C3%BCle'>Wikipedia</a>).<br>
 Wenn es heiß ist, dann fängt der Körper an zu schwitzen. Indem Wasser von der Haut verdunstet, 
 kühlt sich der Körper ab. Wenn die umgebende Luft aber bereits viel Wasser enthält 
-(die oben genannten 13,5 g/m<sup>3</sup>), dann kann sie nicht genug neues Wasser mehr aufnehmen, 
-die Haut kann also auch kein Wasser verdunsten. Der Körper kühlt sich nicht ab und man schwitzt noch mehr.<br>
-Die Grafik zeigt Temperatur-Luftfeuchtigkeitskombinationen, die zu demselben  Wassergehalt von 13,5 g/m<sup>3</sup> in der Luft führen.
+(die oben genannten 13,5 g/m<sup>3</sup>), dann kann sie nur noch wenig zusätzliches Wasser aufnehmen. 
+Der Schweiß verdunstet kaum, der Körper kühlt sich kaum ab und man schwitzt noch mehr.<br>
+Die Grafik zeigt Kombinationen aus Temperatur und Luftfeuchtigkeit, die zu demselben Wassergehalt von 13,5 g/m<sup>3</sup> in der Luft führen.
 
 
 &rarr;
@@ -173,8 +173,8 @@ Die Grafik zeigt Temperatur-Luftfeuchtigkeitskombinationen, die zu demselben  Wa
 
 Beispiel:
 <div class="spacer-10"></div>
-Die Außentemperatur ist 34 °C, die Luftfeuchtigkeit beträgt 60%. In der Luft befinden sich 
-22,5 g Wasser pro Kubikmeter. Dies ist mehr als das doppelte der Wassermenge, die sich an 
+Die Außentemperatur ist 34 °C, die Luftfeuchtigkeit beträgt 60 %. In der Luft befinden sich 
+22,5 g Wasser pro Kubikmeter. Dies ist mehr als das Doppelte der Wassermenge, die sich an 
 normalen Tagen in der Luft befindet.
 &rarr;
 <a href="LF_Grafik.html?example=1-1" target="_blank">Beispiel</a> 
@@ -183,10 +183,10 @@ normalen Tagen in der Luft befindet.
 
 <strong>Heiße Tage</strong> <br>
 <div class="spacer-10"></div>
-Man befindet sich in einem geschlossenen Raum bei einer Temperatur von 27° C und einer 
+Man befindet sich in einem geschlossenen Raum bei einer Temperatur von 27 °C und einer 
 Luftfeuchtigkeit von 60 %. Da der Wassergehalt in der Luft 15 g Wasser pro Kubikmeter beträgt, 
 fühlt sich die Luft schwül an.<br>
-Die Außentemperatur beträgt 32 °C bei einer Luftfeuchtigkeit von 30%. Soll man bei diesen Bedingungen 
+Die Außentemperatur beträgt 32 °C bei einer Luftfeuchtigkeit von 30 %. Soll man bei diesen Bedingungen 
 die Fenster öffnen und die noch wärmere Luft ins Zimmer lassen? <br>
 Die Antwort lautet ja, denn 
 in der Außenluft befinden sich nur 10 g Wasser pro Kubikmeter, was deutlich unter der Schwelle von 13,5 g liegt. 
@@ -206,7 +206,7 @@ p_Luft_Beispiel_3:
 `
 <strong> Wohnraum </strong> <br>
 <div class="spacer-10"></div>
-Ein typischer Wohnraum hat eine Temperatur von 20 °C bei einer relativen Luftfeuchtigkeit von 58%. 
+Ein typischer Wohnraum hat eine Temperatur von 20 °C bei einer relativen Luftfeuchtigkeit von 58 %. 
 Dies entspricht einem Wassergehalt von 10 g/m<sup>3</sup>. <br>
 &rarr;
 <a href="LF_Grafik.html?example=2-0" target="_blank">Wohnraum</a> <br><br><br>
@@ -225,7 +225,7 @@ Wenn man den Keller lüftet, erwärmt sich die einströmende Luft auf 16 °C und
 Feuchtigkeit sinkt auf 44 %. Die Luftfeuchtigkeit im Keller nimmt ab.<br><br>
 Fall B:<br>
 Die Außentemperatur beträgt 24 °C, die Luftfeuchtigkeit liegt bei 50 % (also niedriger als im Keller).
-Wenn man den Keller jetzt lüftet, kühlt sie sich die einströmende Luft auf 16 °C ab und ihre 
+Wenn man den Keller jetzt lüftet, kühlt sich die einströmende Luft auf 16 °C ab und ihre 
 relative Feuchtigkeit nimmt auf 81 % zu. Die Luftfeuchtigkeit im Keller steigt an.<br><br>
 
 
@@ -237,7 +237,7 @@ Grün steht für die aktuelle Kellertemperatur, Blau für Fall A und Rot für Fa
 Erklärung:<br>
 Die Luft im Keller (16 °C, 70 %) hat einen Wassergehalt von 9,5 g/m<sup>3</sup>. 
 Die Luft in Fall A hat einen Wassergehalt von 6 g/m<sup>3</sup>, also weniger als die jetzige 
-Luft im Keller. Die Luft in Fall B hat hingegegen einen Wassergehalt von 11 g/m<sup>3</sup>, 
+Luft im Keller. Die Luft in Fall B hat hingegen einen Wassergehalt von 11 g/m<sup>3</sup>, 
 also mehr als die jetzige Luft im Keller.<br><br>
 
 Lüften im Keller ist dann sinnvoll, wenn die vorhandene Luft durch Luft mit einem 
@@ -247,9 +247,9 @@ niedrigeren Wassergehalt pro Volumen ersetzt wird.<br><br><br>
 
 <strong> Schimmelrisiko </strong> <br>
 <div class="spacer-10"></div>
-Sinkt die Temperatur auf den Taupunkt des Wassers, besteht Schimmelgefahr.
-Dies ist bereits der Fall bei einer Raumtemperatur von 16 °C und einer relativen 
-Luftfeuchtigkeit von 90%. 
+Schimmel kann bereits ab etwa 80 % relativer Luftfeuchtigkeit an Oberflächen wachsen – also schon 
+bevor der Taupunkt erreicht ist. Ein Beispiel ist eine Raumtemperatur von 16 °C bei einer relativen 
+Luftfeuchtigkeit von 90 %. 
 Die Werte entsprechen einem Wassergehalt von 12 g/m<sup>3</sup>. <br>
 &rarr;
 <a href="LF_Grafik.html?example=2-1" target="_blank">Schimmelrisiko</a> 
@@ -295,9 +295,9 @@ Größen Druck, Volumen, Temperatur und Stoffmenge:
 </tr></table>                                                                                                                                                                                         </div>
 </div>
 <!-- l. 179 --><p class='indent'>   <!-- l. 179 --><math display='inline'><mi>R</mi></math> ist die allgemeine
-Gaskonstante: <!-- l. 179 --><math display='inline'><mrow><mi>R</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>8.31446261815324</mn></mrow></math>
+Gaskonstante: <!-- l. 179 --><math display='inline'><mrow><mi>R</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>8,31446261815324</mn></mrow></math>
 J/(K mol)<br class='newline' />
-</p><!-- l. 182 --><p class='indent'>   Aus Gleichung 1 ergibt sich für die Dichte des Gases (in Mol/Volumen):<br class='newline' />
+</p><!-- l. 182 --><p class='indent'>   Aus Gleichung 1 ergibt sich für die Stoffmengendichte des Gases (in mol/m³):<br class='newline' />
 </p><!-- l. 184 --><p class='indent'>   <span class='vspace20'></span>
 </p>
    <table class='equation'><tr><td>
@@ -312,7 +312,7 @@ J/(K mol)<br class='newline' />
 man für den Druck den Sättigungsdampfdruck ein, erhält man die maximal mögliche
 Wassermenge in der Luft.<br class='newline' /><br class='newline' /><br class='newline' />
 </p><!-- l. 197 --><p class='noindent'><span class='ec-lmbx-10x-x-109'>Sättigungsdampfdruck und Magnus-Formel</span>: <span class='spacer20'></span>
-</p><!-- l. 201 --><p class='indent'>   Aus Flüssigkeiten entweichen solange Atome/Moleküle in die Gasphase, bis sich darin
+</p><!-- l. 201 --><p class='indent'>   Aus Flüssigkeiten entweichen so lange Atome/Moleküle in die Gasphase, bis sich darin
 ein von der Temperatur abhängiger Druck eingestellt hat. Die Verdampfung der Flüssigkeit
 ist dann mengenmäßig gleich der Kondensation. Der sich einstellende Gasdruck wird als
 Sättigungsdampfdruck bezeichnet. Beim Sättigungsdampfdruck von Wasser ist die Luft
@@ -327,7 +327,7 @@ muss hier in °C eingesetzt werden.
 </p><!-- l. 210 --><p class='indent'>   <span class='vspace20'></span> </p><table class='equation'><tr><td>
 <!-- l. 211 --><math class='equation' display='block'><mrow>
                     <mstyle class='label' id='x1-4r3'></mstyle><!-- endlabel --><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo> <mi>c</mi><mspace class='thinspace' width='0.17em'></mspace> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>exp</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mspace class='negthinspace' width='-0.17em'></mspace> <mrow><mo fence='true' form='prefix'>(</mo><mrow> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mi>T</mi></mrow>
-<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>T</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mspace class='qquad' width='2em'></mspace><mstyle class='text'><mtext class='textrm' mathvariant='normal'>für -45°C</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo> <mi>T</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mstyle class='text'><mtext class='textrm' mathvariant='normal'>65°C</mtext></mstyle>
+<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>T</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mspace class='qquad' width='2em'></mspace><mstyle class='text'><mtext class='textrm' mathvariant='normal'>für -45 °C</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo> <mi>T</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mstyle class='text'><mtext class='textrm' mathvariant='normal'>65 °C</mtext></mstyle>
 </mrow></math></td><td class='eq-no'>(3)</td></tr></table>
 <!-- l. 213 --><p class='noindent'>
 </p>
@@ -350,10 +350,10 @@ Magnus-Formel, liefert aber immer noch gute Ergebnisse. Der damit berechnete
 Sättigungsdampfdruck von Wasser beträgt 103,8 kPa. Dies entspricht nahezu dem Luftdruck
 auf Meereshöhe (101,3 kPa). </span></span><br class='newline' /><br class='newline' /><span class='ec-lmri-10x-x-109'>Eine Flüssigkeit beginnt zu sieden, wenn ihr Dampfdruck den atmosphärischen Druck
 erreicht (weil sich dann im Inneren der Flüssigkeit Blasen bilden können, die an die
-Oberfläche aufsteigen) </span><br class='newline' /><br class='newline' /><br class='newline' />
+Oberfläche aufsteigen). </span><br class='newline' /><br class='newline' /><br class='newline' />
 </p><!-- l. 247 --><p class='noindent'><span class='ec-lmbx-10x-x-109'>Maximal möglicher Wassergehalt von Luft</span>: <span class='spacer20'></span>
 </p><!-- l. 251 --><p class='indent'>   Mit Hilfe des Sättigungsdampfdruckes und zusammen mit Gleichung (<a href='#x1-3r2'>2<!-- tex4ht:ref: eq_nV  --></a>) kann jetzt der
-Wassergehalt von Luft berechnet werden. <br class='newline' />In der allgemeinen Gasgleichung (<a href='#x1-3r2'>2<!-- tex4ht:ref: eq_nV  --></a>) muss die Temperatur
+Wassergehalt von Luft berechnet werden. <br class='newline' />In Gleichung (<a href='#x1-3r2'>2<!-- tex4ht:ref: eq_nV  --></a>) muss die Temperatur
 <!-- l. 252 --><math display='inline'><mi>T</mi></math> in
 Kelvin eingesetzt werden. Um dies zu kennzeichnen, wird unten die Schreibweise
 <!-- l. 252 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>K</mi></mrow></msub></math>
@@ -363,7 +363,7 @@ verwendet:
                  <mstyle class='label' id='x1-5r4'></mstyle><!-- endlabel --> <mfrac><mrow><mi>n</mi></mrow>
 <mrow><mi>V</mi> </mrow></mfrac> <mo class='MathClass-rel' stretchy='false'>=</mo>    <mfrac><mrow><mn>1</mn></mrow> 
 <mrow><mi>R</mi><msub><mrow><mi>T</mi></mrow><mrow><mi>K</mi></mrow></msub></mrow></mfrac> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mi>c</mi><mspace class='thinspace' width='0.17em'></mspace> <mo class='MathClass-bin' stretchy='false'>⋅</mo><mi class='loglike'>exp</mi><mo>⁡<!-- FUNCTION APPLICATION --></mo><!-- nolimits --><mspace class='negthinspace' width='-0.17em'></mspace> <mrow><mo fence='true' form='prefix'>(</mo><mrow> <mfrac><mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>⋅</mo> <mi>T</mi></mrow>
-<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>T</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mspace class='qquad' width='2em'></mspace><mstyle class='text'><mtext class='textrm' mathvariant='normal'>für -45°C</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo> <mi>T</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mstyle class='text'><mtext class='textrm' mathvariant='normal'>65°C</mtext></mstyle>
+<mrow><mi>b</mi> <mo class='MathClass-bin' stretchy='false'>+</mo> <mi>T</mi></mrow></mfrac> </mrow><mo fence='true' form='postfix'>)</mo></mrow><mspace class='qquad' width='2em'></mspace><mstyle class='text'><mtext class='textrm' mathvariant='normal'>für -45 °C</mtext></mstyle> <mo class='MathClass-rel' stretchy='false'>≤</mo> <mi>T</mi> <mo class='MathClass-rel' stretchy='false'>≤</mo><mstyle class='text'><mtext class='textrm' mathvariant='normal'>65 °C</mtext></mstyle>
 </mrow></math></td><td class='eq-no'>(4)</td></tr></table>
 <!-- l. 257 --><p class='noindent'><br class='newline' />
 </p><!-- l. 260 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-5r4'><span class='ec-lmbxi-10x-x-109'>4</span><!-- tex4ht:ref: eq_nVp  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>a) Die Temperatur beträgt </span><!-- l. 265 --><math display='inline'><mrow><mi>T</mi> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20
@@ -379,7 +379,7 @@ verwendet:
 °C bzw. </span><!-- l. 270 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>K</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math>
 <span class='ec-lmri-10x-x-109'>333,15 K. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Mit dem Sättigungsdampfdruck von Wasser – 19,99 kPa – erhält man 7,22</span>
 <!-- l. 270 --><math display='inline'><mrow><mi mathvariant='italic'>𝑚𝑜𝑙</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math> <span class='ec-lmri-10x-x-109'>bzw.
-129,98 </span><!-- l. 270 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
+130,0 </span><!-- l. 270 --><math display='inline'><mrow><mi>g</mi><mo class='MathClass-bin' stretchy='false'>∕</mo><msup><mrow><mi>m</mi></mrow><mrow><mn>3</mn></mrow></msup></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
 </span><br class='newline' /><br class='newline' /><br class='newline' />
 </p><!-- l. 274 --><p class='indent'>   <span class='ec-lmbx-10x-x-109'>Relative Luftfeuchtigkeit:</span>
 </p><!-- l. 276 --><p class='indent'>   Die relative Luftfeuchtigkeit <!-- l. 276 --><math display='inline'><mi>φ</mi></math>
@@ -401,7 +401,7 @@ die Wassermenge in Mol:
    </mtd></mtr>
    </mtable></math>
    </div>
-<!-- l. 286 --><p class='indent'>   Ein Quotient von 0,6 entspricht einer Luftfeuchtigkeit von 60%.
+<!-- l. 286 --><p class='indent'>   Ein Quotient von 0,6 entspricht einer Luftfeuchtigkeit von 60 %.
 </p><!-- l. 288 --><p class='indent'>   Der tatsächliche Dampfdruck <!-- l. 288 --><math display='inline'><mi>p</mi></math>
 kann aus der relativen Luftfeuchtigkeit und dem Sättigungsdampfdruck
 <!-- l. 288 --><math display='inline'><msub><mrow><mi>p</mi></mrow><mrow><mi>S</mi></mrow></msub></math>
@@ -491,13 +491,13 @@ enthält, wird mit Gamma abgekürzt:
 <mrow><mi>a</mi> <mo class='MathClass-bin' stretchy='false'>−</mo> <mi>γ</mi></mrow></mfrac>
 </mrow></math></td><td class='eq-no'>(9)</td></tr></table>
 <!-- l. 213 --><p class='noindent'><br class='newline' />
-</p><!-- l. 217 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-8r9'><span class='ec-lmbxi-10x-x-109'>9</span><!-- tex4ht:ref: eq_Td  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>Die Temperatur beträgt </span><!-- l. 224 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20°C
-und die relative Luftfeuchtigkeit </span><!-- l. 224 --><math display='inline'><mrow><mi>φ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>58</mn><mi>%</mi></mrow></math><span class='ec-lmri-10x-x-109'>.</span><br class='newline' /><span class='ec-lmri-10x-x-109'>a = 17.62 und b = 243,12, siehe Gleichung 3. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Damit wird </span><!-- l. 224 --><math display='inline'><mrow><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>79</mn></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
+</p><!-- l. 217 --><p class='indent'>   <span style='color:#0066AB;'><span class='ec-lmbxi-10x-x-109'>Beispiel – Gleichung (</span><a href='#x1-8r9'><span class='ec-lmbxi-10x-x-109'>9</span><!-- tex4ht:ref: eq_Td  --></a><span class='ec-lmbxi-10x-x-109'>):</span></span><br class='newline' /><div class='spacer10'></div> <span style='color:#0066AB;'> <span class='ec-lmri-10x-x-109'>Die Temperatur beträgt </span><!-- l. 224 --><math display='inline'><mrow><msub><mrow><mi>T</mi></mrow><mrow><mi>A</mi></mrow></msub> <mo class='MathClass-rel' stretchy='false'>=</mo></mrow></math><span class='ec-lmri-10x-x-109'>20 °C
+und die relative Luftfeuchtigkeit </span><!-- l. 224 --><math display='inline'><mrow><mi>φ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>58</mn><mi>%</mi></mrow></math><span class='ec-lmri-10x-x-109'>.</span><br class='newline' /><span class='ec-lmri-10x-x-109'>a = 17,62 und b = 243,12, siehe Gleichung 3. </span><br class='newline' /><span class='ec-lmri-10x-x-109'>Damit wird </span><!-- l. 224 --><math display='inline'><mrow><mi>γ</mi> <mo class='MathClass-rel' stretchy='false'>=</mo> <mn>0</mn><mo class='MathClass-punc' stretchy='false'>,</mo><mn>79</mn></mrow></math><span class='ec-lmri-10x-x-109'>.</span>
                                                                                 
 
                                                                                 
 <br class='newline' /><span class='ec-lmri-10x-x-109'>Der Taupunkt </span><!-- l. 224 --><math display='inline'><msub><mrow><mi>T</mi></mrow><mrow><mi>d</mi></mrow></msub></math>
-<span class='ec-lmri-10x-x-109'>beträgt 11°C. </span></span>
+<span class='ec-lmri-10x-x-109'>beträgt 11 °C. </span></span>
 </p>
 
 `,
@@ -513,7 +513,7 @@ p_THM:
 <h1>The Hidden Math Between Market and Sales Development</h1>
 
 
-Wie bei der Bewertung von Leuchtmitteln oder der Betrachtung der Luftfeuchtigkeit reicht es oft nicht, einzelne Zahlen isoliert zu betrachten. 
+Wie bei der Bewertung von Leuchtmitteln oder beim Thema Luftfeuchtigkeit reicht es oft nicht, einzelne Zahlen isoliert zu betrachten. 
 Erst durch den Zusammenhang mehrerer Größen entsteht ein aussagekräftiges Bild.<br>
 
 Genau dieses Denken in Zusammenhängen steht im Mittelpunkt des folgenden Buches, das die mathematischen 
@@ -528,7 +528,7 @@ ISBN:
 ISBN: 978-3-00-080521-9<br>
 277 Seiten, 47 Abbildungen<br>
 Gebundene Ausgabe <br>
-E-book: Oktober 2026<br><br>`,
+E-Book: Oktober 2026<br><br>`,
 
 
   },
