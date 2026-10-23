@@ -233,7 +233,8 @@
     padding:4px 6px;
   }
   td.cell{ position:relative; z-index:2; color:#111; font-weight:600; cursor:pointer; }
-  .pctText{ position:relative; z-index:2; }
+  .pctText{ position:relative; z-index:2; padding:0 1px; }   /* kleiner Abstand zwischen benachbarten Prozentwerten */
+  .pctText.full{ font-size:0.75em; }                          /* "100%" ist ein Zeichen länger als die übrigen Werte */
   td.empty{ background:var(--panel); }
   tfoot th, tfoot td{
     color:var(--muted);
@@ -701,7 +702,7 @@ function textColorFor(rgbStr){
 
 function range(min, max, step){
   const out = [];
-  const n = Math.round((max - min) / step);
+  const n = Math.floor((max - min) / step + 1e-6);   // nie über max hinaus
   for(let i=0;i<=n;i++){
     out.push(+(min + i*step).toFixed(2));
   }
@@ -715,6 +716,34 @@ function fmtDE(n){
 // nur für die Temperatur-Achse (x): immer ganzzahlig, keine Nachkommastellen
 function fmtTemp(n){
   return Math.round(n).toLocaleString('de-DE', {maximumFractionDigits:0});
+}
+
+function isMultipleOf(value, step){
+  const q = value / step;
+  return Math.abs(q - Math.round(q)) < 1e-6;
+}
+
+// Achsenbeschriftung: "runder" Abstand (1, 2, 5, 10, ...), der ein Vielfaches der Schrittweite ist
+function niceLabelStep(minUnits, step){
+  minUnits = Math.max(minUnits, step);
+  const candidates = [0.1, 0.2, 0.25, 0.5, 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000, step, step * 2, step * 5]
+    .sort((a, b) => a - b);
+  for(const c of candidates){
+    if(c >= minUnits - 1e-9 && isMultipleOf(c, step)) return c;
+  }
+  return Math.ceil(minUnits / step) * step;
+}
+
+// Indizes der Achsenwerte, die beschriftet werden: alle Vielfachen von labelStep,
+// dazu Anfang und Ende, sofern sie nicht zu nah an einer anderen Beschriftung liegen
+function labelIndices(values, step, labelStep){
+  const idx = [];
+  values.forEach((v, i) => { if(isMultipleOf(v, labelStep)) idx.push(i); });
+  const minGap = Math.max(1, Math.ceil(0.6 * labelStep / step));
+  for(const end of [0, values.length - 1]){
+    if(idx.every(i => Math.abs(i - end) >= minGap)) idx.push(end);
+  }
+  return new Set(idx);
 }
 
 // ---- Auswahl-Status (Spalten-/Zellen-Hervorhebung) ----
@@ -926,8 +955,18 @@ function build(){
   const high = hexToRgb(document.getElementById('colHigh').value);
   const lineColor = document.getElementById('colLine').value;
 
-  const temps = range(tMin, tMax, tStep);
-  const hums = range(hMin, hMax, hStep).reverse();
+  // Achsenwerte auf Vielfache der Schrittweite legen (z.B. 0, 5, 10 statt 1, 6, 11),
+  // der gewählte Bereich wird dabei vollständig abgedeckt
+  let tStart = Math.floor(tMin / tStep + 1e-9) * tStep;
+  if(tStart < TEMP_LIMIT_MIN) tStart += tStep;
+  let tEnd = Math.ceil(tMax / tStep - 1e-9) * tStep;
+  if(tEnd > TEMP_LIMIT_MAX) tEnd -= tStep;
+  let hStart = Math.floor(hMin / hStep + 1e-9) * hStep;
+  if(hStart <= 0 && hMin > 0) hStart += hStep;   // keine Zeile 0 g/m³ (überall 0 %), wenn sie nicht gewählt wurde
+  const hEnd = Math.ceil(hMax / hStep - 1e-9) * hStep;
+
+  const temps = range(tStart, tEnd, tStep);
+  const hums = range(hStart, hEnd, hStep).reverse();
   lastTemps = temps;
   lastHums = hums;
 
@@ -966,18 +1005,7 @@ function build(){
   document.documentElement.style.setProperty('--tick-font', tickFontPx + 'px');
 
   const minRowLabelH = 15;
-  const yLabelStep = Math.max(1, Math.ceil(minRowLabelH / cellH));
-
-
-
-  function niceStep(rawStep){
-    const candidates = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
-    for(const c of candidates){ if(c >= rawStep) return c; }
-    return Math.pow(10, Math.ceil(Math.log10(rawStep)));
-  }
-  const minColLabelW = 24;
-  const rawColStepUnits = (minColLabelW / cellW) * tStep;
-  const xStepUnits = niceStep(rawColStepUnits);
+  const yLabels = labelIndices(hums, hStep, niceLabelStep((minRowLabelH / cellH) * hStep, hStep));
 
   const colgroup = document.createElement('colgroup');
   for(let i=0;i<colCount;i++){
@@ -993,8 +1021,7 @@ function build(){
     const tr = document.createElement('tr');
     tr.dataset.row = rowI;
     const rowTh = document.createElement('th');
-    const forceLabel = Math.abs(h) < 1e-9 || (Number.isInteger(h) && h % 10 === 0);
-    if(rowI % yLabelStep === 0 || rowI === hums.length - 1 || forceLabel){
+    if(yLabels.has(rowI)){
       rowTh.textContent = fmtDE(h);
     }
     tr.appendChild(rowTh);
@@ -1014,7 +1041,7 @@ function build(){
         td.style.color = textColorFor(bg);
         if(cellW >= 22 && cellH >= 16){
           const span = document.createElement('span');
-          span.className = 'pctText';
+          span.className = Math.round(p) >= 100 ? 'pctText full' : 'pctText';
           span.textContent = Math.round(p) + '%';
           td.appendChild(span);
         }
@@ -1033,14 +1060,19 @@ function build(){
   temps.forEach((t, i) => {
     const td = document.createElement('td');
     td.dataset.col = i;
-    const onNiceStep = Math.abs(t % xStepUnits) < 1e-6 || Math.abs(Math.abs(t % xStepUnits) - xStepUnits) < 1e-6;
-    if(onNiceStep || i === 0 || i === temps.length - 1){
-      td.textContent = fmtTemp(t);
-    }
+    td.textContent = fmtTemp(t);
     footRow.appendChild(td);
   });
   tfoot.appendChild(footRow);
   table.appendChild(tfoot);
+
+  const actualCellW = fitCellText(table, wrapOuter, fontPx);
+
+  // x-Beschriftung erst jetzt ausdünnen: die tatsächliche Spaltenbreite steht erst nach dem Rendern fest
+  const maxLabelChars = Math.max(...temps.map(t => fmtTemp(t).length));
+  const minColLabelW = maxLabelChars * tickFontPx * 0.62 + 6;
+  const xLabels = labelIndices(temps, tStep, niceLabelStep((minColLabelW / actualCellW) * tStep, tStep));
+  footRow.querySelectorAll('td').forEach((td, i) => { if(!xLabels.has(i)) td.textContent = ''; });
 
   if(selectedColIndex !== null && selectedColIndex >= temps.length){
     selectedColIndex = null;
@@ -1062,6 +1094,47 @@ function build(){
 
 
 
+
+
+function textWidth(el){
+  const r = document.createRange();
+  r.selectNodeContents(el);
+  return r.getBoundingClientRect().width;
+}
+
+// Gleich breite Spalten, die die verfügbare Breite füllen. Passen die Prozentwerte nicht hinein
+// (schmaler Bildschirm), wird die Schrift verkleinert. Reicht dafür auch die kleinste noch lesbare
+// Schrift nicht (sehr viele Spalten), bleibt die Schrift wie sie war und man scrollt seitlich.
+// Gibt die tatsächliche Spaltenbreite zurück.
+function fitCellText(table, wrapOuter, fontPx){
+  const MIN_FONT = 8;
+  const root = document.documentElement.style;
+  const cols = table.querySelectorAll('col');
+  const n = cols.length - 1;
+
+  const labelW = Math.ceil(Math.max(...[...table.querySelectorAll('th')].map(textWidth))) + 14;
+  const spans = [...table.querySelectorAll('.pctText:not(.full)')];
+  const maxSpanW = spans.length ? Math.max(...spans.map(s => s.getBoundingClientRect().width)) : 0;
+
+  const fitW = Math.floor((wrapOuter.clientWidth - labelW) / n);
+  const needW = Math.ceil(maxSpanW) + 2;
+  let cellW = fitW;
+  if(fitW < needW){
+    const font = Math.floor(fontPx * (fitW - 2) / maxSpanW * 10) / 10;
+    if(font >= MIN_FONT){
+      root.setProperty('--cell-font', font + 'px');
+    } else {
+      cellW = needW;
+    }
+  }
+
+  cols[0].style.width = labelW + 'px';
+  for(let i = 1; i < cols.length; i++) cols[i].style.width = cellW + 'px';
+  root.setProperty('--cell-w', cellW + 'px');
+  root.setProperty('--label-w', labelW + 'px');
+  table.style.width = (labelW + n * cellW) + 'px';
+  return cellW;
+}
 
 
 function drawSaturationLine(temps, hums, hStep, lineColor){
@@ -1422,6 +1495,7 @@ function buildGridSvgFragment(){
   const col = name => (cs.getPropertyValue(name).trim() || '');
 
   const cellW = num('--cell-w', 44);
+  const labelW = num('--label-w', cellW);   // Breite der Beschriftungsspalte (y-Achse)
   const cellH = num('--cell-h', 26);
   const cellFont = num('--cell-font', 12);
   const tickFont = num('--tick-font', 11);
@@ -1432,7 +1506,7 @@ function buildGridSvgFragment(){
 
   const numCols = lastTemps.length;
   const numRows = lastHums.length;
-  const gridW = cellW * (numCols + 1);
+  const gridW = labelW + cellW * numCols;
   const gridH = cellH * (numRows + 1);
 
   const parts = [];
@@ -1474,7 +1548,7 @@ function buildGridSvgFragment(){
   // Export überdecken, genau wie jetzt auch auf der Live-Seite (td.cell liegt
   // per z-index über dem Overlay). In leeren Zellen (kein fill) bleibt sie
   // weiterhin sichtbar.
-  parts.push(buildSaturationLineSvg(cellW, cellH));
+  parts.push(buildSaturationLineSvg(cellW, cellH, labelW));
 
   const table = document.getElementById('grid');
   table.querySelectorAll('tbody > tr').forEach(tr => {
@@ -1487,7 +1561,7 @@ function buildGridSvgFragment(){
         const thBg = th.classList.contains('markedRow')
           ? (th.style.getPropertyValue('--marked-row-color') || '#d1495b')
           : selectionColor;
-        parts.push(`<rect x="0" y="${y}" width="${cellW}" height="${cellH}" fill="${thBg}"/>`);
+        parts.push(`<rect x="0" y="${y}" width="${labelW}" height="${cellH}" fill="${thBg}"/>`);
       }
       parts.push(svgText(th.textContent, 6, y + cellH / 2, {
         fontSize: tickFont, fill: thHighlighted ? '#fff' : mutedColor, anchor: 'start', weight: 600, fontFamily: monoFont
@@ -1495,7 +1569,7 @@ function buildGridSvgFragment(){
     }
     tr.querySelectorAll('td').forEach(td => {
       const colI = +td.dataset.col;
-      const x = (colI + 1) * cellW;
+      const x = labelW + colI * cellW;
       const isEmpty = td.classList.contains('empty');
       if(isEmpty){
         // kein Fill -> die zuvor gezeichnete Linie bleibt hier sichtbar, nur der Rahmen wird nachgezogen
@@ -1509,7 +1583,7 @@ function buildGridSvgFragment(){
       if(span && span.textContent){
         const txtColor = td.style.color || '#111';
         parts.push(svgText(span.textContent, x + cellW / 2, y + cellH / 2, {
-          fontSize: cellFont, fill: txtColor, weight: 700, fontFamily: monoFont
+          fontSize: span.classList.contains('full') ? cellFont * 0.75 : cellFont, fill: txtColor, weight: 700, fontFamily: monoFont
         }));
       }
     });
@@ -1518,10 +1592,10 @@ function buildGridSvgFragment(){
   const footRow = table.querySelector('tfoot > tr');
   if(footRow){
     const y = numRows * cellH;
-    parts.push(`<rect x="0" y="${y}" width="${cellW}" height="${cellH}" fill="${panelColor}" stroke="${lineColor}" stroke-width="1"/>`);
+    parts.push(`<rect x="0" y="${y}" width="${labelW}" height="${cellH}" fill="${panelColor}" stroke="${lineColor}" stroke-width="1"/>`);
     footRow.querySelectorAll('td').forEach(td => {
       const colI = +td.dataset.col;
-      const x = (colI + 1) * cellW;
+      const x = labelW + colI * cellW;
       // Priorität wie im Original-CSS: Spaltenauswahl (!important) schlägt die
       // inline gesetzte Taupunkt-Hintergrundfarbe.
       let bg = panelColor, txtColor = mutedColor;
@@ -1542,7 +1616,7 @@ function buildGridSvgFragment(){
   return { fragment: parts.join(''), width: gridW, height: gridH };
 }
 
-function buildSaturationLineSvg(cellW, cellH){
+function buildSaturationLineSvg(cellW, cellH, labelW = cellW){
   if(!lastTemps.length || lastHums.length < 1) return '';
   const lineColor = document.getElementById('colLine').value;
   const hStep = lastHums.length > 1 ? Math.abs(lastHums[1] - lastHums[0]) : 1;
@@ -1552,7 +1626,7 @@ function buildSaturationLineSvg(cellW, cellH){
     const sat = saturationDensity(t);
     const rowIndexFrac = (lastHums[0] - sat) / hStep;
     const y = y0 + rowIndexFrac * cellH;
-    const x = (i + 1) * cellW + cellW / 2; // Mitte der Datenspalte i (wie tfoot-Zelle)
+    const x = labelW + i * cellW + cellW / 2; // Mitte der Datenspalte i (wie tfoot-Zelle)
     return { x, y };
   });
 
