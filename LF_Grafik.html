@@ -311,6 +311,25 @@ tbody th.markedRow{
   color:var(--text) !important;
 }
 
+
+/* ---- Smartphone: Buttons umbrechen statt links abschneiden, Eingabefelder passen in die Breite ---- */
+@media (max-width: 600px) {
+  body{ padding:10px; }
+  .sub{ justify-content:flex-start; }
+  .subBtns{ flex:1 1 100%; flex-wrap:wrap; gap:6px; }
+  .control-button{
+    font-size:0.8rem;
+    padding:0.4rem 0.7rem;
+  }
+  .panel{
+    gap:16px;
+    padding:12px;
+  }
+  .field .row{ flex-wrap:wrap; }
+  input[type=number]{ width:56px; }
+  #exampleSelect{ max-width:100%; }
+}
+
 </style>
 </head>
 
