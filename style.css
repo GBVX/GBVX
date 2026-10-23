@@ -58,6 +58,20 @@ h1, h2 {                        /* Dynamische, responsive Überschriften */
   margin: 0 0 1rem;
 }
 
+.wrap .back-link {            /* Link zurück zur Startseite über der Überschrift */
+  font-size: 0.9em;
+  margin-bottom: 1.5rem;
+}
+
+.back-link a {
+  color: #0b66c3;
+  text-decoration: none;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}
+
 
 
 /* Footer ---------------------------------------------------------------------------------------------------*/
